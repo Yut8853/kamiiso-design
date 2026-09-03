@@ -1,0 +1,14 @@
+:root {
+  --font-zen-kaku: "Zen Kaku Gothic New", sans-serif;
+  --font-noto-serif: "Shippori Mincho B1", "Noto Serif JP", serif;
+}
+
+.particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: block;
+  width: calc(100% + min(24vw, 320px));
+  height: 100%;
+  transform: translateX(-50%);
+}

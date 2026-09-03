@@ -1,0 +1,1988 @@
+<!doctype html>
+<html lang="ja" class="site-root is-loading">
+  <head>
+    <meta charset="utf-8" />
+    <script>
+      (() => {
+        const navigation = performance.getEntriesByType?.('navigation')?.[0];
+        if (navigation?.type !== 'reload') return;
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        if (location.hash) {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
+        document.documentElement.dataset.reloadAtTop = 'true';
+        window.scrollTo(0, 0);
+      })();
+    </script>
+    <title>カミイソ 採用サイト｜見えない思いを彩り、魅せる、モノづくり。</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <meta
+      name="description"
+      content="紙を通じて、世界中で選ばれるモノづくりを。カミイソ株式会社の採用サイトです。事業紹介、社員インタビュー、働く環境、福利厚生、募集要項をご覧いただけます。"
+    />
+    <meta
+      name="viewport"
+      id="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="assets/images/kamiiso-logo.png" />
+    <meta
+      property="og:title"
+      content="カミイソ 採用サイト｜見えない思いを彩り、魅せる、モノづくり。"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://www.kamiiso.co.jp/assets/images/ogp.png"
+    />
+    <meta property="og:url" content="https://www.kamiiso.co.jp" />
+    <meta
+      property="og:description"
+      content="紙を通じて、世界中で選ばれるモノづくりを。カミイソ株式会社の採用サイトです。事業紹介、社員インタビュー、働く環境、福利厚生、募集要項をご覧いただけます。"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="カミイソ 採用サイト｜見えない思いを彩り、魅せる、モノづくり。"
+    />
+    <meta
+      name="twitter:description"
+      content="紙を通じて、世界中で選ばれるモノづくりを。カミイソ株式会社の採用サイトです。事業紹介、社員インタビュー、働く環境、福利厚生、募集要項をご覧いただけます。"
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.kamiiso.co.jp/assets/images/ogp.png"
+    />
+    <meta name="twitter:url" content="https://www.kamiiso.co.jp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="assets/images/kamiiso-logo.png" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;600;700;800&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700;900&amp;display=swap"
+    />
+    <link rel="stylesheet" href="assets/css/properties.css" />
+    <link rel="stylesheet" href="assets/css/reset.css" />
+    <link
+      rel="stylesheet"
+      href="assets/css/particles.css"
+    />
+    <link
+      rel="stylesheet"
+      href="assets/css/site.css"
+    />
+  </head>
+  <body class="site-body is-loading">
+    <div hidden=""></div>
+    <div
+      class="site-loader"
+      role="status"
+      aria-live="polite"
+      aria-label="読み込み中"
+    >
+      <span class="sr-only">読み込み中</span>
+    </div>
+    <div class="site-loader__progress" aria-hidden="true">
+      <div class="site-loader__progress-track">
+        <span class="site-loader__progress-bar" data-loader-progress></span>
+      </div>
+      <p class="site-loader__progress-value">
+        <span data-loader-value>0</span>%
+      </p>
+    </div>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a href="#top" class="site-logo" aria-label="KAMIISO 採用サイト ホーム"
+          ><img
+            alt="KAMIISO"
+            width="340"
+            height="54"
+            decoding="async"
+            data-nimg="1"
+            class="site-logo__image"
+            src="assets/images/kamiiso-logo.png"
+          /><span class="site-logo__label"
+            ><span class="site-logo__bar" aria-hidden="true"></span
+            ><span class="site-logo__text">RECRUIT</span></span
+          ></a
+        ><button
+          type="button"
+          aria-expanded="false"
+          aria-controls="global-nav"
+          class="menu-button"
+        >
+          <span class="sr-only">メニューを開く</span
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-menu menu-button__icon"
+            aria-hidden="true"
+          >
+            <path d="M4 5h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 19h16"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+    <nav id="global-nav" aria-hidden="true" class="global-nav">
+      <div class="global-nav__viewport">
+        <div class="global-nav__inner">
+          <p class="global-nav__eyebrow">
+            <span class="global-nav__eyebrow-line"></span>SITE MENU
+          </p>
+          <ul class="global-nav__list">
+            <li class="global-nav__item">
+              <a href="#about" class="global-nav__link"
+                ><span class="global-nav__label"
+                  ><span class="global-nav__number">01</span
+                  ><span class="global-nav__title"
+                    >私たちの事業について</span
+                  ></span
+                ><span class="global-nav__meta">About</span></a
+              >
+            </li>
+            <li class="global-nav__item">
+              <a href="#products" class="global-nav__link"
+                ><span class="global-nav__label"
+                  ><span class="global-nav__number">02</span
+                  ><span class="global-nav__title">製品紹介</span></span
+                ><span class="global-nav__meta">Products</span></a
+              >
+            </li>
+            <li class="global-nav__item">
+              <a href="#interview" class="global-nav__link"
+                ><span class="global-nav__label"
+                  ><span class="global-nav__number">03</span
+                  ><span class="global-nav__title">社員インタビュー</span></span
+                ><span class="global-nav__meta">Interview</span></a
+              >
+            </li>
+            <li class="global-nav__item">
+              <a href="#keyword" class="global-nav__link"
+                ><span class="global-nav__label"
+                  ><span class="global-nav__number">04</span
+                  ><span class="global-nav__title"
+                    >キーワードで見るカミイソ</span
+                  ></span
+                ><span class="global-nav__meta">Data</span></a
+              >
+            </li>
+            <li class="global-nav__item">
+              <a href="#environment" class="global-nav__link"
+                ><span class="global-nav__label"
+                  ><span class="global-nav__number">05</span
+                  ><span class="global-nav__title">働く環境</span></span
+                ><span class="global-nav__meta">Environment</span></a
+              >
+            </li>
+            <li class="global-nav__item">
+              <a href="#welfare" class="global-nav__link"
+                ><span class="global-nav__label"
+                  ><span class="global-nav__number">06</span
+                  ><span class="global-nav__title">福利厚生</span></span
+                ><span class="global-nav__meta">Welfare</span></a
+              >
+            </li>
+            <li class="global-nav__item">
+              <a href="#requirements" class="global-nav__link"
+                ><span class="global-nav__label"
+                  ><span class="global-nav__number">07</span
+                  ><span class="global-nav__title">募集要項</span></span
+                ><span class="global-nav__meta">Requirements</span></a
+              >
+            </li>
+            <li class="global-nav__item">
+              <a href="#flow" class="global-nav__link"
+                ><span class="global-nav__label"
+                  ><span class="global-nav__number">08</span
+                  ><span class="global-nav__title">応募の流れ</span></span
+                ><span class="global-nav__meta">Flow</span></a
+              >
+            </li>
+            <li class="global-nav__item">
+              <a href="#faq" class="global-nav__link"
+                ><span class="global-nav__label"
+                  ><span class="global-nav__number">09</span
+                  ><span class="global-nav__title">よくあるご質問</span></span
+                ><span class="global-nav__meta">FAQ</span></a
+              >
+            </li>
+            <li class="global-nav__item">
+              <a href="#entry" class="global-nav__link"
+                ><span class="global-nav__label"
+                  ><span class="global-nav__number">10</span
+                  ><span class="global-nav__title">エントリー</span></span
+                ><span class="global-nav__meta">Entry</span></a
+              >
+            </li>
+          </ul>
+          <a href="#entry" class="global-nav__entry"
+            >エントリーはこちら
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-right global-nav__entry-icon"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path></svg
+          ></a>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <section id="top" class="kv-section">
+        <div class="kv-hero">
+          <div class="kv-particles" aria-hidden="true">
+            <div class="kv-particles__stage">
+              <div class="kv-particles__inner">
+                <canvas class="kv-particles__canvas"></canvas>
+              </div>
+            </div>
+          </div>
+          <div aria-hidden="true" class="kv-decor">
+            <div class="kv-photo kv-photo--01">
+              <div class="kv-photo-float kv-photo-block">
+                <span class="sr-only">写真プレースホルダー 1</span>
+              </div>
+            </div>
+            <div class="kv-photo kv-photo--02">
+              <div class="kv-photo-float kv-photo-block">
+                <span class="sr-only">写真プレースホルダー 2</span>
+              </div>
+            </div>
+            <div class="kv-photo kv-photo--03">
+              <div class="kv-photo-float kv-photo-block">
+                <span class="sr-only">写真プレースホルダー 3</span>
+              </div>
+            </div>
+            <div class="kv-photo kv-photo--04">
+              <div class="kv-photo-float kv-photo-block">
+                <span class="sr-only">写真プレースホルダー 4</span>
+              </div>
+            </div>
+            <div class="kv-photo kv-photo--05">
+              <div class="kv-photo-float kv-photo-block">
+                <span class="sr-only">写真プレースホルダー 5</span>
+              </div>
+            </div>
+            <div class="kv-photo kv-photo--06">
+              <div class="kv-photo-float kv-photo-block">
+                <span class="sr-only">写真プレースホルダー 6</span>
+              </div>
+            </div>
+            <div class="kv-dot kv-dot--01"></div>
+            <div class="kv-dot kv-dot--02"></div>
+            <div class="kv-dot kv-dot--03"></div>
+            <div class="kv-dot kv-dot--04"></div>
+            <div class="kv-dot kv-dot--05"></div>
+            <div class="kv-dot kv-dot--06"></div>
+            <div class="kv-dot kv-dot--07"></div>
+            <div class="kv-dot kv-dot--08"></div>
+            <div class="kv-dot kv-dot--09"></div>
+            <div class="kv-dot kv-dot--10"></div>
+          </div>
+          <div class="kv-content">
+            <div class="kv-message">
+              <h1 class="kv-title">
+                <img
+                  class="kv-title__image"
+                  src="assets/images/kamiiso-kv-copy.png"
+                  alt="見えない思いを 彩り、魅せる、モノづくり。"
+                  width="982"
+                  height="502"
+                />
+              </h1>
+              <div class="kv-copy">
+                <p>少しでも、手の込んだモノを送りたい。<br>
+                  少しでも、魅力を伝えたい。<br>
+                その少しに詰まったたくさんの思いを、精一杯心に届けたい。</p>
+                <p>
+                  私たちは、見えない思いを彩り、<br />魅せて伝えるモノづくりをしています。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          id="about"
+          class="site-section site-section--cream site-section--clip"
+        >
+          <div class="section-container about-layout">
+            <div class="about-copy">
+              <div class="section-header section-header--center">
+                <p class="section-kicker">
+                  <span class="section-kicker__line" aria-hidden="true"></span
+                  >OUR BUSINESS
+                </p>
+                <h2 class="section-title">私たちの事業について</h2>
+              </div>
+              <p class="about-tagline">
+                紙を通して、世界中で愛される<br />モノづくりを。
+              </p>
+              <p class="about-text">
+                軽工業が非常に発達している瀬戸内工業地帯のなかで、約１００年にわたり「紙」の可能性に挑戦してきました。これまでに生まれた数々の商品は、誰もが、どこかで一度は見たことあるものだと思います。
+                時代とともに進化を続けてきた私たちは、今までもこれからも、思いを彩ることで皆様の心と心を繋いでいきます。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="products" class="site-section site-section--deep">
+        <div class="section-container">
+          <div class="section-header">
+            <p class="section-kicker">
+              <span class="section-kicker__line" aria-hidden="true"></span
+              >PRODUCTS
+            </p>
+            <h2 class="section-title">製品紹介</h2>
+          </div>
+          <div class="product-layout">
+            <figure class="product-figure">
+              <div class="product-figure__main">
+                <img
+                  src="assets/images/products/product-lineup.png"
+                  alt="マスキングテープ・ファンシーシール・メッセージカードなど、カミイソの多彩な紙製品"
+                  loading="lazy"
+                  decoding="async"
+                  width="1301"
+                  height="980"
+                />
+              </div>
+            </figure>
+            <div class="product-body">
+              <p class="product-text">
+                着物を収納する衣裳文庫紙の製造から始まり、スーパーマーケット向けの販促ラベルやプレート、飲食店向けの雲龍和紙テーブルマット、コースター、今日ではマスキングテープやファンシーシール、メッセージカードなど紙に纏わる多彩な商品作りに日々取り組んでいます。
+              </p>
+              <div class="product-actions">
+                <a
+                  href="https://kamiiso.co.jp/"
+                  class="button-pill button-pill--dark"
+                  ><span>製品詳細はこちら</span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-right button-pill__icon"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path></svg></a
+                ><a
+                  href="https://kamiiso.co.jp/"
+                  class="button-pill button-pill--outline"
+                  ><span>SAIENの詳細はこちら</span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.75"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-arrow-right button-pill__icon"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path></svg
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- <section
+        id="interview"
+        class="site-section site-section--cream"
+        data-interview-view="bento"
+      >
+        <div class="section-container">
+          <div class="section-header">
+            <p class="section-kicker">
+              <span class="section-kicker__line" aria-hidden="true"></span
+              >PEOPLE
+            </p>
+            <h2 class="section-title">社員インタビュー</h2>
+          </div>
+          <div class="interview-grid">
+            <article class="interview-card">
+              <div class="interview-card__head">
+                <div>
+                  <p class="interview-card__kicker">INTERVIEW 01</p>
+                  <h3 class="interview-card__title">
+                    文具好きが輝く職場！出荷した商品を店頭で見かける喜び
+                  </h3>
+                </div>
+                <span
+                  class="interview-card__thumb interview-card__thumb--01"
+                  role="img"
+                  aria-label="カミイソの紙製品"
+                ></span>
+              </div>
+              <div class="interview-card__meta">
+                <strong>T.M</strong
+                ><span class="interview-card__divider" aria-hidden="true"></span
+                ><span>出荷事務</span
+                ><span class="interview-card__year">2026年入社</span>
+              </div>
+              <div class="interview-card__excerpt">
+                <p class="interview-card__text">
+                  発注入力や送り状発行をしています。文具好きで好きなものに関わりたくて入社しました。思ったより幅広い分野に関わっていて驚きました。SNSや店頭で、自分が出荷に関わった商品を見かけると嬉しくなりやりがいを感じます。新商品の大量注文で大変だったことも良い思い出です。カワイイ物や紙ものが好きな方なら、様々な発見があって楽しく働ける職場だと思います。
+                </p>
+              </div>
+            </article>
+            <article class="interview-card">
+              <div class="interview-card__head">
+                <div>
+                  <p class="interview-card__kicker">INTERVIEW 02</p>
+                  <h3 class="interview-card__title">
+                    夜勤なしで公私両立！気さくな仲間と街に並ぶ製品を作る
+                  </h3>
+                </div>
+                <span
+                  class="interview-card__thumb interview-card__thumb--02"
+                  role="img"
+                  aria-label="カミイソの紙製品"
+                ></span>
+              </div>
+              <div class="interview-card__meta">
+                <strong>A.R</strong
+                ><span class="interview-card__divider" aria-hidden="true"></span
+                ><span>印刷オペレーター</span
+                ><span class="interview-card__year">2021年入社</span>
+              </div>
+              <div class="interview-card__excerpt">
+                <p class="interview-card__text">
+                  マットなどの印刷や検品を担当しています。夜勤がなく公私の両立ができると思い入社しました。工場は厳しいイメージでしたが、気さくな人が多くて実際は楽しく働けています。自分が製造した製品を街で見かけ、お客様が手に取る姿にやりがいを感じますね。好きなキャラクターの印刷に携われたのは嬉しかったです。日常生活で目にする製品を作れる、働きやすい職場ですよ。
+                </p>
+              </div>
+            </article>
+            <article class="interview-card">
+              <div class="interview-card__head">
+                <div>
+                  <p class="interview-card__kicker">INTERVIEW 03</p>
+                  <h3 class="interview-card__title">
+                    憧れの和柄マステに携わる！カミイソならではのモノづくり
+                  </h3>
+                </div>
+                <span
+                  class="interview-card__thumb interview-card__thumb--03"
+                  role="img"
+                  aria-label="カミイソの紙製品"
+                ></span>
+              </div>
+              <div class="interview-card__meta">
+                <strong>Y.R</strong
+                ><span class="interview-card__divider" aria-hidden="true"></span
+                ><span>検品加工部</span
+                ><span class="interview-card__year">2024年入社</span>
+              </div>
+              <div class="interview-card__excerpt">
+                <p class="interview-card__text">
+                  マスキングテープの小巻加工をしています。HPで見た和柄の製品に惹かれたのがきっかけです。入社後は製品の多さと材質の幅広さに驚きました。数量の多い製品を巻き切ったときに達成感があり、やりがいを感じます。入社前から興味のあった製品に初めて携われたときは本当に嬉しかったです。カミイソならではの製品づくりができるのがこの仕事の魅力だと思います。
+                </p>
+              </div>
+            </article>
+            <article class="interview-card">
+              <div class="interview-card__head">
+                <div>
+                  <p class="interview-card__kicker">INTERVIEW 04</p>
+                  <h3 class="interview-card__title">
+                    未経験から温かい職場へ。100年続く安定企業でのびのび成長
+                  </h3>
+                </div>
+                <span
+                  class="interview-card__thumb interview-card__thumb--04"
+                  role="img"
+                  aria-label="カミイソの紙製品"
+                ></span>
+              </div>
+              <div class="interview-card__meta">
+                <strong>I.K</strong
+                ><span class="interview-card__divider" aria-hidden="true"></span
+                ><span>輪転</span
+                ><span class="interview-card__year">2025年入社</span>
+              </div>
+              <div class="interview-card__excerpt">
+                <p class="interview-card__text">
+                  箔押しの機械操作など、印刷の加工を担当しています。前職の環境が厳しく、ここは環境や人柄が良いと紹介されて入社しました。未経験でしたが似た境遇の人が多くすぐ馴染めました。調整が難しいものをやり遂げたときや上司の言葉にやりがいを感じます。自分が加工した商品が売れたときは自信になりました。100年続く安定した会社で、のびのび実力をつけられる環境です。
+                </p>
+              </div>
+            </article>
+            <article class="interview-card">
+              <div class="interview-card__head">
+                <div>
+                  <p class="interview-card__kicker">INTERVIEW 05</p>
+                  <h3 class="interview-card__title">
+                    意欲次第でいくらでも挑戦！ゼロから世界へ自社商品を届ける
+                  </h3>
+                </div>
+                <span
+                  class="interview-card__thumb interview-card__thumb--05"
+                  role="img"
+                  aria-label="カミイソの紙製品"
+                ></span>
+              </div>
+              <div class="interview-card__meta">
+                <strong>M.R</strong
+                ><span class="interview-card__divider" aria-hidden="true"></span
+                ><span>海外事業部</span
+                ><span class="interview-card__year">2020年入社</span>
+              </div>
+              <div class="interview-card__excerpt">
+                <p class="interview-card__text">
+                  商談から出荷、展示会参加まで幅広く担当しています。歴史がありつつ新分野へ挑戦する姿勢に惹かれて入社しました。海外事業部の発足メンバーとしてゼロから貿易を学び、成長できたと感じます。海外の店頭に自社商品が並ぶことやバイヤーとの直接商談にやりがいを感じます。フランスの展示会で現地の方に喜んでもらえたのは良い思い出です。意欲があればいくらでも挑戦できます。
+                </p>
+              </div>
+            </article>
+            <article class="interview-card">
+              <div class="interview-card__head">
+                <div>
+                  <p class="interview-card__kicker">INTERVIEW 06</p>
+                  <h3 class="interview-card__title">
+                    チームで挑戦を後押し！お客様と深い信頼を築く文具の営業
+                  </h3>
+                </div>
+                <span
+                  class="interview-card__thumb interview-card__thumb--06"
+                  role="img"
+                  aria-label="カミイソの紙製品"
+                ></span>
+              </div>
+              <div class="interview-card__meta">
+                <strong>H.M</strong
+                ><span class="interview-card__divider" aria-hidden="true"></span
+                ><span>営業部</span
+                ><span class="interview-card__year">2021年入社</span>
+              </div>
+              <div class="interview-card__excerpt">
+                <p class="interview-card__text">
+                  自社製品やOEMの提案、イベント対応をしています。身近な文具に関わり、人と関わる仕事がしたくて入社しました。多くの部署が密接に関わるチーム体制で、挑戦を後押ししてくれます。お客様に継続して相談され、信頼関係を築ける点にやりがいを感じます。2年目に顧客の課題に寄り添った独自のイベントを提案し、成果に繋がった経験が思い出です。焦らず経験を積める環境です。
+                </p>
+              </div>
+            </article>
+            <article class="interview-card">
+              <div class="interview-card__head">
+                <div>
+                  <p class="interview-card__kicker">INTERVIEW 07</p>
+                  <h3 class="interview-card__title">
+                    マステやシールの企画に挑戦！イベントでお客様の反応を実感
+                  </h3>
+                </div>
+                <span
+                  class="interview-card__thumb interview-card__thumb--07"
+                  role="img"
+                  aria-label="カミイソの紙製品"
+                ></span>
+              </div>
+              <div class="interview-card__meta">
+                <strong>O.H</strong
+                ><span class="interview-card__divider" aria-hidden="true"></span
+                ><span>商品企画部</span
+                ><span class="interview-card__year">2025年入社</span>
+              </div>
+              <div class="interview-card__excerpt">
+                <p class="interview-card__text">
+                  新商品の企画やイベント準備、在庫管理などをしています。マステやシールを手掛ける当社に興味を持ち入社しました。想像以上に多くのイベントに出店している点に良いギャップを感じています。携わった商品に対し、イべントやSNSでお客様から良い反応をいただけたときにやりがいを感じますね。初めて出店者として参加した文房具イベントが、今でも一番印象に残っています。
+                </p>
+              </div>
+            </article>
+            <article class="interview-card">
+              <div class="interview-card__head">
+                <div>
+                  <p class="interview-card__kicker">INTERVIEW 08</p>
+                  <h3 class="interview-card__title">
+                    地元で叶えたデザインの夢！自由なアイデアでヒットを生み出す
+                  </h3>
+                </div>
+                <span
+                  class="interview-card__thumb interview-card__thumb--08"
+                  role="img"
+                  aria-label="カミイソの紙製品"
+                ></span>
+              </div>
+              <div class="interview-card__meta">
+                <strong>O.I</strong
+                ><span class="interview-card__divider" aria-hidden="true"></span
+                ><span>デザイン部</span
+                ><span class="interview-card__year">2025年入社</span>
+              </div>
+              <div class="interview-card__excerpt">
+                <p class="interview-card__text">
+                  デザインや写真撮影、チラシ作成を担当しています。地元に近くデザインができる仕事を探して入社しました。トレンドを意識して新しいことに挑戦している会社です。意見を取り入れてもらえるので、自由にアイデア出しができる点にやりがいを感じます。入社後すぐにデザインした限定シールが沢山売れたのが思い出です。頼れる先輩が多く、楽しく成長できる環境だと思います。
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section
+        id="keyword"
+        class="site-section site-section--cream"
+      >
+        <div class="section-container">
+          <div class="section-header">
+            <p class="section-kicker">
+              <span class="section-kicker__line" aria-hidden="true"></span
+              >KAMIISO IN NUMBERS
+            </p>
+            <h2 class="section-title">キーワードで見るカミイソ</h2>
+          </div>
+          <div class="keyword-mosaic">
+            <div
+              class="keyword-mosaic__board"
+              aria-label="14のキーワードで構成されたモザイク"
+            ></div>
+            <div class="keyword-mosaic__detail" aria-live="polite"></div>
+          </div>
+          <div class="keyword-grid" hidden>
+            <div class="keyword-webgl" aria-hidden="true"></div>
+            <article class="keyword-card">
+              <p class="keyword-card__number">01</p>
+              <h3 class="keyword-card__label">創業</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                1926（大正15）年
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">02</p>
+              <h3 class="keyword-card__label">原点</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                愛媛県四国中央市<br />（旧川之江市）<br />和紙産地問屋
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">03</p>
+              <h3 class="keyword-card__label">ものづくり体制</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                香川県自社工場一貫体制<br />Made in Japan
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">04</p>
+              <h3 class="keyword-card__label">大切にしていること</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                お客様の笑顔
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">05</p>
+              <h3 class="keyword-card__label">男女比</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                男性 41%：女性 59%<br />2026年7月現在
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">06</p>
+              <h3 class="keyword-card__label">国内拠点</h3>
+              <p
+                class="keyword-card__note keyword-card__note--strong keyword-card__value keyword-card__value--large"
+              >
+                香川（事業本部・豊浜工場）<br />、大阪、東京、福岡
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">07</p>
+              <h3 class="keyword-card__label">カフェ</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                瀬戸内海を一望できる<br />カフェを完備
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">08</p>
+              <h3 class="keyword-card__label">海外展示会、OEM</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                40以上の国や地域
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">09</p>
+              <h3 class="keyword-card__label">SAIEN、Kimono美のテープの品数</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                1,271 廃番含む <br />
+                2026年7月現在
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">10</p>
+              <h3 class="keyword-card__label">海外デザイナー</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                フィンランド、スイス、フランス
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">11</p>
+              <h3 class="keyword-card__label">創業時の名前</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                大西磯太郎商店
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">12</p>
+              <h3 class="keyword-card__label">文房具</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                マスキングテープ、クリアテープ、シール、クリアシール、フレークシール、透明しおり、懐紙など幅広い商品を展開
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">13</p>
+              <h3 class="keyword-card__label">実用新案取得</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                手でちぎれるクリアテープや、はがしやすい取っ手付きクリアフレークシールなど実用新案取得済みの技術を有する
+              </p>
+            </article>
+            <article class="keyword-card">
+              <p class="keyword-card__number">14</p>
+              <h3 class="keyword-card__label">イベント出展</h3>
+              <p class="keyword-card__value keyword-card__value--large">
+                「SAIEN」として文具女子博や文具マルシェなど各地に出展
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section
+        id="environment"
+        class="site-section site-section--cream site-section--clip"
+      >
+        <div class="section-container">
+          <div class="environment-layout">
+            <div class="environment-copy env-copy">
+              <p class="section-kicker">
+                <span class="section-kicker__line" aria-hidden="true"></span
+                >ENVIRONMENT
+              </p>
+              <h2 class="environment-title">働く環境</h2>
+              <p class="environment-lead">
+                私たちは、製品のクオリティに絶対の自信を持っています。根拠に基づき、柔軟なアイデアから数々の製品を生み出してきましたが、どれだけ良いアイデアがあっても生産できなければ意味がありません。工場オペレーターは、生産という「カタチにすること」を担い、モノの提供を会社の最前線で行っていく、重要な役割になります。
+              </p>
+            </div>
+
+            <div class="env-gallery">
+              <div class="env-gallery-photo env-gallery-photo--01">
+                <picture>
+                  <source
+                    srcset="assets/images/environment/0004.avif"
+                    type="image/avif"
+                  />
+                  <img
+                    src="assets/images/environment/0004.webp"
+                    alt="働く環境の写真 1"
+                    loading="eager"
+                    decoding="async"
+                    fetchpriority="high"
+                    width="4905"
+                    height="3270"
+                  />
+                </picture>
+              </div>
+              <div class="env-gallery-photo env-gallery-photo--02">
+                <picture>
+                  <source
+                    srcset="assets/images/environment/0009.avif"
+                    type="image/avif"
+                  />
+                  <img
+                    src="assets/images/environment/0009.webp"
+                    alt="働く環境の写真 2"
+                    loading="eager"
+                    decoding="async"
+                    fetchpriority="high"
+                    width="8192"
+                    height="5461"
+                  />
+                </picture>
+              </div>
+              <div class="env-gallery-photo env-gallery-photo--03">
+                <picture>
+                  <source
+                    srcset="assets/images/environment/0028.avif"
+                    type="image/avif"
+                  />
+                  <img
+                    src="assets/images/environment/0028.webp"
+                    alt="働く環境の写真 3"
+                    loading="eager"
+                    decoding="async"
+                    fetchpriority="high"
+                    width="6000"
+                    height="4000"
+                  />
+                </picture>
+              </div>
+              <div class="env-gallery-photo env-gallery-photo--04">
+                <picture>
+                  <source
+                    srcset="assets/images/environment/0044.avif"
+                    type="image/avif"
+                  />
+                  <img
+                    src="assets/images/environment/0044.webp"
+                    alt="働く環境の写真 4"
+                    loading="lazy"
+                    decoding="async"
+                    width="5128"
+                    height="3419"
+                  />
+                </picture>
+              </div>
+              <div class="env-gallery-photo env-gallery-photo--05">
+                <picture>
+                  <source
+                    srcset="assets/images/environment/0048.avif"
+                    type="image/avif"
+                  />
+                  <img
+                    src="assets/images/environment/0048.webp"
+                    alt="働く環境の写真 5"
+                    loading="lazy"
+                    decoding="async"
+                    width="5263"
+                    height="3509"
+                  />
+                </picture>
+              </div>
+              <div class="env-gallery-photo env-gallery-photo--06">
+                <picture>
+                  <source
+                    srcset="assets/images/environment/0083.avif"
+                    type="image/avif"
+                  />
+                  <img
+                    src="assets/images/environment/0083.webp"
+                    alt="働く環境の写真 6"
+                    loading="lazy"
+                    decoding="async"
+                    width="6000"
+                    height="4000"
+                  />
+                </picture>
+              </div>
+              <div class="env-gallery-photo env-gallery-photo--07">
+                <picture>
+                  <source
+                    srcset="assets/images/environment/0092.avif"
+                    type="image/avif"
+                  />
+                  <img
+                    src="assets/images/environment/0092.webp"
+                    alt="働く環境の写真 7"
+                    loading="lazy"
+                    decoding="async"
+                    width="6000"
+                    height="4000"
+                  />
+                </picture>
+              </div>
+            </div>
+            <div class="env-slider">
+              <div class="env-slider__head">
+                <h3 class="env-slider__title">社屋・オフィス</h3>
+                <p class="env-slider__meta">OFFICE SCENES</p>
+              </div>
+              <div class="env-slider-window">
+                <div class="env-slide-track">
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1001.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1001.webp"
+                        alt="社屋写真 1"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1002.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1002.webp"
+                        alt="社屋写真 2"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1003.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1003.webp"
+                        alt="社屋写真 3"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1004.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1004.webp"
+                        alt="社屋写真 4"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1005.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1005.webp"
+                        alt="社屋写真 5"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1006.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1006.webp"
+                        alt="社屋写真 6"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1007.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1007.webp"
+                        alt="社屋写真 7"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1008.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1008.webp"
+                        alt="社屋写真 8"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1009.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1009.webp"
+                        alt="社屋写真 9"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1010.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1010.webp"
+                        alt="社屋写真 10"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1011.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1011.webp"
+                        alt="社屋写真 11"
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1001.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1001.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1002.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1002.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1003.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1003.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1004.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1004.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1005.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1005.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1006.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1006.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1007.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1007.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1008.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1008.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1009.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1009.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1010.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1010.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                  <div class="env-slide" aria-hidden="true">
+                    <picture>
+                      <source
+                        srcset="assets/images/office/1011.avif"
+                        type="image/avif"
+                      />
+                      <img
+                        src="assets/images/office/1011.webp"
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="1000"
+                        height="667"
+                      />
+                    </picture>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="section-container">
+          <div class="env-feature-section">
+            <article class="env-feature-card env-feature-card--photo">
+              <div class="env-feature-body">
+                <p class="section-kicker">
+                  <span class="section-kicker__line" aria-hidden="true"></span
+                  >EXHIBITION
+                </p>
+                <h3 class="section-title">展示会などでも出店しています</h3>
+              </div>
+              <div class="env-feature-media env-feature-media--duo">
+                <picture>
+                  <source
+                    srcset="assets/images/exhibition/0109.avif"
+                    type="image/avif"
+                  />
+                  <img
+                    src="assets/images/exhibition/0109.webp"
+                    alt="展示会に並ぶカミイソの商品"
+                    loading="lazy"
+                    decoding="async"
+                    width="6000"
+                    height="4000"
+                  />
+                </picture>
+                <picture>
+                  <source
+                    srcset="assets/images/exhibition/0112.avif"
+                    type="image/avif"
+                  />
+                  <img
+                    src="assets/images/exhibition/0112.webp"
+                    alt="展示会に並ぶカミイソの商品とマスキングテープ"
+                    loading="lazy"
+                    decoding="async"
+                    width="6000"
+                    height="4000"
+                  />
+                </picture>
+              </div>
+            </article>
+            <article class="env-feature-card env-feature-card--mono">
+              <div class="env-feature-body">
+                <p class="section-kicker">
+                  <span class="section-kicker__line" aria-hidden="true"></span
+                  >GLOBAL
+                </p>
+                <h3 class="section-title">カミイソの海外展開</h3>
+              </div>
+              <div
+                class="env-feature-media env-feature-media--duo env-feature-media--mono"
+              >
+                <div class="env-feature-placeholder" aria-hidden="true"></div>
+                <div class="env-feature-placeholder" aria-hidden="true"></div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </section>
+      <section id="welfare" class="site-section site-section--cream">
+        <div class="section-container">
+          <div class="section-header">
+            <p class="section-kicker">
+              <span class="section-kicker__line" aria-hidden="true"></span
+              >WELFARE
+            </p>
+            <h2 class="section-title">福利厚生</h2>
+            <p class="section-lead">
+              テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。
+            </p>
+          </div>
+          <ul class="welfare-list">
+            <li class="welfare-card">
+              <p class="welfare-card__number">01</p>
+              <h3 class="welfare-card__title">福利厚生</h3>
+              <p class="welfare-card__text">
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li class="welfare-card">
+              <p class="welfare-card__number">02</p>
+              <h3 class="welfare-card__title">福利厚生</h3>
+              <p class="welfare-card__text">
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li class="welfare-card">
+              <p class="welfare-card__number">03</p>
+              <h3 class="welfare-card__title">福利厚生</h3>
+              <p class="welfare-card__text">
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト��キストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li class="welfare-card">
+              <p class="welfare-card__number">04</p>
+              <h3 class="welfare-card__title">福利厚生</h3>
+              <p class="welfare-card__text">
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li class="welfare-card">
+              <p class="welfare-card__number">05</p>
+              <h3 class="welfare-card__title">福利厚生</h3>
+              <p class="welfare-card__text">
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+            <li class="welfare-card">
+              <p class="welfare-card__number">06</p>
+              <h3 class="welfare-card__title">福利厚生</h3>
+              <p class="welfare-card__text">
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section
+        id="requirements"
+        class="site-section site-section--deep site-section--relative"
+      >
+        <div class="section-container">
+          <div class="section-header section-header--center">
+            <p class="section-kicker section-kicker--center">
+              <span class="section-kicker__line" aria-hidden="true"></span
+              >REQUIREMENTS
+            </p>
+            <h2 class="section-title">募集要項</h2>
+          </div>
+          <div class="requirements-box">
+            <div role="tablist" aria-label="募集区分" class="requirements-tabs">
+              <button
+                type="button"
+                role="tab"
+                id="requirements-tab-01"
+                aria-controls="requirements-panel-01"
+                aria-selected="true"
+                aria-label="タブ01"
+                class="requirements-tab is-selected"
+              >
+                タブ01<span class="requirements-tab__marker"></span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                id="requirements-tab-02"
+                aria-controls="requirements-panel-02"
+                aria-selected="false"
+                aria-label="タブ02"
+                class="requirements-tab"
+              >
+                タブ02
+              </button>
+              <button
+                type="button"
+                role="tab"
+                id="requirements-tab-03"
+                aria-controls="requirements-panel-03"
+                aria-selected="false"
+                aria-label="タブ03"
+                class="requirements-tab"
+              >
+                タブ03
+              </button>
+              <button
+                type="button"
+                role="tab"
+                id="requirements-tab-04"
+                aria-controls="requirements-panel-04"
+                aria-selected="false"
+                aria-label="タブ04"
+                class="requirements-tab"
+              >
+                タブ04
+              </button>
+              <span class="requirements-tabs__marker" aria-hidden="true"></span>
+            </div>
+            <div
+              role="tabpanel"
+              id="requirements-panel-01"
+              aria-labelledby="requirements-tab-01"
+              class="requirements-panel"
+            >
+              <p class="requirements-panel__title">タブ01</p>
+              <dl>
+                <div class="requirements-row">
+                  <dt class="requirements-term">職種</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">雇用形態</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">勤務地</dt>
+                  <dd class="requirements-description">
+                    〒 000 - 0000<br />この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">給与</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">賞与など</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">勤務時間</dt>
+                  <dd class="requirements-description">0時〜00時</dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">休日休暇</dt>
+                  <dd class="requirements-description">0週0休</dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">福利厚生</dt>
+                  <dd class="requirements-description">
+                    ・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。<br />・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。<br />・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。<br />・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">資格など</dt>
+                  <dd class="requirements-description">
+                    ・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。<br />・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <div
+              role="tabpanel"
+              id="requirements-panel-02"
+              aria-labelledby="requirements-tab-02"
+              class="requirements-panel is-hidden"
+              hidden
+            >
+              <p class="requirements-panel__title">タブ02</p>
+              <dl>
+                <div class="requirements-row">
+                  <dt class="requirements-term">職種</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">雇用形態</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">勤務地</dt>
+                  <dd class="requirements-description">
+                    〒 000 - 0000<br />この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">給与</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">賞与など</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">勤務時間</dt>
+                  <dd class="requirements-description">0時〜00時</dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">休日休暇</dt>
+                  <dd class="requirements-description">0週0休</dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">福利厚生</dt>
+                  <dd class="requirements-description">
+                    ・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。<br />・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">資格など</dt>
+                  <dd class="requirements-description">
+                    ・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <div
+              role="tabpanel"
+              id="requirements-panel-03"
+              aria-labelledby="requirements-tab-03"
+              class="requirements-panel is-hidden"
+              hidden
+            >
+              <p class="requirements-panel__title">タブ03</p>
+              <dl>
+                <div class="requirements-row">
+                  <dt class="requirements-term">職種</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">雇用形態</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">勤務地</dt>
+                  <dd class="requirements-description">
+                    〒 000 - 0000<br />この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">給与</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">賞与など</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を���認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">勤務時間</dt>
+                  <dd class="requirements-description">0時〜00時</dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">休日休暇</dt>
+                  <dd class="requirements-description">0週0休</dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">福利厚生</dt>
+                  <dd class="requirements-description">
+                    ・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">資格など</dt>
+                  <dd class="requirements-description">
+                    ・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <div
+              role="tabpanel"
+              id="requirements-panel-04"
+              aria-labelledby="requirements-tab-04"
+              class="requirements-panel is-hidden"
+              hidden
+            >
+              <p class="requirements-panel__title">タブ04</p>
+              <dl>
+                <div class="requirements-row">
+                  <dt class="requirements-term">職種</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">雇用形態</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキス���です。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">勤務地</dt>
+                  <dd class="requirements-description">
+                    〒 000 - 0000<br />この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">給与</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">賞与など</dt>
+                  <dd class="requirements-description">
+                    この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">勤務時間</dt>
+                  <dd class="requirements-description">0時〜00時</dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">休日休暇</dt>
+                  <dd class="requirements-description">0週0休</dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">福利厚生</dt>
+                  <dd class="requirements-description">
+                    ・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+                <div class="requirements-row">
+                  <dt class="requirements-term">資格など</dt>
+                  <dd class="requirements-description">
+                    ・この文章はダミーです。文字の大きさ、量、字間、行間等を確認するためのテキストです。
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        id="flow"
+        class="site-section site-section--deep site-section--relative"
+      >
+        <div class="section-container">
+          <div class="section-header section-header--center">
+            <p class="section-kicker section-kicker--center">
+              <span class="section-kicker__line" aria-hidden="true"></span>FLOW
+            </p>
+            <h2 class="section-title">応募の流れ</h2>
+            <p class="section-lead">
+              テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。
+            </p>
+          </div>
+          <ol class="flow-list">
+            <li class="flow-card">
+              <span class="flow-card__connector" aria-hidden="true"></span>
+              <p class="flow-card__step">STEP 01</p>
+              <h3 class="flow-card__title">step</h3>
+              <p class="flow-card__text">
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。
+              </p>
+            </li>
+            <li class="flow-card">
+              <span class="flow-card__connector" aria-hidden="true"></span>
+              <p class="flow-card__step">STEP 02</p>
+              <h3 class="flow-card__title">step</h3>
+              <p class="flow-card__text">
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。
+              </p>
+            </li>
+            <li class="flow-card">
+              <span class="flow-card__connector" aria-hidden="true"></span>
+              <p class="flow-card__step">STEP 03</p>
+              <h3 class="flow-card__title">step</h3>
+              <p class="flow-card__text">
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。
+              </p>
+            </li>
+            <li class="flow-card">
+              <p class="flow-card__step">STEP 04</p>
+              <h3 class="flow-card__title">step</h3>
+              <p class="flow-card__text">
+                テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+      <section
+        id="faq"
+        class="site-section site-section--cream site-section--relative"
+      >
+        <div class="faq-container">
+          <div class="section-header section-header--center">
+            <p class="section-kicker section-kicker--center">
+              <span class="section-kicker__line" aria-hidden="true"></span>FAQ
+            </p>
+            <h2 class="section-title">よくあるご質問</h2>
+            <p class="section-lead">
+              テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+            </p>
+          </div>
+          <ul class="faq-list">
+            <li class="faq-item">
+              <h3>
+                <button type="button" aria-expanded="true" class="faq-question">
+                  <span class="faq-mark faq-mark--question" aria-hidden="true"
+                    >Q</span
+                  ><span class="faq-question__text"
+                    >テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ</span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-plus faq-icon is-open"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5v14"></path>
+                  </svg>
+                </button>
+              </h3>
+              <div class="faq-answer is-open">
+                <div class="faq-answer__clip">
+                  <div class="faq-answer__inner">
+                    <span class="faq-mark faq-mark--answer" aria-hidden="true"
+                      >A</span
+                    >
+                    <p class="faq-answer__text">
+                      テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="faq-item">
+              <h3>
+                <button
+                  type="button"
+                  aria-expanded="false"
+                  class="faq-question"
+                >
+                  <span class="faq-mark faq-mark--question" aria-hidden="true"
+                    >Q</span
+                  ><span class="faq-question__text"
+                    >テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ</span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-plus faq-icon"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5v14"></path>
+                  </svg>
+                </button>
+              </h3>
+              <div class="faq-answer">
+                <div class="faq-answer__clip">
+                  <div class="faq-answer__inner">
+                    <span class="faq-mark faq-mark--answer" aria-hidden="true"
+                      >A</span
+                    >
+                    <p class="faq-answer__text">
+                      テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="faq-item">
+              <h3>
+                <button
+                  type="button"
+                  aria-expanded="false"
+                  class="faq-question"
+                >
+                  <span class="faq-mark faq-mark--question" aria-hidden="true"
+                    >Q</span
+                  ><span class="faq-question__text"
+                    >テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ</span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-plus faq-icon"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14"></path>
+                    <path d="M12 5v14"></path>
+                  </svg>
+                </button>
+              </h3>
+              <div class="faq-answer">
+                <div class="faq-answer__clip">
+                  <div class="faq-answer__inner">
+                    <span class="faq-mark faq-mark--answer" aria-hidden="true"
+                      >A</span
+                    >
+                    <p class="faq-answer__text">
+                      テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキ
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section id="entry" class="entry-section">
+        <div class="entry-container entry-inner">
+          <p class="entry-kicker">
+            <span class="entry-kicker__line"></span>ENTRY
+          </p>
+          <h2 class="entry-title">
+            見えない思いを、<br />一緒に彩りませんか。
+          </h2>
+          <p class="entry-lead">
+            まずは話を聞いてみたい、という方も歓迎です。工場見学のみのご相談もお受けしています。
+          </p>
+          <div class="entry-actions">
+            <a
+              href="mailto:recruit@example.co.jp"
+              class="entry-button entry-button--primary"
+              ><span class="entry-button__text"
+                ><span>新卒採⽤募集中！</span><span>詳しくはこちら</span></span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-arrow-right entry-button__icon"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path></svg></a
+            ><a
+              href="mailto:recruit@example.co.jp"
+              class="entry-button entry-button--outline"
+              ><span class="entry-button__text"
+                ><span>中途採⽤募集中！</span><span>詳しくはこちら</span></span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-arrow-up-right entry-button__icon"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path></svg
+            ></a>
+          </div>
+        </div>
+      </section> -->
+      <footer class="site-footer">
+        <div class="site-footer__inner">
+          <div>
+            <div class="site-footer__logo-box">
+              <img
+                alt="KAMIISO"
+                width="340"
+                height="54"
+                decoding="async"
+                data-nimg="1"
+                class="site-logo__image"
+                src="assets/images/kamiiso-logo.png"
+              />
+            </div>
+            <div class="site-footer__address">
+              <p>カミイソ産商株式会社</p>
+              <p>〒799-0101 愛媛県四国中央市川之江町2529-218</p>
+            </div>
+          </div>
+          <div class="site-footer__links">
+            <a
+              href="https://kamiiso.co.jp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-footer__link"
+              >コーポレートサイトはこちら<svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-arrow-up-right site-footer__link-icon"
+                aria-hidden="true"
+              >
+                <path d="M7 7h10v10"></path>
+                <path d="M7 17 17 7"></path></svg
+            ></a>
+            <p class="site-footer__copyright">
+              © 2026 KAMIISO SANSHO CO., LTD.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </main>
+    <template data-dgst="BAILOUT_TO_CLIENT_SIDE_RENDERING"></template>
+    <script src="assets/js/gsap.min.js"></script>
+    <script src="assets/js/ScrollTrigger.min.js"></script>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
