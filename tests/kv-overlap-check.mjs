@@ -108,7 +108,7 @@ if (!result) {
 
 console.log(JSON.stringify(result, null, 2));
 if (
-  result.photos.length !== 6 ||
+  result.photos.length !== 5 ||
   result.photoPairs.length ||
   result.photoNearPairs.length ||
   result.protectedPairs.length

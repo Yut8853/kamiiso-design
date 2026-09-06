@@ -121,10 +121,10 @@ const loaderCompletionDuration = 100;
 const loaderScatterDuration = 250;
 const loaderFadeDuration = 150;
 
-// The first KV set is decided once. The exact same 16 DOM elements/images are
+// The first KV set is decided once. The exact same 12 DOM elements/images are
 // used in the loader, then returned to the KV and animated to their final spots.
-const initialKvPhotoImages = selectInitialKvPhotoImages(kvPhotoImages, 6);
-const initialKvDotImages = shuffleItems(kvDotImages).slice(0, 10);
+const initialKvPhotoImages = selectInitialKvPhotoImages(kvPhotoImages, 5);
+const initialKvDotImages = shuffleItems(kvDotImages).slice(0, 7);
 
 function selectInitialKvPhotoImages(images, count) {
   const storageKey = 'kv-random-photo-selection';
@@ -136,7 +136,7 @@ function selectInitialKvPhotoImages(images, count) {
     previousImages = [];
   }
 
-  // When enough candidates exist, avoid the previous load's six photos
+  // When enough candidates exist, avoid the previous load's photos
   // entirely. This makes the random selection visually apparent on reload.
   const previousImageSet = new Set(previousImages);
   const freshCandidates = images.filter(image => !previousImageSet.has(image));
@@ -157,8 +157,8 @@ function prepareKvLoaderSequence() {
   const decor = document.querySelector('.kv-decor');
   if (!loader || !decor) return null;
 
-  const photoBlocks = [...document.querySelectorAll('.kv-photo-block')].slice(0, 6);
-  const dots = [...document.querySelectorAll('.kv-dot')].slice(0, 10);
+  const photoBlocks = [...document.querySelectorAll('.kv-photo-block')].slice(0, 5);
+  const dots = [...document.querySelectorAll('.kv-dot')].slice(0, 7);
 
   // Paint every first-view asset immediately so the loader never starts blank.
   photoBlocks.forEach((block, index) => {
@@ -174,7 +174,7 @@ function prepareKvLoaderSequence() {
   const items = shuffleItems([
     ...photoBlocks.map(block => block.closest('.kv-photo')).filter(Boolean),
     ...dots,
-  ]);
+  ].filter(element => getComputedStyle(element).display !== 'none'));
   if (!items.length) return null;
   // Show half of the KV pieces in the loading stack. All pieces still settle
   // into the hero so the finished composition remains unchanged.
@@ -566,93 +566,15 @@ function waitForWindowLoad() {
 }
 
 async function initializeKvRandomDecor() {
-  const photoBlocks = [...document.querySelectorAll('.kv-photo-block')].slice(
-    0,
-    6
-  );
-  const dotBlocks = [...document.querySelectorAll('.kv-dot')].slice(0, 10);
-  const decor = document.querySelector('.kv-decor');
-
-  await applyKvRandomDecor(photoBlocks, dotBlocks);
-  // Decor is placed a single time. The brief calls for a calm hero without
-  // the constant re-randomizing / floating loop, so no rotation is scheduled.
-  if (decor) decor.classList.add('is-settled');
-}
-
-async function applyKvRandomDecor(photoBlocks, dotBlocks) {
-  const shuffledPhotos = initialKvPhotoImages;
-  const shuffledDots = initialKvDotImages;
-  const hero = document.querySelector('.kv-hero');
-  const heroRect = hero ? hero.getBoundingClientRect() : null;
-  const heroWidth =
-    heroRect && heroRect.width ? heroRect.width : window.innerWidth || 1180;
-  const heroHeight =
-    heroRect && heroRect.height ? heroRect.height : window.innerHeight || 812;
-
-  const isNarrowHero = heroWidth < 768;
-  // Always reserve six photo zones: two on each side, one above, and one
-  // below. Shuffle the six assignments so the individual photos still change
-  // position on every load without losing the requested directional balance.
-  const photoZones = shuffleItems(
-    isNarrowHero
-      ? [
-          { x: [8, 18], y: [30, 42] },
-          { x: [8, 18], y: [62, 74] },
-          { x: [82, 92], y: [30, 42] },
-          { x: [82, 92], y: [62, 74] },
-          { x: [38, 62], y: [14, 20] },
-          { x: [38, 62], y: [84, 91] },
-        ]
-      : [
-          { x: [9, 17], y: [30, 42] },
-          { x: [9, 17], y: [62, 74] },
-          { x: [83, 91], y: [30, 42] },
-          { x: [83, 91], y: [62, 74] },
-          { x: [40, 60], y: [17, 23] },
-          { x: [40, 60], y: [82, 89] },
-        ]
-  );
-  // Tape rolls (dots) sit in the left/right side bands only, tucked into the
-  // vertical gaps between the photo slots, plus a couple far above/below the
-  // centered copy. They never enter the central 30-70% column that holds the
-  // headline and lead text.
-  const dotPlacements = shuffleItems([
-    { x: [23, 30], y: [10, 18] },
-    { x: [70, 77], y: [8, 16] },
-    { x: [22, 29], y: [33, 41] },
-    { x: [71, 78], y: [33, 41] },
-    { x: [24, 31], y: [58, 66] },
-    { x: [70, 77], y: [60, 68] },
-    { x: [4, 11], y: [40, 48] },
-    { x: [88, 95], y: [40, 48] },
-    { x: [26, 34], y: [88, 95] },
-    { x: [66, 74], y: [88, 95] },
-    { x: [6, 13], y: [72, 80] },
-    { x: [86, 93], y: [70, 78] },
-  ]);
-
-  await placeKvPhotosAcrossHero(
-    photoBlocks,
-    shuffledPhotos,
-    photoZones,
-    hero,
-    heroWidth,
-    heroHeight,
-    isNarrowHero
-  );
-
-  // Photos must settle first because their final dimensions depend on each
-  // source image's aspect ratio. Dots are then fitted into the remaining
-  // spaces one by one, sharing the same occupied-rectangle list.
-  const occupiedRects = [
-    ...getKvContentProtectedRects(),
-    ...getKvPhotoOccupiedRectsFromStyles(photoBlocks, heroWidth, heroHeight),
-  ];
-  dotBlocks.forEach((block, index) => {
-    setResponsiveBackground(block, shuffledDots[index]);
-    const rect = setRandomDotDecor(block, occupiedRects);
-    if (rect) occupiedRects.push(rect);
+  // CSS owns the fixed destinations, including responsive sizing. Image swaps
+  // and the loader animate these same nodes without changing their placement.
+  document.querySelectorAll('.kv-photo-block').forEach((block, index) => {
+    setResponsiveBackground(block, initialKvPhotoImages[index]);
   });
+  document.querySelectorAll('.kv-dot').forEach((block, index) => {
+    setResponsiveBackground(block, initialKvDotImages[index]);
+  });
+  document.querySelector('.kv-decor')?.classList.add('is-settled');
 }
 
 async function placeKvPhotosAcrossHero(

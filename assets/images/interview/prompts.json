@@ -1,0 +1,53 @@
+{
+  "generator": "Built-in image_gen",
+  "images": [
+    {
+      "slug": "shipping",
+      "label": "出荷事務",
+      "prompt": "Use case: illustration-story. Asset type: square employee interview avatar for a Japanese paper stationery company recruitment website. Create one fictional adult person icon: a shipping office worker holding a shipping slip beside a small parcel. Not a portrait of a real employee. Consistent clean flat editorial illustration, rounded simple shapes, subtle paper texture, dark charcoal fine outlines, friendly minimal facial features, muted cream background #fff9ec, muted sage and warm red accent palette. Centered waist-up person with one or two clearly readable job props, generous 10% safe margin all sides. Face and props readable at 76px. Warm, professional, approachable, gender-neutral styling. No text, no letters, no logos, no watermark, no photorealism, no complex scenery. Square image.",
+      "source": "/Users/yutakakizaki/.codex/generated_images/01a0745c-6408-7011-b01c-56229155d640/exec-2619b2b9-ee68-4830-8bd0-41afb52fe8a0.png"
+    },
+    {
+      "slug": "printing",
+      "label": "印刷オペレーター",
+      "prompt": "Use case: illustration-story. Asset type: square employee interview avatar for a Japanese paper stationery company recruitment website. Create one fictional adult person icon: a printing press operator in a work jacket holding a printed patterned paper sheet, with a simple ink roller. Not a portrait of a real employee. Consistent clean flat editorial illustration, rounded simple shapes, subtle paper texture, dark charcoal fine outlines, friendly minimal facial features, muted cream background #fff9ec, muted sage and warm red accent palette. Centered waist-up person with one or two clearly readable job props, generous 10% safe margin all sides. Face and props readable at 76px. Warm, professional, approachable, gender-neutral styling. No text, no letters, no logos, no watermark, no photorealism, no complex scenery. Square image.",
+      "source": "/Users/yutakakizaki/.codex/generated_images/01a0745c-6408-7011-b01c-56229155d640/exec-6eeedc9a-99b8-425a-8ea0-2d2a8886c34e.png"
+    },
+    {
+      "slug": "inspection",
+      "label": "検品加工部",
+      "prompt": "Use case: illustration-story. Asset type: square employee interview avatar for a Japanese paper stationery company recruitment website. Create one fictional adult person icon: a quality inspection and finishing worker in a work jacket carefully examining a small decorative washi masking tape roll. Not a portrait of a real employee. Consistent clean flat editorial illustration, rounded simple shapes, subtle paper texture, dark charcoal fine outlines, friendly minimal facial features, muted cream background #fff9ec, muted sage and warm red accent palette. Centered waist-up person with one or two clearly readable job props, generous 10% safe margin all sides. Face and props readable at 76px. Warm, professional, approachable, gender-neutral styling. No text, no letters, no logos, no watermark, no photorealism, no complex scenery. Square image.",
+      "source": "/Users/yutakakizaki/.codex/generated_images/01a0745c-6408-7011-b01c-56229155d640/exec-61d850ba-9cbf-4c91-9b47-63f4dc6b73e9.png"
+    },
+    {
+      "slug": "rotary",
+      "label": "輪転",
+      "prompt": "Use case: illustration-story. Asset type: square employee interview avatar for a Japanese paper stationery company recruitment website. Create one fictional adult person icon: a rotary printing and foil stamping operator in a work jacket beside one simplified gold foil roller. Not a portrait of a real employee. Consistent clean flat editorial illustration, rounded simple shapes, subtle paper texture, dark charcoal fine outlines, friendly minimal facial features, muted cream background #fff9ec, muted sage and warm red accent palette. Centered waist-up person with one or two clearly readable job props, generous 10% safe margin all sides. Face and props readable at 76px. Warm, professional, approachable, gender-neutral styling. No text, no letters, no logos, no watermark, no photorealism, no complex scenery. Square image.",
+      "source": "/Users/yutakakizaki/.codex/generated_images/01a0745c-6408-7011-b01c-56229155d640/exec-2dc0b572-2108-4acb-ad94-14a96632b59c.png"
+    },
+    {
+      "slug": "overseas",
+      "label": "海外事業部",
+      "prompt": "Use case: illustration-story. Asset type: square employee interview avatar for a Japanese paper stationery company recruitment website. Create one fictional adult person icon: an international business staff member holding a product catalog with a small globe beside them. Not a portrait of a real employee. Consistent clean flat editorial illustration, rounded simple shapes, subtle paper texture, dark charcoal fine outlines, friendly minimal facial features, muted cream background #fff9ec, muted sage and warm red accent palette. Centered waist-up person with one or two clearly readable job props, generous 10% safe margin all sides. Face and props readable at 76px. Warm, professional, approachable, gender-neutral styling. No text, no letters, no logos, no watermark, no photorealism, no complex scenery. Square image.",
+      "source": "/Users/yutakakizaki/.codex/generated_images/01a0745c-6408-7011-b01c-56229155d640/exec-faaf5e16-3355-456c-8790-04daef59e8b9.png"
+    },
+    {
+      "slug": "sales",
+      "label": "営業部",
+      "prompt": "Use case: illustration-story. Asset type: square employee interview avatar for a Japanese paper stationery company recruitment website. Create one fictional adult person icon: a stationery sales representative holding an open sample folder showing colorful paper stationery. Not a portrait of a real employee. Consistent clean flat editorial illustration, rounded simple shapes, subtle paper texture, dark charcoal fine outlines, friendly minimal facial features, muted cream background #fff9ec, muted sage and warm red accent palette. Centered waist-up person with one or two clearly readable job props, generous 10% safe margin all sides. Face and props readable at 76px. Warm, professional, approachable, gender-neutral styling. No text, no letters, no logos, no watermark, no photorealism, no complex scenery. Square image.",
+      "source": "/Users/yutakakizaki/.codex/generated_images/01a0745c-6408-7011-b01c-56229155d640/exec-ac336051-20a9-4413-8ae2-9de9c4795fa5.png"
+    },
+    {
+      "slug": "planning",
+      "label": "商品企画部",
+      "prompt": "Use case: illustration-story. Asset type: square employee interview avatar for a Japanese paper stationery company recruitment website. Create one fictional adult person icon: a product planner holding a sketch notebook with decorative tape ideas and a pencil. Not a portrait of a real employee. Consistent clean flat editorial illustration, rounded simple shapes, subtle paper texture, dark charcoal fine outlines, friendly minimal facial features, muted cream background #fff9ec, muted sage and warm red accent palette. Centered waist-up person with one or two clearly readable job props, generous 10% safe margin all sides. Face and props readable at 76px. Warm, professional, approachable, gender-neutral styling. No text, no letters, no logos, no watermark, no photorealism, no complex scenery. Square image.",
+      "source": "/Users/yutakakizaki/.codex/generated_images/01a0745c-6408-7011-b01c-56229155d640/exec-d93272c6-f9da-4653-844b-5dae9a986a86.png"
+    },
+    {
+      "slug": "design",
+      "label": "デザイン部",
+      "prompt": "Use case: illustration-story. Asset type: square employee interview avatar for a Japanese paper stationery company recruitment website. Create one fictional adult person icon: a graphic designer holding a stylus and a small drawing tablet showing a simple floral motif. Not a portrait of a real employee. Consistent clean flat editorial illustration, rounded simple shapes, subtle paper texture, dark charcoal fine outlines, friendly minimal facial features, muted cream background #fff9ec, muted sage and warm red accent palette. Centered waist-up person with one or two clearly readable job props, generous 10% safe margin all sides. Face and props readable at 76px. Warm, professional, approachable, gender-neutral styling. No text, no letters, no logos, no watermark, no photorealism, no complex scenery. Square image.",
+      "source": "/Users/yutakakizaki/.codex/generated_images/01a0745c-6408-7011-b01c-56229155d640/exec-00c3cf51-0e6f-4bf5-9aa0-6d755db4e2d6.png"
+    }
+  ]
+}

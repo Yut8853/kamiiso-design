@@ -134,72 +134,6 @@
   background: transparent center / cover no-repeat;
   box-shadow: 0 18px 30px rgb(0 0 0 / 0.16);
 }
-.kv-photo--01 {
-  --float-delay: 0s;
-  --float-duration: 7.5s;
-  --float-x: 9px;
-  --float-y: -14px;
-  top: 7%;
-  left: 1%;
-  width: 22%;
-  height: 16%;
-  rotate: -8deg;
-}
-.kv-photo--02 {
-  --float-delay: -0.85s;
-  --float-duration: 8.9s;
-  --float-x: -9px;
-  --float-y: -10px;
-  top: 5%;
-  right: 2%;
-  width: 21%;
-  height: 15%;
-  rotate: 6deg;
-}
-.kv-photo--03 {
-  --float-delay: -1.7s;
-  --float-duration: 10.3s;
-  --float-x: 9px;
-  --float-y: -10px;
-  top: 33%;
-  left: 1%;
-  width: 18%;
-  height: 14%;
-  rotate: 5deg;
-}
-.kv-photo--04 {
-  --float-delay: -2.55s;
-  --float-duration: 11.7s;
-  --float-x: -9px;
-  --float-y: -14px;
-  top: 35%;
-  right: 1%;
-  width: 20%;
-  height: 15%;
-  rotate: -5deg;
-}
-.kv-photo--05 {
-  --float-delay: -3.4s;
-  --float-duration: 7.5s;
-  --float-x: 9px;
-  --float-y: -10px;
-  bottom: 7%;
-  left: 2%;
-  width: 22%;
-  height: 16%;
-  rotate: 9deg;
-}
-.kv-photo--06 {
-  --float-delay: -4.25s;
-  --float-duration: 8.9s;
-  --float-x: -9px;
-  --float-y: -10px;
-  bottom: 5%;
-  right: 3%;
-  width: 21%;
-  height: 15%;
-  rotate: -9deg;
-}
 .kv-dot {
   position: absolute;
   border-radius: 0;
@@ -218,66 +152,6 @@
 }
 .kv-decor.is-fading {
   opacity: 0;
-}
-.kv-dot--01 {
-  top: 45%;
-  left: 12%;
-  width: 3rem;
-  height: 3rem;
-}
-.kv-dot--02 {
-  bottom: 24%;
-  left: 25%;
-  width: 3.5rem;
-  height: 3.5rem;
-}
-.kv-dot--03 {
-  top: 44%;
-  right: 19%;
-  width: 3.5rem;
-  height: 3.5rem;
-}
-.kv-dot--04 {
-  right: 5%;
-  bottom: 13%;
-  width: 3rem;
-  height: 3rem;
-}
-.kv-dot--05 {
-  top: 29%;
-  left: 48%;
-  width: 2.75rem;
-  height: 2.75rem;
-}
-.kv-dot--06 {
-  top: 58%;
-  right: 12%;
-  width: 4rem;
-  height: 4rem;
-}
-.kv-dot--07 {
-  bottom: 35%;
-  left: 8%;
-  width: 2.5rem;
-  height: 2.5rem;
-}
-.kv-dot--08 {
-  top: 24%;
-  right: 35%;
-  width: 2.9rem;
-  height: 2.9rem;
-}
-.kv-dot--09 {
-  right: 31%;
-  bottom: 21%;
-  width: 3.25rem;
-  height: 3.25rem;
-}
-.kv-dot--10 {
-  top: 64%;
-  left: 31%;
-  width: 2.35rem;
-  height: 2.35rem;
 }
 .kv-content {
   position: relative;
@@ -327,7 +201,7 @@
 .kv-copy {
   max-width: 42rem;
   margin: 1.75rem auto 0;
-  color: color-mix(in oklab, var(--foreground) 75%, transparent);
+  color: #090405;
   font-family: "Unica B", "Yu Gothic Pr6N", "Yu Gothic Pro6N",
     "Yu Gothic", "游ゴシック体", "游ゴシック", sans-serif;
   font-size: 0.75rem;
@@ -1292,6 +1166,11 @@ footer a[href]:hover svg {
 .about-copy .section-kicker {
   justify-content: center;
 }
+.about-copy .section-title,
+.about-tagline,
+.about-text {
+  color: #090405;
+}
 .about-tagline {
   margin-top: 2.5rem;
   font-family: var(--font-noto-serif), ui-serif, serif;
@@ -1301,7 +1180,6 @@ footer a[href]:hover svg {
 .about-text {
   max-width: var(--container-xl);
   margin: 1.75rem auto 0;
-  color: color-mix(in oklab, var(--foreground) 65%, transparent);
   font-size: var(--text-lg);
   line-height: 2rem;
 }
@@ -1353,7 +1231,7 @@ footer a[href]:hover svg {
   margin-top: 4rem;
 }
 .product-text {
-  color: color-mix(in oklab, var(--foreground) 70%, transparent);
+  color: #090405;
   font-size: var(--text-lg);
   line-height: 2rem;
 }
@@ -2021,49 +1899,42 @@ html.is-loading .site-body {
   line-height: 2rem;
 }
 .interview-card__thumb {
+  display: block;
   flex: none;
   width: 4.75rem;
   height: 4.75rem;
-  border-radius: 1rem;
-  background-image: url("../images/products/product-lineup.png");
+  border: 2px solid #c91927;
+  border-radius: 50%;
+  background-color: #fbecee;
   background-repeat: no-repeat;
-  background-size: 320%;
-  background-position: 20% 30%;
-  box-shadow: 0 8px 20px rgb(82 61 43 / 0.18);
-  rotate: -4deg;
+  background-size: 110%;
+  background-position: center;
 }
 .interview-card__thumb--01 {
-  background-position: 8% 18%;
-  rotate: -5deg;
+  background-image: url("../images/interview/shipping-simple-red.png");
 }
 .interview-card__thumb--02 {
-  background-position: 88% 12%;
-  rotate: 4deg;
+  background-image: url("../images/interview/printing-simple-red.png");
 }
 .interview-card__thumb--03 {
-  background-position: 46% 58%;
-  rotate: -3deg;
+  background-image: url("../images/interview/inspection-simple-red.png");
 }
 .interview-card__thumb--04 {
-  background-position: 72% 82%;
-  rotate: 5deg;
+  background-image: url("../images/interview/rotary-simple-red.png");
 }
 .interview-card__thumb--05 {
-  background-position: 14% 78%;
-  rotate: -4deg;
+  background-image: url("../images/interview/overseas-simple-red.png");
 }
 .interview-card__thumb--06 {
-  background-position: 92% 62%;
-  rotate: 3deg;
+  background-image: url("../images/interview/sales-simple-red.png");
 }
 .interview-card__thumb--07 {
-  background-position: 32% 40%;
-  rotate: -6deg;
+  background-image: url("../images/interview/planning-simple-red.png");
 }
 .interview-card__thumb--08 {
-  background-position: 60% 24%;
-  rotate: 4deg;
+  background-image: url("../images/interview/design-simple-red.png");
 }
+
 .interview-card__meta {
   display: flex;
   flex-wrap: wrap;
@@ -2497,53 +2368,6 @@ html.is-loading .site-body {
   .kv-hero {
     min-height: max(100svh, 900px);
     padding-top: 5rem;
-  }
-  .kv-photo--01 {
-    top: 11%;
-    left: 3%;
-    width: 22%;
-    height: 24%;
-  }
-  .kv-photo--02 {
-    top: 10%;
-    left: 29%;
-    width: 16%;
-    height: 13%;
-  }
-  .kv-photo--03 {
-    top: 10%;
-    height: 16%;
-  }
-  .kv-photo--04 {
-    top: 15%;
-    right: 3%;
-    width: 22%;
-    height: 25%;
-  }
-  .kv-photo--05 {
-    bottom: 11%;
-    left: 3%;
-    width: 22%;
-    height: 19%;
-  }
-  .kv-photo--06 {
-    bottom: 9%;
-    left: 36%;
-    width: 20%;
-    height: 17%;
-  }
-  .kv-dot--01,
-  .kv-dot--03 {
-    width: 5rem;
-    height: 5rem;
-  }
-  .kv-dot--02 {
-    width: 6rem;
-    height: 6rem;
-  }
-  .kv-dot--04 {
-    width: 4rem;
-    height: 4rem;
   }
   .kv-content {
     min-height: 820px;
@@ -5734,4 +5558,55 @@ h2.section-title::before,
 #about .about-layout {
   position: relative;
   z-index: 1;
+}
+
+/* Fixed KV composition, based on the 1902 × 1081 reference.
+   Five photos: left pair, right pair, top. Seven product cutouts surround them. */
+.kv-decor {
+  overflow: hidden;
+  pointer-events: none;
+}
+.kv-decor .kv-photo,
+.kv-decor .kv-dot {
+  right: auto;
+  bottom: auto;
+  height: auto;
+  aspect-ratio: 3 / 2;
+}
+.kv-photo--01 { left: 5.5%; top: 37%; width: 12.6%; rotate: 13deg; }
+.kv-photo--02 { left: -0.7%; top: 62%; width: 24.3%; rotate: 11deg; }
+.kv-photo--03 { left: 75%; top: 20.5%; width: 20.3%; rotate: -10deg; }
+.kv-photo--04 { left: 76.2%; top: 68.5%; width: 22%; rotate: 7deg; }
+.kv-photo--05 { left: 43.2%; top: 1.5%; width: 12.2%; rotate: 8deg; }
+.kv-decor .kv-dot {
+  animation: none;
+  transform: none;
+  will-change: auto;
+}
+.kv-decor .kv-dot--01 { left: 27%; top: 9%; width: 7.8%; aspect-ratio: 3 / 1; rotate: -21deg; }
+.kv-decor .kv-dot--02 { left: 23.5%; top: 29.5%; width: 4.1%; aspect-ratio: 1 / 1.8; rotate: 19deg; }
+.kv-decor .kv-dot--03 { left: 62.3%; top: -2%; width: 5.2%; aspect-ratio: 1; rotate: 21deg; }
+.kv-decor .kv-dot--04 { left: 74%; top: 2%; width: 5.2%; aspect-ratio: 1 / 1.2; rotate: -20deg; }
+.kv-decor .kv-dot--05 { left: 83.4%; top: 6%; width: 5%; aspect-ratio: 3 / 2; rotate: 4deg; }
+.kv-decor .kv-dot--06 { left: 91.7%; top: 44%; width: 5.9%; aspect-ratio: 1 / 2.35; rotate: 6deg; }
+.kv-decor .kv-dot--07 { left: 18%; top: 96%; width: 6%; aspect-ratio: 1; rotate: 12deg; }
+@media (max-width: 47.9375rem) {
+  /* The mobile hero uses only cutouts, including during the loading stack. */
+  .kv-decor .kv-photo {
+    display: none !important;
+  }
+  .kv-decor {
+    clip-path: inset(6rem 0 0);
+  }
+  .kv-decor .kv-dot {
+    width: clamp(5rem, 26vw, 8rem);
+    aspect-ratio: 1;
+  }
+  .kv-decor .kv-dot--01 { left: 9%; top: 6.75rem; rotate: -21deg; }
+  .kv-decor .kv-dot--02 { left: -17%; top: 34%; rotate: 19deg; }
+  .kv-decor .kv-dot--03 { left: 70%; top: 6.75rem; rotate: 21deg; }
+  .kv-decor .kv-dot--04 { left: 91%; top: 35%; rotate: -20deg; }
+  .kv-decor .kv-dot--05 { left: -17%; top: 62%; rotate: 4deg; }
+  .kv-decor .kv-dot--06 { left: 91%; top: 63%; rotate: 6deg; }
+  .kv-decor .kv-dot--07 { left: 38%; top: 85%; rotate: 12deg; }
 }
