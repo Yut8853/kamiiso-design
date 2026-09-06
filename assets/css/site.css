@@ -5572,23 +5572,36 @@ h2.section-title::before,
   height: auto;
   aspect-ratio: 3 / 2;
 }
-.kv-photo--01 { left: 5.5%; top: 37%; width: 12.6%; rotate: 13deg; }
-.kv-photo--02 { left: -0.7%; top: 62%; width: 24.3%; rotate: 11deg; }
-.kv-photo--03 { left: 75%; top: 20.5%; width: 20.3%; rotate: -10deg; }
-.kv-photo--04 { left: 76.2%; top: 68.5%; width: 22%; rotate: 7deg; }
-.kv-photo--05 { left: 43.2%; top: 1.5%; width: 12.2%; rotate: 8deg; }
+.kv-photo--01 { left: 5.5%; top: 37%; width: 13.86%; rotate: 13deg; }
+.kv-photo--02 { left: -0.7%; top: 62%; width: 26.73%; rotate: 11deg; }
+.kv-photo--03 { left: 75%; top: 20.5%; width: 22.33%; rotate: -10deg; }
+.kv-photo--04 { left: 76.2%; top: 68.5%; width: 24.2%; rotate: 7deg; }
+.kv-photo--05 { left: 43.2%; top: 1.5%; width: 13.42%; rotate: 8deg; }
 .kv-decor .kv-dot {
   animation: none;
   transform: none;
   will-change: auto;
 }
-.kv-decor .kv-dot--01 { left: 27%; top: 9%; width: 7.8%; aspect-ratio: 3 / 1; rotate: -21deg; }
-.kv-decor .kv-dot--02 { left: 23.5%; top: 29.5%; width: 4.1%; aspect-ratio: 1 / 1.8; rotate: 19deg; }
-.kv-decor .kv-dot--03 { left: 62.3%; top: -2%; width: 5.2%; aspect-ratio: 1; rotate: 21deg; }
-.kv-decor .kv-dot--04 { left: 74%; top: 2%; width: 5.2%; aspect-ratio: 1 / 1.2; rotate: -20deg; }
-.kv-decor .kv-dot--05 { left: 83.4%; top: 6%; width: 5%; aspect-ratio: 3 / 2; rotate: 4deg; }
-.kv-decor .kv-dot--06 { left: 91.7%; top: 44%; width: 5.9%; aspect-ratio: 1 / 2.35; rotate: 6deg; }
-.kv-decor .kv-dot--07 { left: 18%; top: 96%; width: 6%; aspect-ratio: 1; rotate: 12deg; }
+.kv-decor .kv-dot--01 { left: 27%; top: 9%; width: 8.58%; aspect-ratio: 3 / 1; rotate: -21deg; }
+.kv-decor .kv-dot--02 { left: 23.5%; top: 29.5%; width: 4.51%; aspect-ratio: 1 / 1.8; rotate: 19deg; }
+.kv-decor .kv-dot--03 { left: 62.3%; top: -2%; width: 5.72%; aspect-ratio: 1; rotate: 21deg; }
+.kv-decor .kv-dot--04 { left: 74%; top: 2%; width: 5.72%; aspect-ratio: 1 / 1.2; rotate: -20deg; }
+.kv-decor .kv-dot--05 { left: 83.4%; top: 6%; width: 5.5%; aspect-ratio: 3 / 2; rotate: 4deg; }
+.kv-decor .kv-dot--06 { left: 91.7%; top: 44%; width: 6.49%; aspect-ratio: 1 / 2.35; rotate: 6deg; }
+.kv-decor .kv-dot--07 {
+  left: 18%;
+  top: max(calc(96% + 3rem), calc(62% + 21vw + 1rem));
+  width: 6.6%;
+  aspect-ratio: 1;
+  rotate: 12deg;
+}
+@media (min-width: 48rem) {
+  .kv-decor {
+    /* Let the lower cutout sit below the photo without clipping it away. */
+    overflow: visible;
+    clip-path: inset(0 0 -30vw);
+  }
+}
 @media (max-width: 47.9375rem) {
   /* The mobile hero uses only cutouts, including during the loading stack. */
   .kv-decor .kv-photo {
@@ -5598,7 +5611,7 @@ h2.section-title::before,
     clip-path: inset(6rem 0 0);
   }
   .kv-decor .kv-dot {
-    width: clamp(5rem, 26vw, 8rem);
+    width: clamp(5.5rem, 28.6vw, 8.8rem);
     aspect-ratio: 1;
   }
   .kv-decor .kv-dot--01 { left: 9%; top: 6.75rem; rotate: -21deg; }
