@@ -1230,7 +1230,8 @@ footer a[href]:hover svg {
   gap: 2.5rem;
   margin-top: 4rem;
 }
-.product-text {
+.product-text,
+.interview-card__text {
   color: #090405;
   font-size: var(--text-lg);
   line-height: 2rem;
@@ -1763,8 +1764,6 @@ html.is-loading .site-body {
 }
 #interview[data-interview-view='focus'] .interview-card__text {
   max-width: 48rem;
-  font-size: clamp(0.9rem, 1.25vw, 1.05rem);
-  line-height: 2.15;
 }
 
 /* 02: basic cards in source order: 01, 02, 03... */
@@ -1936,6 +1935,7 @@ html.is-loading .site-body {
 }
 
 .interview-card__meta {
+  color: #090405;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1943,7 +1943,8 @@ html.is-loading .site-body {
   margin-top: 1.5rem;
   padding-top: 1.25rem;
   border-top: 1px solid color-mix(in oklab, var(--foreground) 15%, transparent);
-  font-size: var(--text-sm);
+  font-size: 1rem;
+  line-height: 1.6;
 }
 .interview-card__divider {
   width: 1px;
@@ -1951,17 +1952,12 @@ html.is-loading .site-body {
   background: color-mix(in oklab, var(--foreground) 20%, transparent);
 }
 .interview-card__year {
-  color: color-mix(in oklab, var(--foreground) 50%, transparent);
+  color: inherit;
 }
 .interview-card__excerpt {
   max-height: none;
   margin-top: 1.25rem;
   overflow: visible;
-}
-.interview-card__text {
-  color: var(--foreground);
-  font-size: var(--text-sm);
-  line-height: 1.75rem;
 }
 .interview-card__button {
   margin-top: 1rem;
@@ -2437,6 +2433,9 @@ html.is-loading .site-body {
   .about-text,
   .product-text {
     margin-top: 1.25rem;
+  }
+  .product-text,
+  .interview-card__text {
     line-height: 1.8rem;
   }
   .product-layout {
