@@ -1499,6 +1499,10 @@ html.is-loading .site-body {
   color: var(--primary);
   transition: opacity 0.22s ease;
 }
+.menu-button__icon {
+  width: 3rem;
+  height: 3rem;
+}
 .menu-button:hover {
   opacity: 0.65;
 }
@@ -5596,10 +5600,18 @@ h2.section-title::before,
   rotate: 12deg;
 }
 @media (min-width: 48rem) {
+  .kv-section {
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+  .kv-hero {
+    /* Keep overflowing KV images in front of the following about section. */
+    z-index: 12;
+  }
   .kv-decor {
-    /* Let the lower cutout sit below the photo without clipping it away. */
+    /* Clip only at the section's sides, not at the hero's lower edge. */
     overflow: visible;
-    clip-path: inset(0 0 -30vw);
+    clip-path: none;
   }
 }
 @media (max-width: 47.9375rem) {
