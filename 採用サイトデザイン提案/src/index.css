@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-serif: 'Noto Serif JP', Georgia, '游明朝', 'Yu Mincho', serif;
+  --font-sans: 'Noto Sans JP', '游ゴシック', 'Yu Gothic', sans-serif;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f5f0e6;
+  color: #1a1510;
+}
+
+@keyframes slide-infinite {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
