@@ -205,8 +205,9 @@
   color: #090405;
   font-family: "Unica B", "Yu Gothic Pr6N", "Yu Gothic Pro6N",
     "Yu Gothic", "游ゴシック体", "游ゴシック", sans-serif;
-  font-size: 0.75rem;
-  line-height: 1.6rem;
+  font-size: calc(0.75rem + 2pt);
+  font-weight: 500;
+  line-height: 2.2;
 }
 .kv-copy p + p {
   margin-top: 0.85rem;
@@ -1177,10 +1178,13 @@ footer a[href]:hover svg {
   font-family: var(--font-noto-serif), ui-serif, serif;
   font-size: var(--text-xl);
   line-height: 2;
+  white-space: nowrap;
 }
 .about-text {
   max-width: var(--container-xl);
   margin: 1.75rem auto 0;
+  text-align: justify;
+  text-justify: inter-ideograph;
   font-size: var(--text-lg);
   line-height: 2rem;
 }
@@ -1240,8 +1244,16 @@ footer a[href]:hover svg {
 .product-actions {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 2.5rem;
+  gap: 1.5rem;
+  margin-top: 3.25rem;
+}
+.product-text {
+  line-height: 2.3rem;
+}
+.product-actions .button-pill,
+.product-actions .button-pill:hover,
+.product-actions .button-pill:focus-visible {
+  text-decoration: none;
 }
 .button-pill {
   display: inline-flex;
@@ -1916,28 +1928,28 @@ html.is-loading .site-body {
   background-position: center;
 }
 .interview-card__thumb--01 {
-  background-image: url("../images/interview/shipping-simple-red.png");
+  background-image: url("../images/interview/face-01.png");
 }
 .interview-card__thumb--02 {
-  background-image: url("../images/interview/printing-simple-red.png");
+  background-image: url("../images/interview/face-02.png");
 }
 .interview-card__thumb--03 {
-  background-image: url("../images/interview/inspection-simple-red.png");
+  background-image: url("../images/interview/face-03.png");
 }
 .interview-card__thumb--04 {
-  background-image: url("../images/interview/rotary-simple-red.png");
+  background-image: url("../images/interview/face-04.png");
 }
 .interview-card__thumb--05 {
-  background-image: url("../images/interview/overseas-simple-red.png");
+  background-image: url("../images/interview/face-05.png");
 }
 .interview-card__thumb--06 {
-  background-image: url("../images/interview/sales-simple-red.png");
+  background-image: url("../images/interview/face-06.png");
 }
 .interview-card__thumb--07 {
-  background-image: url("../images/interview/planning-simple-red.png");
+  background-image: url("../images/interview/face-07.png");
 }
 .interview-card__thumb--08 {
-  background-image: url("../images/interview/design-simple-red.png");
+  background-image: url("../images/interview/face-08.png");
 }
 
 .interview-card__meta {
@@ -2096,30 +2108,10 @@ html.is-loading .site-body {
 }
 .environment-lead {
   margin-top: 2rem;
-  color: color-mix(in oklab, var(--foreground) 70%, transparent);
+  color: #090405;
   font-size: var(--text-sm);
   line-height: 2rem;
   text-wrap: pretty;
-}
-.env-slider__head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-bottom: 1.75rem;
-}
-.env-slider__title {
-  font-family: var(--font-noto-serif), ui-serif, serif;
-  font-size: var(--text-2xl);
-  font-weight: 500;
-  line-height: var(--leading-relaxed);
-  letter-spacing: 0.04em;
-}
-.env-slider__meta {
-  display: none;
-  color: var(--primary);
-  font-size: 0.65rem;
-  letter-spacing: 0.24em;
 }
 .faq-container {
   max-width: var(--container-4xl);
@@ -2422,8 +2414,7 @@ html.is-loading .site-body {
   }
   .kv-copy {
     margin-top: 2.25rem;
-    font-size: var(--text-lg);
-    line-height: 2rem;
+    font-size: calc(var(--text-lg) + 2pt);
   }
 }
 @media (max-width: 47.9375rem) {
@@ -2444,8 +2435,7 @@ html.is-loading .site-body {
   }
   .kv-copy {
     margin-top: 1.25rem;
-    font-size: 0.7rem;
-    line-height: 1.45rem;
+    font-size: calc(0.7rem + 2pt);
   }
   .kv-scroll {
     margin-top: 1.5rem;
@@ -2471,21 +2461,23 @@ html.is-loading .site-body {
   }
   .about-tagline {
     margin-top: 1.75rem;
-    font-size: 1.125rem;
+    font-size: clamp(0.75rem, 3.5vw, 1.125rem);
   }
   .about-text,
   .product-text {
     margin-top: 1.25rem;
   }
-  .product-text,
   .interview-card__text {
     line-height: 1.8rem;
+  }
+  .product-text {
+    line-height: 2.1rem;
   }
   .product-layout {
     margin-top: 2.5rem;
   }
   .product-actions {
-    margin-top: 1.75rem;
+    margin-top: 2.5rem;
   }
   .button-pill {
     width: 100%;
@@ -2543,12 +2535,6 @@ html.is-loading .site-body {
   }
   .env-slider {
     margin-top: 3.5rem;
-  }
-  .env-slider__head {
-    display: block;
-  }
-  .env-slider__meta {
-    margin-top: 0.75rem;
   }
   .faq-list {
     margin-top: 2.5rem;
@@ -3054,12 +3040,6 @@ html.is-loading .site-body {
   .environment-lead {
     font-size: var(--text-lg);
     line-height: 2.25rem;
-  }
-  .env-slider__title {
-    font-size: var(--text-3xl);
-  }
-  .env-slider__meta {
-    display: block;
   }
   .faq-container {
     padding-inline: 2.5rem;
@@ -4117,11 +4097,6 @@ html.is-loading .site-body {
   transform: scale(1.04);
 }
 
-/* Environment copy kicker to match the section-header rhythm */
-.env-copy .section-kicker {
-  margin-bottom: 1.25rem;
-}
-
 @media (width >= 48rem) {
   .about-layout {
     grid-template-columns: minmax(0, 1fr);
@@ -5032,26 +5007,17 @@ html.is-loading .site-body {
   }
 }
 
-/* Office photos belong to the environment story, not a separate marquee. */
+/* Static office gallery: two large scenes above four smaller details. */
+.env-slider > .section-header {
+  margin-bottom: 2rem;
+}
+
 #environment .env-slider {
   padding-top: clamp(3.5rem, 7vw, 5.5rem);
 }
 
-#environment .env-slider__head {
-  align-items: end;
-  margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid color-mix(in oklab, var(--foreground) 18%, transparent);
-}
 
-#environment .env-slider__title {
-  font-size: clamp(1.15rem, 2vw, 1.5rem);
-}
 
-#environment .env-slider__meta {
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-}
 
 #environment .env-slider-window {
   margin-inline: 0;
@@ -5068,6 +5034,7 @@ html.is-loading .site-body {
   padding: 0;
   animation: none;
   transform: none;
+  will-change: auto;
 }
 
 #environment .env-slide {
@@ -5075,19 +5042,11 @@ html.is-loading .site-body {
   aspect-ratio: 4 / 3;
 }
 
-/* Keep only visually distinct scenes: exterior, factory, and interior spaces. */
-#environment .env-slide:nth-child(2),
-#environment .env-slide:nth-child(3),
-#environment .env-slide:nth-child(4),
-#environment .env-slide:nth-child(5),
-#environment .env-slide:nth-child(7),
-#environment .env-slide[aria-hidden="true"] {
-  display: none;
-}
-
+#environment .env-slide img,
 #environment .env-slide:hover img {
   animation: none;
   transform: none;
+  transition: none;
 }
 
 @media (min-width: 48rem) {
@@ -5096,7 +5055,12 @@ html.is-loading .site-body {
   }
 
   #environment .env-slide-track {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  #environment .env-slide:nth-child(-n + 2) {
+    grid-column: span 2;
+    aspect-ratio: 3 / 2;
   }
 }
 
@@ -5111,7 +5075,8 @@ html.is-loading .site-body {
   gap: clamp(0.75rem, 1.5vw, 1rem);
 }
 
-#environment .env-feature-card .section-title {
+#environment .env-feature-card .section-title,
+#environment .env-slider .section-title {
   font-size: clamp(1rem, 2.8vw, 1.35rem);
   line-height: 1.45;
   white-space: nowrap;
@@ -5140,51 +5105,6 @@ html.is-loading .site-body {
 
   #environment .env-feature-body {
     min-height: 0;
-  }
-}
-
-/* Office scenes: compact infinite loop using the six selected views. */
-#environment .env-slider-window {
-  margin-inline: calc(50% - 50vw);
-  overflow: hidden;
-}
-
-#environment .env-slide-track {
-  display: flex;
-  width: max-content;
-  gap: clamp(0.625rem, 1.5vw, 1rem);
-  padding-inline: clamp(0.625rem, 1.5vw, 1rem);
-  animation: env-slide 52s linear infinite;
-  will-change: transform;
-}
-
-#environment .env-slide {
-  display: flex;
-  width: clamp(13rem, 21vw, 20rem);
-  aspect-ratio: 4 / 3;
-  flex: 0 0 auto;
-}
-
-/* Reveal the matching second set, then remove the same repeated angles. */
-#environment .env-slide[aria-hidden="true"] {
-  display: flex;
-}
-
-#environment .env-slide:nth-child(13),
-#environment .env-slide:nth-child(14),
-#environment .env-slide:nth-child(15),
-#environment .env-slide:nth-child(16),
-#environment .env-slide:nth-child(18) {
-  display: none;
-}
-
-#environment .env-slider-window:hover .env-slide-track {
-  animation-play-state: running;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #environment .env-slide-track {
-    animation: none;
   }
 }
 
@@ -5565,7 +5485,12 @@ h2.section-title::before,
 .kv-decor .kv-dot {
   animation: none;
   transform: none;
+  scale: 1.4;
   will-change: auto;
+}
+.kv-decor .kv-dot--01,
+.kv-decor .kv-dot--02 {
+  scale: 2;
 }
 .kv-decor .kv-dot--01 { left: 27%; top: 9%; width: 8.58%; aspect-ratio: 3 / 1; rotate: -21deg; }
 .kv-decor .kv-dot--02 { left: 23.5%; top: 29.5%; width: 4.51%; aspect-ratio: 1 / 1.8; rotate: 19deg; }
@@ -5617,7 +5542,7 @@ h2.section-title::before,
   .kv-decor .kv-dot--07 { left: 38%; top: 85%; rotate: 12deg; }
 }
 
-/* Exhibition and global photo frames; the office slider keeps its own rules. */
+/* Exhibition and global photo frames; the office gallery keeps its own layout. */
 #environment .env-feature-section {
   grid-template-columns: minmax(0, 1fr);
   gap: 5rem;
@@ -5628,8 +5553,12 @@ h2.section-title::before,
   height: auto;
   gap: 2rem;
 }
-#environment .env-feature-card .section-title {
+#environment .env-feature-card .section-title,
+#environment .env-slider .section-title {
   white-space: normal;
+}
+#environment .env-feature-card--photo .section-title {
+  line-height: 1.7;
 }
 #environment .env-feature-media {
   display: grid;
@@ -5645,14 +5574,34 @@ h2.section-title::before,
   overflow: hidden;
   box-shadow: none;
 }
+#environment .env-feature-photo--tour img {
+  object-position: 55% 30%;
+  transform: scale(1.35);
+  transform-origin: 55% 40%;
+}
+#environment .env-feature-photo--booth img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: auto;
+  min-height: calc(100% / 0.75);
+  object-position: center top;
+  transform: translateY(-25%);
+}
 #environment .env-feature-card--photo .env-feature-media {
-  grid-template-rows: 280px 180px 150px;
+  grid-template-rows: auto auto;
+}
+#environment .env-feature-card--photo .env-feature-media > picture {
+  aspect-ratio: 4 / 3;
 }
 #environment .env-feature-card--photo .env-feature-media > :first-child {
   grid-column: 1 / -1;
 }
 #environment .env-feature-media--mono {
   grid-template-rows: 220px 160px 160px 220px 160px 160px;
+}
+#environment .env-feature-media--mono img {
+  filter: brightness(1.12);
 }
 #environment .env-feature-media--mono > :first-child,
 #environment .env-feature-media--mono > :nth-child(4),
@@ -5697,7 +5646,6 @@ h2.section-title::before,
     gap: 1rem 4rem;
     align-items: end;
   }
-  #environment .environment-copy .section-kicker { grid-column: 1 / -1; }
   #environment .environment-lead { margin-top: 0; }
   #environment .env-gallery { margin-top: 3.5rem; }
   #environment .env-feature-card--photo {
@@ -5706,14 +5654,16 @@ h2.section-title::before,
     align-items: start;
   }
   #environment .env-feature-card--photo .env-feature-media {
-    grid-template-columns: 1.6fr 1fr 1fr;
-    grid-template-rows: 260px 180px 150px;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    aspect-ratio: 2 / 1;
+  }
+  #environment .env-feature-card--photo .env-feature-media > picture {
+    aspect-ratio: auto;
   }
   #environment .env-feature-card--photo .env-feature-media > :nth-child(1) { grid-column: 1; grid-row: 1 / 3; }
-  #environment .env-feature-card--photo .env-feature-media > :nth-child(2) { grid-column: 2 / 4; grid-row: 1; }
+  #environment .env-feature-card--photo .env-feature-media > :nth-child(2) { grid-column: 2; grid-row: 1; }
   #environment .env-feature-card--photo .env-feature-media > :nth-child(3) { grid-column: 2; grid-row: 2; }
-  #environment .env-feature-card--photo .env-feature-media > :nth-child(4) { grid-column: 3; grid-row: 2; }
-  #environment .env-feature-card--photo .env-feature-media > :nth-child(5) { grid-column: 1 / 4; grid-row: 3; }
 }
 
 /* Draft frames preserve the original pictures for the final photo selection. */

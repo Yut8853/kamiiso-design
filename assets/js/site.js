@@ -2031,7 +2031,7 @@ function initializeEnvironmentImagePreload() {
   const galleryImages = [
     ...section.querySelectorAll('.env-gallery img[loading="lazy"]'),
   ];
-  const sliderImages = [
+  const officeImages = [
     ...section.querySelectorAll('.env-slider img[loading="lazy"]'),
   ];
 
@@ -2053,7 +2053,7 @@ function initializeEnvironmentImagePreload() {
         preloadImage(image.currentSrc || image.src);
     });
   };
-  preloadImages(sliderImages);
+  preloadImages(officeImages);
   if (!galleryImages.length) return;
 
   if (!('IntersectionObserver' in window)) {
