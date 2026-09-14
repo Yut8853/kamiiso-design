@@ -1241,6 +1241,10 @@ footer a[href]:hover svg {
   font-size: var(--text-lg);
   line-height: 2rem;
 }
+.interview-card__text {
+  font-feature-settings: "palt";
+  letter-spacing: 0.04em;
+}
 .product-actions {
   display: flex;
   flex-direction: column;
@@ -1787,7 +1791,7 @@ html.is-loading .site-body {
 /* 02: basic cards in source order: 01, 02, 03... */
 #interview[data-interview-view='bento'] .interview-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
 }
 #interview[data-interview-view='bento'] .interview-card {
@@ -1873,7 +1877,7 @@ html.is-loading .site-body {
 .interview-card {
   position: relative;
   overflow: hidden;
-  padding: 1.5rem;
+  padding: 1.75rem;
   border: 1px solid color-mix(in oklab, var(--foreground) 12%, transparent);
   background: #ffffff;
   box-shadow: 0 14px 34px rgb(82 61 43 / 0.1);
@@ -2986,7 +2990,7 @@ html.is-loading .site-body {
     margin-top: 5rem;
   }
   .interview-card {
-    padding: 2rem;
+    padding: 2.5rem;
   }
   .interview-card__title {
     font-size: var(--text-xl);
@@ -3169,7 +3173,7 @@ html.is-loading .site-body {
 /* Keep the basic card grid after the legacy desktop interview declarations. */
 #interview[data-interview-view='bento'] .interview-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
 }
 #interview[data-interview-view='bento'] .interview-card,
