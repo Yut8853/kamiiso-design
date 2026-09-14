@@ -1920,7 +1920,7 @@ html.is-loading .site-body {
   flex: none;
   width: 4.75rem;
   height: 4.75rem;
-  border: 2px solid #c91927;
+  border: 0;
   border-radius: 50%;
   background-color: #fbecee;
   background-repeat: no-repeat;
@@ -5075,11 +5075,18 @@ html.is-loading .site-body {
   gap: clamp(0.75rem, 1.5vw, 1rem);
 }
 
-#environment .env-feature-card .section-title,
-#environment .env-slider .section-title {
-  font-size: clamp(1rem, 2.8vw, 1.35rem);
-  line-height: 1.45;
-  white-space: nowrap;
+/* Subsection headings stay distinct from the large serif H2 titles. */
+.environment-subtitle {
+  margin: 0;
+  padding-left: 0.875rem;
+  border-left: 3px solid var(--primary);
+  color: #090405;
+  font-family: var(--font-zen-kaku), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  font-weight: 700;
+  line-height: 1.75;
+  letter-spacing: 0.03em;
+  text-wrap: balance;
 }
 
 #environment .env-feature-media--duo {
@@ -5552,13 +5559,6 @@ h2.section-title::before,
   grid-template-rows: auto;
   height: auto;
   gap: 2rem;
-}
-#environment .env-feature-card .section-title,
-#environment .env-slider .section-title {
-  white-space: normal;
-}
-#environment .env-feature-card--photo .section-title {
-  line-height: 1.7;
 }
 #environment .env-feature-media {
   display: grid;
