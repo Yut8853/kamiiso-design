@@ -1136,7 +1136,7 @@ footer a[href]:hover svg {
   letter-spacing: 0.24em;
 }
 .welfare-card__title {
-  margin-top: 2rem;
+  margin-top: 0;
   font-family: var(--font-noto-serif), ui-serif, serif;
   font-size: var(--text-xl);
 }
@@ -3106,7 +3106,7 @@ html.is-loading .site-body {
   }
   .welfare-card {
     grid-column: span 2;
-    padding: 2.25rem;
+    padding: 2rem;
   }
   .welfare-card:nth-child(n + 4) {
     grid-column: span 3;
