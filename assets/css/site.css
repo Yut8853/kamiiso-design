@@ -1124,10 +1124,6 @@ footer a[href]:hover svg {
   border-bottom: 1px solid
     color-mix(in oklab, var(--foreground) 15%, transparent);
   background-color: color-mix(in oklab, var(--background) 40%, transparent);
-  transition: background-color 0.22s ease;
-}
-.welfare-card:hover {
-  background-color: var(--background);
 }
 .welfare-card__number {
   color: var(--primary);
@@ -1146,9 +1142,9 @@ footer a[href]:hover svg {
 }
 .welfare-card__text {
   margin-top: 1rem;
-  color: color-mix(in oklab, var(--foreground) 60%, transparent);
-  font-size: var(--text-sm);
-  line-height: 1.75rem;
+  color: #090405;
+  font-size: var(--text-lg);
+  line-height: 2rem;
 }
 .about-layout {
   display: grid;
@@ -1244,6 +1240,9 @@ footer a[href]:hover svg {
 .interview-card__text {
   font-feature-settings: "palt";
   letter-spacing: 0.04em;
+  text-align: justify;
+  text-justify: inter-ideograph;
+  text-align-last: left;
 }
 .product-actions {
   display: flex;
@@ -3102,11 +3101,15 @@ html.is-loading .site-body {
     line-height: 2rem;
   }
   .welfare-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     margin-top: 5rem;
   }
   .welfare-card {
+    grid-column: span 2;
     padding: 2.25rem;
+  }
+  .welfare-card:nth-child(n + 4) {
+    grid-column: span 3;
   }
   .about-layout {
     grid-template-columns: minmax(0, 1fr);
@@ -3183,6 +3186,52 @@ html.is-loading .site-body {
   margin: 0;
   grid-column: auto;
   background: #fff;
+}
+/* Interview reference: portrait beside the heading and profile, copy below. */
+#interview[data-interview-view='bento'] .interview-grid {
+  gap: 2.5rem;
+}
+#interview[data-interview-view='bento'] .interview-card {
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 12px rgb(82 61 43 / 0.08);
+}
+#interview[data-interview-view='bento'] .interview-card__head {
+  display: grid;
+  grid-template-columns: clamp(4.75rem, 8vw, 6.875rem) minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(1.25rem, 2.5vw, 2.5rem);
+}
+#interview[data-interview-view='bento'] .interview-card__head > div {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+}
+#interview[data-interview-view='bento'] .interview-card__thumb {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+#interview[data-interview-view='bento'] .interview-card__meta {
+  margin-top: 1rem;
+  padding-top: 0;
+  border-top: 0;
+  gap: 0.5rem 0.75rem;
+}
+#interview[data-interview-view='bento'] .interview-card__excerpt {
+  margin-top: 2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent);
+}
+@media (max-width: 47.9375rem) {
+  #interview[data-interview-view='bento'] .interview-grid {
+    gap: 1.5rem;
+  }
+  #interview[data-interview-view='bento'] .interview-card__head {
+    grid-template-columns: 3.75rem minmax(0, 1fr);
+    column-gap: 1rem;
+  }
 }
 @media (max-width: 47.9375rem) {
   .interview-designs {
