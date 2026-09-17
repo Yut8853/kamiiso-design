@@ -9,6 +9,7 @@ function copyRuntimeAssets() {
       const outputAssets = resolve('dist/assets');
       mkdirSync(resolve(outputAssets, 'images'), { recursive: true });
       mkdirSync(resolve(outputAssets, 'js'), { recursive: true });
+      cpSync(resolve('assets/images/OGP.jpg'), resolve(outputAssets, 'images/OGP.jpg'));
       cpSync(
         resolve('assets/images/kv-random'),
         resolve(outputAssets, 'images/kv-random'),
