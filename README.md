@@ -54,6 +54,6 @@ npm run preview
 SITE_URL=https://kamiiso-design.vercel.app/ npm run build
 ```
 
-または `.env.staging` に `SITE_URL=https://kamiiso-design.vercel.app/` を記入し、`npm run build -- --mode staging` を実行してください。Vercel以外でURLを未指定の場合は本番URL（`https://www.kamiiso.co.jp/recruit/`）になります。
+または `.env.staging` に `SITE_URL=https://kamiiso-design.vercel.app/` を記入し、`npm run build -- --mode staging` を実行してください。URLを未指定の場合もテストサイト（`https://kamiiso-design.vercel.app/`）になります。本番公開時は `SITE_URL=https://www.kamiiso.co.jp/recruit/` を指定してください。
 
 生成した `dist/` の中身をテストサーバーの公開先に配置します。画像は `assets/images/OGP.jpg` に出力され、メタタグはJavaScript実行前のHTMLに含まれます。公開後はページのソースで `og:image` を確認し、そのURLで画像を取得できることを確認してください。

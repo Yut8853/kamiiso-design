@@ -42,7 +42,7 @@ function socialMetadata(siteUrl) {
     transformIndexHtml: {
       order: 'post',
       handler(html) {
-        return html.replaceAll('https://www.kamiiso.co.jp/recruit/', url.href);
+        return html.replaceAll('https://kamiiso-design.vercel.app/', url.href);
       },
     },
   };
@@ -50,7 +50,7 @@ function socialMetadata(siteUrl) {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'SITE_');
-  const siteUrl = env.SITE_URL || 'https://www.kamiiso.co.jp/recruit/';
+  const siteUrl = env.SITE_URL || 'https://kamiiso-design.vercel.app/';
   return {
     // Keep built asset URLs relative so the site also works when deployed under
     // a subdirectory (and when previewing dist/index.html directly).
