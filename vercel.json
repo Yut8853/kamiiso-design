@@ -1,0 +1,3 @@
+{
+  "buildCommand": "SITE_URL=https://kamiiso-design.vercel.app/ npm run build"
+}

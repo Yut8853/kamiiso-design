@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import { cpSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
@@ -30,17 +30,39 @@ function copyRuntimeAssets() {
   };
 }
 
-export default defineConfig({
-  // Keep built asset URLs relative so the site also works when deployed under
-  // a subdirectory (and when previewing dist/index.html directly).
-  base: './',
-  plugins: [copyRuntimeAssets()],
-  server: {
-    host: '0.0.0.0',
-    port: 3000,
-    allowedHosts: true,
-  },
-  build: {
-    outDir: 'dist',
-  },
+function socialMetadata(siteUrl) {
+  const url = new URL(siteUrl);
+  if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password || url.search || url.hash) {
+    throw new Error('SITE_URL must be an http(s) public page URL without credentials, query or hash.');
+  }
+  if (!url.pathname.endsWith('/')) url.pathname += '/';
+
+  return {
+    name: 'social-metadata',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html) {
+        return html.replaceAll('https://www.kamiiso.co.jp/recruit/', url.href);
+      },
+    },
+  };
+}
+
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), 'SITE_');
+  const siteUrl = env.SITE_URL || 'https://www.kamiiso.co.jp/recruit/';
+  return {
+    // Keep built asset URLs relative so the site also works when deployed under
+    // a subdirectory (and when previewing dist/index.html directly).
+    base: './',
+    plugins: [socialMetadata(siteUrl), copyRuntimeAssets()],
+    server: {
+      host: '0.0.0.0',
+      port: 3000,
+      allowedHosts: true,
+    },
+    build: {
+      outDir: 'dist',
+    },
+  };
 });

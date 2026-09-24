@@ -1108,7 +1108,7 @@ footer a[href]:hover svg {
   color: color-mix(in oklab, var(--foreground) 65%, transparent);
   font-size: var(--text-sm);
   line-height: 1.75rem;
-  text-wrap: pretty;
+  /* text-wrap: pretty; */
 }
 .welfare-list {
   display: grid;
@@ -1134,12 +1134,6 @@ footer a[href]:hover svg {
   color: var(--primary);
   font-size: 1.125rem;
   letter-spacing: 0.24em;
-}
-.welfare-card__title {
-  margin-top: 0;
-  font-family: var(--font-noto-serif), ui-serif, serif;
-  font-size: var(--text-xl);
-  font-weight: 700;
 }
 .welfare-card__text {
   margin-top: 1rem;
@@ -5153,7 +5147,8 @@ html.is-loading .site-body {
 }
 
 /* Subsection headings stay distinct from the large serif H2 titles. */
-.environment-subtitle {
+.environment-subtitle,
+.welfare-card__title {
   margin: 0;
   padding-left: 0.875rem;
   border-left: 3px solid var(--primary);
@@ -5538,21 +5533,6 @@ h2.section-title::before,
 
 #about h2.section-title {
   margin-inline: auto;
-}
-
-#requirements h2.section-title,
-#flow h2.section-title,
-#faq h2.section-title {
-  margin-inline: auto;
-}
-
-#requirements h2.section-title::before,
-#faq h2.section-title::before {
-  left: calc(50% - 2.08em - 4rem);
-}
-
-#faq h2.section-title::before {
-  left: calc(50% - 2.08em - 3rem);
 }
 
 #faq .section-lead,
