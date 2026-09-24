@@ -2344,11 +2344,13 @@ html.is-loading .site-body {
   font-size: clamp(0px, 1.4285714286vw, 20px);
   font-weight: 600;
 }
-@media (max-width: 767px) {
+@media (max-width: 47.9375rem) {
+  .site-footer__inner {
+    text-align: center;
+  }
   .site-footer__logo-box {
     display: block;
     width: 100%;
-    padding-right: 3.7333333333vw;
     text-align: center;
   }
   .site-footer__logo-box .site-logo__image {
@@ -2357,9 +2359,14 @@ html.is-loading .site-body {
   }
   .site-footer__company {
     margin-top: 0.5333333333vw;
-    padding-left: 3.2vw;
     font-size: 4.2666666667vw;
     letter-spacing: 0.02em;
+  }
+  .site-footer__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 }
 .site-footer__address {
@@ -5620,16 +5627,17 @@ h2.section-title::before,
     clip-path: inset(6rem 0 0);
   }
   .kv-decor .kv-dot {
-    width: clamp(5.5rem, 28.6vw, 8.8rem);
+    width: clamp(4.5rem, 22vw, 6.5rem);
     aspect-ratio: 1;
+    scale: 1;
   }
   .kv-decor .kv-dot--01 { left: 9%; top: 6.75rem; rotate: -21deg; }
-  .kv-decor .kv-dot--02 { left: -17%; top: 34%; rotate: 19deg; }
-  .kv-decor .kv-dot--03 { left: 70%; top: 6.75rem; rotate: 21deg; }
-  .kv-decor .kv-dot--04 { left: 91%; top: 35%; rotate: -20deg; }
-  .kv-decor .kv-dot--05 { left: -17%; top: 62%; rotate: 4deg; }
-  .kv-decor .kv-dot--06 { left: 91%; top: 63%; rotate: 6deg; }
-  .kv-decor .kv-dot--07 { left: 38%; top: 85%; rotate: 12deg; }
+  .kv-decor .kv-dot--02 { left: -10%; top: 34%; rotate: 19deg; }
+  .kv-decor .kv-dot--03 { left: 73%; top: 6.75rem; rotate: 21deg; }
+  .kv-decor .kv-dot--04 { left: 88%; top: 35%; rotate: -20deg; }
+  .kv-decor .kv-dot--05 { left: -10%; top: 62%; rotate: 4deg; }
+  .kv-decor .kv-dot--06 { left: 88%; top: 63%; rotate: 6deg; }
+  .kv-decor .kv-dot--07 { left: calc(50% - clamp(2.25rem, 11vw, 3.25rem)); top: 85%; rotate: 12deg; }
 }
 
 /* Exhibition and global photo frames; the office gallery keeps its own layout. */
