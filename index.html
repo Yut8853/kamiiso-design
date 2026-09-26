@@ -1,19 +1,7 @@
 <!doctype html>
 <html lang="ja" class="site-root is-loading">
   <head>
-    <meta charset="utf-8" />
-    <script>
-      (() => {
-        const navigation = performance.getEntriesByType?.('navigation')?.[0];
-        if (navigation?.type !== 'reload') return;
-        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-        if (location.hash) {
-          history.replaceState(null, '', location.pathname + location.search);
-        }
-        document.documentElement.dataset.reloadAtTop = 'true';
-        window.scrollTo(0, 0);
-      })();
-    </script>
+    <meta charset="utf-8" />s
     <title>カミイソ株式会社 採用サイト｜見えない思いを彩り、魅せる、モノづくり。</title>
     <link rel="canonical" href="https://kamiiso-design.vercel.app/" />
     <meta
@@ -150,7 +138,6 @@
             <li class="global-nav__item">
               <a href="#about" class="global-nav__link"
                 ><span class="global-nav__label"
-                  ><span class="global-nav__number">01</span
                   ><span class="global-nav__title"
                     >私たちの事業について</span
                   ></span
@@ -160,7 +147,6 @@
             <li class="global-nav__item">
               <a href="#products" class="global-nav__link"
                 ><span class="global-nav__label"
-                  ><span class="global-nav__number">02</span
                   ><span class="global-nav__title">製品紹介</span></span
                 ><span class="global-nav__meta">Products</span></a
               >
@@ -168,7 +154,6 @@
             <li class="global-nav__item">
               <a href="#interview" class="global-nav__link"
                 ><span class="global-nav__label"
-                  ><span class="global-nav__number">03</span
                   ><span class="global-nav__title">社員インタビュー</span></span
                 ><span class="global-nav__meta">Interview</span></a
               >
@@ -176,7 +161,6 @@
             <li class="global-nav__item" hidden>
               <a href="#keyword" class="global-nav__link"
                 ><span class="global-nav__label"
-                  ><span class="global-nav__number">04</span
                   ><span class="global-nav__title"
                     >キーワードで見るカミイソ</span
                   ></span
@@ -186,7 +170,6 @@
             <li class="global-nav__item">
               <a href="#environment" class="global-nav__link"
                 ><span class="global-nav__label"
-                  ><span class="global-nav__number">05</span
                   ><span class="global-nav__title">働く環境</span></span
                 ><span class="global-nav__meta">Environment</span></a
               >
@@ -194,7 +177,6 @@
             <li class="global-nav__item">
               <a href="#welfare" class="global-nav__link"
                 ><span class="global-nav__label"
-                  ><span class="global-nav__number">06</span
                   ><span class="global-nav__title">福利厚生</span></span
                 ><span class="global-nav__meta">Welfare</span></a
               >
@@ -202,7 +184,6 @@
             <li class="global-nav__item">
               <a href="#requirements" class="global-nav__link"
                 ><span class="global-nav__label"
-                  ><span class="global-nav__number">07</span
                   ><span class="global-nav__title">募集要項</span></span
                 ><span class="global-nav__meta">Requirements</span></a
               >
@@ -210,7 +191,6 @@
             <li class="global-nav__item">
               <a href="#flow" class="global-nav__link"
                 ><span class="global-nav__label"
-                  ><span class="global-nav__number">08</span
                   ><span class="global-nav__title">応募の流れ</span></span
                 ><span class="global-nav__meta">Flow</span></a
               >
@@ -218,7 +198,6 @@
             <li class="global-nav__item">
               <a href="#faq" class="global-nav__link"
                 ><span class="global-nav__label"
-                  ><span class="global-nav__number">09</span
                   ><span class="global-nav__title">よくあるご質問</span></span
                 ><span class="global-nav__meta">FAQ</span></a
               >
@@ -226,7 +205,6 @@
             <li class="global-nav__item">
               <a href="#entry" class="global-nav__link"
                 ><span class="global-nav__label"
-                  ><span class="global-nav__number">10</span
                   ><span class="global-nav__title">エントリー</span></span
                 ><span class="global-nav__meta">Entry</span></a
               >
@@ -642,7 +620,7 @@
           </div>
         </div>
       </section>
-      <!--<section
+      <section
         id="keyword"
         class="site-section site-section--cream"
       >
@@ -654,119 +632,121 @@
             </p>
             <h2 class="section-title">キーワードで見るカミイソ</h2>
           </div>
-          <div class="keyword-mosaic">
-            <div
-              class="keyword-mosaic__board"
-              aria-label="14のキーワードで構成されたモザイク"
-            ></div>
-            <div class="keyword-mosaic__detail" aria-live="polite"></div>
-          </div>
-          <div class="keyword-grid" hidden>
-            <div class="keyword-webgl" aria-hidden="true"></div>
-            <article class="keyword-card">
-              <p class="keyword-card__number">01</p>
-              <h3 class="keyword-card__label">創業</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                1926（大正15）年
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">02</p>
-              <h3 class="keyword-card__label">原点</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                愛媛県四国中央市<br />（旧川之江市）<br />和紙産地問屋
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">03</p>
-              <h3 class="keyword-card__label">ものづくり体制</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                香川県自社工場一貫体制<br />Made in Japan
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">04</p>
-              <h3 class="keyword-card__label">大切にしていること</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                お客様の笑顔
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">05</p>
-              <h3 class="keyword-card__label">男女比</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                男性 41%：女性 59%<br />2026年7月現在
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">06</p>
-              <h3 class="keyword-card__label">国内拠点</h3>
-              <p
-                class="keyword-card__note keyword-card__note--strong keyword-card__value keyword-card__value--large"
-              >
-                香川（事業本部・豊浜工場）<br />、大阪、東京、福岡
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">07</p>
-              <h3 class="keyword-card__label">カフェ</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                瀬戸内海を一望できる<br />カフェを完備
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">08</p>
-              <h3 class="keyword-card__label">海外展示会、OEM</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                40以上の国や地域
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">09</p>
-              <h3 class="keyword-card__label">SAIEN、Kimono美のテープの品数</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                1,271 廃番含む <br />
-                2026年7月現在
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">10</p>
-              <h3 class="keyword-card__label">海外デザイナー</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                フィンランド、スイス、フランス
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">11</p>
-              <h3 class="keyword-card__label">創業時の名前</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                大西磯太郎商店
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">12</p>
-              <h3 class="keyword-card__label">文房具</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                マスキングテープ、クリアテープ、シール、クリアシール、フレークシール、透明しおり、懐紙など幅広い商品を展開
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">13</p>
-              <h3 class="keyword-card__label">実用新案取得</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                手でちぎれるクリアテープや、はがしやすい取っ手付きクリアフレークシールなど実用新案取得済みの技術を有する
-              </p>
-            </article>
-            <article class="keyword-card">
-              <p class="keyword-card__number">14</p>
-              <h3 class="keyword-card__label">イベント出展</h3>
-              <p class="keyword-card__value keyword-card__value--large">
-                「SAIEN」として文具女子博や文具マルシェなど各地に出展
-              </p>
-            </article>
+          <div class="keyword-layout">
+            <div class="keyword-composition">
+              <svg class="keyword-composition__lines" viewBox="0 0 1200 535" fill="none" aria-hidden="true" focusable="false">
+                <path d="M0 -20H1200 M138 0V238 M161 92H369 M398 0V182 M526 0V96 M559 92H1054 M1087 0V255 M685 181H978 M450 207H624 M42 266H281 M316 246V401 M418 245V385 M648 245V317 M997 320V371 M1067 288H1160 M707 382H1160 M42 423H503 M540 442V515 M678 407V515 M0 534H1200" />
+              </svg>
+              <details class="keyword-composition__item keyword-composition__item--vertical" name="kamiiso-keywords" style="--x: 40; --y: 0; --w: 80; --h: 240; --size: 76">
+                <summary><span>文房具</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>文房具</h3>
+                  <p>マスキングテープ、クリアテープ、シール、クリアシール、フレークシール、透明しおり、懐紙など幅広い商品を展開</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item" name="kamiiso-keywords" style="--x: 160; --y: 8; --w: 217; --h: 70; --size: 52">
+                <summary><span>国内拠点</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>国内拠点</h3>
+                  <p>香川（事業本部・豊浜工場）<br />、大阪、東京、福岡</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item" name="kamiiso-keywords" style="--x: 159; --y: 114; --w: 224; --h: 119; --size: 54">
+                <summary><span>創業時の<br>名前</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>創業時の名前</h3>
+                  <p>大西磯太郎商店</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item keyword-composition__item--vertical" name="kamiiso-keywords" style="--x: 420; --y: 10; --w: 80; --h: 169; --size: 76">
+                <summary><span>原点</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>原点</h3>
+                  <p>愛媛県四国中央市（旧川之江市）<br />和紙産地問屋</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item" name="kamiiso-keywords" style="--x: 555; --y: 0; --w: 500; --h: 79; --size: 76">
+                <summary><span>ものづくり体制</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>ものづくり体制</h3>
+                  <p>香川県自社工場一貫体制<br />Made in Japan</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item" name="kamiiso-keywords" style="--x: 565; --y: 105; --w: 453; --h: 67; --size: 54">
+                <summary><span>海外展示会、OEM</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>海外展示会、OEM</h3>
+                  <p>40以上の国や地域</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item keyword-composition__item--vertical" name="kamiiso-keywords" style="--x: 1105; --y: 0; --w: 58; --h: 217; --size: 54">
+                <summary><span>海外展開</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>海外展開</h3>
+                  <p>40以上の国や地域</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item" name="kamiiso-keywords" style="--x: 40; --y: 282; --w: 244; --h: 120; --size: 54">
+                <summary><span>海外<br>デザイナー</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>海外デザイナー</h3>
+                  <p>フィンランド、スイス、フランス</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item keyword-composition__item--vertical" name="kamiiso-keywords" style="--x: 337; --y: 241; --w: 61; --h: 161; --size: 54">
+                <summary><span>男女比</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>男女比</h3>
+                  <p>男性 41%：女性 59%<br />2026年7月現在</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item" name="kamiiso-keywords" style="--x: 447; --y: 238; --w: 188; --h: 122; --size: 52">
+                <summary><span>イベント<br>出展</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>イベント出展</h3>
+                  <p>「SAIEN」として文具女子博や文具マルシェなど各地に出展</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item" name="kamiiso-keywords" style="--x: 683; --y: 198; --w: 360; --h: 162; --size: 76">
+                <summary><span>大切にして<br>いること</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>大切にしていること</h3>
+                  <p>お客様の笑顔</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item" name="kamiiso-keywords" style="--x: 1033; --y: 309; --w: 132; --h: 58; --size: 48">
+                <summary><span>カフェ</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>カフェ</h3>
+                  <p>瀬戸内海を一望できるカフェを完備</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item" name="kamiiso-keywords" style="--x: 40; --y: 430; --w: 482; --h: 85; --size: 78">
+                <summary><span>実用新案取得</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>実用新案取得</h3>
+                  <p>手でちぎれるクリアテープや、はがしやすい取っ手付きクリアフレークシールなど実用新案取得済みの技術を有する</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item keyword-composition__item--vertical" name="kamiiso-keywords" style="--x: 569; --y: 350; --w: 78; --h: 167; --size: 76">
+                <summary><span>創業</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>創業</h3>
+                  <p>1926（大正15）年</p>
+                </div>
+              </details>
+              <details class="keyword-composition__item" name="kamiiso-keywords" style="--x: 702; --y: 400; --w: 459; --h: 120; --size: 52">
+                <summary><span>SAIEN、Kimono美の<br>テープの品数</span></summary>
+                <div class="keyword-composition__description">
+                  <h3>SAIEN、Kimono美のテープの品数</h3>
+                  <p>1,271 廃番含む <br />
+                2026年7月現在</p>
+                </div>
+              </details>
+            </div>
           </div>
         </div>
-      </section>-->
+      </section>
       <section
         id="environment"
         class="site-section site-section--cream site-section--clip"
@@ -1757,7 +1737,7 @@
               href="mailto:recruit@example.co.jp"
               class="entry-button entry-button--primary"
               ><span class="entry-button__text"
-                ><span>新卒採⽤募集中！</span><span>詳しくはこちら</span></span
+                ><span>新卒採⽤募集中！</span></span
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -1777,7 +1757,7 @@
               href="mailto:recruit@example.co.jp"
               class="entry-button entry-button--outline"
               ><span class="entry-button__text"
-                ><span>中途採⽤募集中！</span><span>詳しくはこちら</span></span
+                ><span>中途採⽤募集中！</span></span
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

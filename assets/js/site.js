@@ -2288,167 +2288,94 @@ function initializeScrollReveal() {
   items.forEach(element => observer.observe(element));
 }
 
-function initializeKeywordMosaic() {
-  const section = document.querySelector('#keyword');
-  const board = section?.querySelector('.keyword-mosaic__board');
-  const detail = section?.querySelector('.keyword-mosaic__detail');
-  const cards = section
-    ? [...section.querySelectorAll('.keyword-grid > .keyword-card')]
-    : [];
-  if (!section || !board || !detail || !cards.length) return;
+function initializeKeywordPopovers() {
+  const board = document.querySelector('.keyword-composition');
+  if (!board) return;
+  const items = [...board.querySelectorAll('.keyword-composition__item')];
+  const desktop = window.matchMedia('(min-width: 48rem)');
+  const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
+  let active = null;
+  const close = () => {
+    items.forEach(item => { item.open = false; });
+    active = null;
+  };
+  const position = item => {
+    const summary = item.querySelector('summary');
+    const panel = item.querySelector('.keyword-composition__description');
+    const bounds = board.getBoundingClientRect();
+    const anchor = summary.getBoundingClientRect();
+    const width = panel.offsetWidth;
+    const height = panel.offsetHeight;
+    const gap = 24 * bounds.width / 1200;
+    const inset = 3; // Account for the decorative outer ring.
+    const x = anchor.left - bounds.left;
+    const y = anchor.top - bounds.top;
+    const vertical = item.classList.contains('keyword-composition__item--vertical');
+    const preferred = vertical
+      ? (x > bounds.width / 2 ? ['left', 'right', 'top', 'bottom'] : ['right', 'left', 'top', 'bottom'])
+      : (y > bounds.height / 2 ? ['top', 'bottom', 'left', 'right'] : ['bottom', 'top', 'right', 'left']);
+    const candidates = {
+      right: [x + anchor.width + gap, y],
+      left: [x - width - gap, y],
+      bottom: [x, y + anchor.height + gap],
+      top: [x, y - height - gap],
+    };
+    const clamp = (value, max) => Math.max(inset, Math.min(value, Math.max(inset, max - inset)));
+    // Prefer a nearby position that fits the board and leaves its own label visible.
+    const positions = preferred.map(side => {
+      const [left, top] = candidates[side];
+      const px = clamp(left, bounds.width - width);
+      const py = clamp(top, bounds.height - height);
+      const overlapWidth = Math.max(0, Math.min(px + width, x + anchor.width) - Math.max(px, x));
+      const overlapHeight = Math.max(0, Math.min(py + height, y + anchor.height) - Math.max(py, y));
+      return { left: px, top: py, overlap: overlapWidth * overlapHeight };
+    });
+    const best = positions.reduce((a, b) => b.overlap < a.overlap ? b : a);
+    panel.style.setProperty('--panel-left', `${best.left}px`);
+    panel.style.setProperty('--panel-top', `${best.top}px`);
+  };
+  const open = item => {
+    items.forEach(other => { other.open = other === item; });
+    active = item;
+    position(item);
+  };
 
-  const items = cards.map((card, index) => ({
-    index,
-    number: card.querySelector('.keyword-card__number')?.textContent?.trim() || '',
-    label: card.querySelector('.keyword-card__label')?.textContent?.trim() || '',
-    values: (card.querySelector('.keyword-card__value')?.innerHTML || '')
-      .split(/<br\s*\/?>/i)
-      .map(value => value.replace(/<[^>]+>/g, '').trim())
-      .filter(Boolean),
-    photo: `assets/images/keyword-tape/tape-${String(index + 1).padStart(2, '0')}.webp`,
-  }));
-  const narrowQuery = window.matchMedia('(max-width: 47.9375rem)');
-  let activeIndex = null;
-  let pinnedIndex = null;
-  let activeDotImages = [];
-  const dotNumbers = [
-    ...Array.from({ length: 18 }, (_, index) => index + 1),
-    ...Array.from({ length: 27 }, (_, index) => index + 22),
-    ...Array.from({ length: 13 }, (_, index) => index + 63),
-  ];
-  const dotImages = dotNumbers.map(
-    number => `assets/images/kv-random/dots/dot-${String(number).padStart(3, '0')}.webp`
-  );
-  const chooseDotImages = count => {
-    const pool = [...dotImages];
-    for (let index = pool.length - 1; index > 0; index--) {
-      const target = Math.floor(Math.random() * (index + 1));
-      [pool[index], pool[target]] = [pool[target], pool[index]];
+  items.forEach(item => {
+    const summary = item.querySelector('summary');
+    summary.addEventListener('pointerenter', event => {
+      if (desktop.matches && hover.matches && event.pointerType !== 'touch') open(item);
+    });
+    summary.addEventListener('pointerleave', () => {
+      if (desktop.matches && active === item) close();
+    });
+    summary.addEventListener('focus', () => {
+      if (desktop.matches) open(item);
+    });
+    summary.addEventListener('blur', () => {
+      if (desktop.matches && active === item) close();
+    });
+    summary.addEventListener('click', event => {
+      if (!desktop.matches) return; // Native details handles touch/mobile expansion.
+      event.preventDefault();
+      open(item);
+    });
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && active) {
+      event.preventDefault();
+      close();
     }
-    return pool.slice(0, count);
-  };
-
-  const characterWidth = label =>
-    Array.from(label).reduce(
-      (sum, character) => sum + (/^[\x20-\x7e]$/.test(character) ? 0.55 : 1),
-      0
-    );
-  const widthFor = width => {
-    if (width <= 6) return 2;
-    if (width <= 8) return 3;
-    if (width <= 12) return 4;
-    return 5;
-  };
-  const pack = columns => {
-    const shaped = items
-      .map(item => ({
-        index: item.index,
-        width: Math.min(widthFor(characterWidth(item.label)), columns),
-      }))
-      .sort((a, b) => b.width - a.width);
-    const packedRows = [];
-    shaped.forEach(block => {
-      const row = packedRows.find(
-        candidate =>
-          candidate.reduce((sum, item) => sum + item.width, 0) + block.width <= columns
-      );
-      if (row) row.push(block);
-      else packedRows.push([block]);
-    });
-    const pieces = [];
-    packedRows.forEach((row, rowIndex) => {
-      const slack = columns - row.reduce((sum, block) => sum + block.width, 0);
-      const share = Math.floor(slack / row.length);
-      let extra = slack - share * row.length;
-      let column = 0;
-      row.forEach(block => {
-        const width = block.width + share + (extra > 0 ? 1 : 0);
-        if (extra > 0) extra -= 1;
-        pieces.push({
-          index: block.index,
-          column,
-          row: rowIndex * 2,
-          width,
-          height: 2,
-        });
-        column += width;
-      });
-    });
-    return { pieces, rows: packedRows.length * 2 };
-  };
-
-  const renderDetail = index => {
-    const item = index === null ? null : items[index];
-    if (!item) {
-      detail.replaceChildren();
-      return;
-    }
-    const values = item.values
-      .map((value, valueIndex) => `<p class="${valueIndex === 0 ? (value.length <= 16 ? 'keyword-mosaic__value-main' : 'keyword-mosaic__value-main keyword-mosaic__value-main--long') : 'keyword-mosaic__value-sub'}">${value}</p>`)
-      .join('');
-    detail.innerHTML = `<div class="keyword-mosaic__detail-copy"><p class="keyword-mosaic__detail-label">${item.label}</p><div>${values}</div></div>`;
-  };
-
-  const activate = index => {
-    const shouldRefreshImages = index !== null && index !== activeIndex;
-    if (shouldRefreshImages) activeDotImages = chooseDotImages(12);
-    if (index === null) activeDotImages = [];
-    activeIndex = index;
-    board.querySelectorAll('.keyword-mosaic__piece').forEach(piece => {
-      const isActive = Number(piece.dataset.keywordIndex) === index;
-      piece.classList.toggle('is-active', isActive);
-      piece.classList.toggle('is-dimmed', index !== null && !isActive);
-      piece.setAttribute('aria-pressed', String(isActive));
-    });
-    board.querySelector('.keyword-mosaic__tape')?.remove();
-    if (index !== null && activeDotImages.length) {
-      const tape = document.createElement('div');
-      const imageMarkup = activeDotImages
-        .map(source => `<span><img src="${source}" alt="" /></span>`)
-        .join('');
-      tape.className = 'keyword-mosaic__tape';
-      tape.innerHTML = `<div class="keyword-mosaic__tape-track"><div>${imageMarkup}</div><div aria-hidden="true">${imageMarkup}</div></div>`;
-      board.append(tape);
-    }
-    renderDetail(index);
-  };
-
-  const build = () => {
-    const columns = narrowQuery.matches ? 6 : 14;
-    const { pieces, rows } = pack(columns);
-    board.replaceChildren();
-    board.dataset.rows = String(rows);
-    board.style.aspectRatio = `${columns} / ${rows}`;
-    board.style.setProperty('--keyword-columns', columns);
-    pieces.forEach(piece => {
-      const item = items[piece.index];
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'keyword-mosaic__piece';
-      button.dataset.keywordIndex = String(piece.index);
-      button.dataset.row = String(piece.row);
-      button.setAttribute('aria-label', `${item.label} — ${item.values.join(' ')}`);
-      button.setAttribute('aria-pressed', 'false');
-      button.style.left = `${(piece.column / columns) * 100}%`;
-      button.style.top = `${(piece.row / rows) * 100}%`;
-      button.style.width = `${(piece.width / columns) * 100}%`;
-      button.style.height = `${(piece.height / rows) * 100}%`;
-      button.innerHTML = `<span class="keyword-mosaic__surface"><span>${item.label}</span></span>`;
-      button.addEventListener('pointerenter', () => activate(piece.index));
-      button.addEventListener('pointerleave', () => activate(pinnedIndex));
-      button.addEventListener('focus', () => activate(piece.index));
-      button.addEventListener('blur', () => activate(pinnedIndex));
-      button.addEventListener('click', () => {
-        pinnedIndex = pinnedIndex === piece.index ? null : piece.index;
-        activate(pinnedIndex);
-      });
-      board.append(button);
-    });
-    activate(activeIndex);
-  };
-
-  build();
-  narrowQuery.addEventListener?.('change', build);
+  });
+  document.addEventListener('pointerdown', event => {
+    if (active && !board.contains(event.target)) close();
+  });
+  desktop.addEventListener('change', close);
+  window.addEventListener('resize', () => {
+    if (desktop.matches && active) position(active);
+  });
+  document.fonts?.ready.then(() => {
+    if (desktop.matches && active) position(active);
+  });
 }
 
 function initializeKeywordGeometric(section, cards) {
@@ -2781,7 +2708,7 @@ Promise.all([kvDecorReady, kvLoadingReady]).then(() => {
 initializeMenu();
 initializeAccordions();
 initializeTabsAndKeywords();
-initializeKeywordMosaic();
+initializeKeywordPopovers();
 initializeScrollReveal();
 initializeEnvironmentImagePreload();
 initializeParticles();
