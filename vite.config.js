@@ -15,14 +15,6 @@ function copyRuntimeAssets() {
         resolve(outputAssets, 'images/kv-random'),
         { recursive: true }
       );
-      cpSync(
-        resolve('assets/js/gsap.min.js'),
-        resolve(outputAssets, 'js/gsap.min.js')
-      );
-      cpSync(
-        resolve('assets/js/ScrollTrigger.min.js'),
-        resolve(outputAssets, 'js/ScrollTrigger.min.js')
-      );
       cpSync(resolve('assets/shader'), resolve(outputAssets, 'shader'), {
         recursive: true,
       });

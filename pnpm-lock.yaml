@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      gsap:
-        specifier: 3.13.0
-        version: 3.13.0
     devDependencies:
       vite:
         specifier: ^5.4.10
@@ -314,9 +310,6 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  gsap@3.13.0:
-    resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
-
   nanoid@3.3.18:
     resolution: {integrity: sha512-DTg4MJbGMWkfi6VZFdNt2/caMbQy4Ou+Op/hJQvGEWcnVfoA1QA+xzRKAzw9jD6+GVOOeYr/mIcuDSdug6F6+w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -548,8 +541,6 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
-
-  gsap@3.13.0: {}
 
   nanoid@3.3.18: {}
 

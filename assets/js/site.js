@@ -1,8 +1,5 @@
 import * as THREE from './three.module.min.js';
 
-const { gsap, ScrollTrigger } = window;
-gsap.registerPlugin(ScrollTrigger);
-
 const reducedMotion = window.matchMedia(
   '(prefers-reduced-motion: reduce)'
 ).matches;
@@ -1511,520 +1508,6 @@ function initializeTabsAndKeywords() {
 
 }
 
-function initializeKineticKeywords() {
-  const grid = document.querySelector('.keyword-grid');
-  const cards = [...document.querySelectorAll('.keyword-grid > article')];
-  const host = grid?.querySelector('.keyword-webgl');
-  if (!grid || !host || !cards.length || reducedMotion) return;
-
-  const canvas = document.createElement('canvas');
-  host.append(canvas);
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    alpha: true,
-    antialias: true,
-    powerPreference: 'high-performance',
-  });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 160);
-  camera.position.set(0, 0.4, 54);
-  const spiral = new THREE.Group();
-  spiral.position.y = 1.3;
-  scene.add(spiral);
-
-  const pointer = new THREE.Vector2();
-  const raycaster = new THREE.Raycaster();
-  const rayPointer = new THREE.Vector2();
-  let isPaused = false;
-  let travelTime = 0;
-  let lastElapsed = 0;
-  const palette = [
-    ['#f8d7bf', '#fff7bd', '#d9e3dd'],
-    ['#dce6de', '#fffdef', '#f4ccb8'],
-    ['#fff0b7', '#e8eef4', '#f8d7bf'],
-  ];
-
-  const makeTexture = (card, index) => {
-    const number =
-      card.querySelector('p:first-child')?.textContent?.trim() ?? '';
-    const label = card.querySelector('h3')?.textContent?.trim() ?? '';
-    const paragraphs = [...card.querySelectorAll('p')].slice(1);
-    const value = paragraphs.map(item => item.textContent.trim()).join(' / ');
-    const width = value.length > 34 ? 1360 : value.length > 18 ? 1120 : 860;
-    const height = value.length > 18 ? 660 : 560;
-    const textureCanvas = document.createElement('canvas');
-    textureCanvas.width = width;
-    textureCanvas.height = height;
-    const context = textureCanvas.getContext('2d');
-    const colors = palette[index % palette.length];
-
-    context.fillStyle = '#fffdef';
-    context.fillRect(0, 0, width, height);
-    const gradient = context.createLinearGradient(0, 0, width, height);
-    gradient.addColorStop(0, colors[0]);
-    gradient.addColorStop(0.52, colors[1]);
-    gradient.addColorStop(1, colors[2]);
-    context.globalAlpha = 0.86;
-    context.fillStyle = gradient;
-    context.fillRect(0, 0, width, height);
-    context.globalAlpha = 1;
-    context.strokeStyle = 'rgba(37, 37, 37, 0.13)';
-    context.lineWidth = 8;
-    context.strokeRect(4, 4, width - 8, height - 8);
-
-    context.fillStyle = '#d72b2f';
-    context.font = '700 34px sans-serif';
-    context.letterSpacing = '4px';
-    context.fillText(number, 52, 82);
-    context.fillRect(52, 106, 70, 4);
-
-    context.fillStyle = 'rgba(37, 37, 37, 0.58)';
-    context.font = '700 40px sans-serif';
-    wrapCanvasText(context, label, 52, 166, width - 104, 54, 2);
-
-    context.fillStyle = '#252525';
-    fitCanvasText(context, value, {
-      x: 52,
-      y: 270,
-      maxWidth: width - 104,
-      maxHeight: height - 320,
-      maxLines: 5,
-      fontFamily: 'serif',
-      maxFontSize: 60,
-      minFontSize: 46,
-      lineRatio: 1.22,
-    });
-
-    const texture = new THREE.CanvasTexture(textureCanvas);
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.anisotropy = 4;
-    return { texture, aspect: width / height };
-  };
-
-  const helixTurns = 2.15;
-  const helixHeight = 22;
-  const helixRadius = 9.2;
-  const getHelixState = progress => {
-    const angle = progress * Math.PI * 2 * helixTurns - 1.35;
-    return {
-      angle,
-      position: new THREE.Vector3(
-        Math.cos(angle) * helixRadius,
-        -helixHeight / 2 + progress * helixHeight,
-        Math.sin(angle) * helixRadius
-      ),
-    };
-  };
-  const initialFrontPhase = (Math.PI / 2 + 1.35) / (Math.PI * 2 * helixTurns);
-
-  const meshes = cards.map((card, index) => {
-    const { texture, aspect } = makeTexture(card, index);
-    const geometry = new THREE.PlaneGeometry(4.15 * aspect, 4.15);
-    const material = new THREE.MeshBasicMaterial({
-      map: texture,
-      side: THREE.DoubleSide,
-      transparent: true,
-      opacity: 0,
-      depthWrite: false,
-      toneMapped: false,
-    });
-    const mesh = new THREE.Mesh(geometry, material);
-    const phase = (initialFrontPhase - index / cards.length + 1) % 1;
-    const { angle, position } = getHelixState(phase);
-    mesh.position.copy(position);
-    mesh.rotation.z = (index % 2 ? -1 : 1) * (0.04 + index * 0.0025);
-    mesh.userData.baseScale = 1.1 + Math.sin(index * 0.7) * 0.04;
-    mesh.userData.phase = phase;
-    mesh.scale.setScalar(mesh.userData.baseScale);
-    spiral.add(mesh);
-    return mesh;
-  });
-
-  const helixCurve = new THREE.CatmullRomCurve3(
-    Array.from(
-      { length: 220 },
-      (_, index) => getHelixState(index / 219).position
-    )
-  );
-  const helixGeometry = new THREE.BufferGeometry().setFromPoints(
-    helixCurve.getPoints(180)
-  );
-  const helixLine = new THREE.Line(
-    helixGeometry,
-    new THREE.LineBasicMaterial({
-      color: '#d72b2f',
-      transparent: true,
-      opacity: 0.28,
-    })
-  );
-  spiral.add(helixLine);
-
-  spiral.rotation.x = -0.1;
-  spiral.rotation.y = -0.35;
-
-  const resize = () => {
-    const width = Math.ceil(canvas.offsetWidth || host.clientWidth);
-    const height = Math.ceil(canvas.offsetHeight || host.clientHeight);
-    renderer.setSize(width, height, false);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-  };
-
-  host.addEventListener(
-    'pointermove',
-    event => {
-      const rect = canvas.getBoundingClientRect();
-      rayPointer.set(
-        ((event.clientX - rect.left) / rect.width - 0.5) * 2,
-        -((event.clientY - rect.top) / rect.height - 0.5) * 2
-      );
-      raycaster.setFromCamera(rayPointer, camera);
-      spiral.updateMatrixWorld(true);
-      isPaused = raycaster
-        .intersectObjects(meshes, false)
-        .some(hit => hit.object.material.opacity > 0.18);
-      pointer.set(
-        isPaused ? rayPointer.x * 0.5 : 0,
-        isPaused ? -rayPointer.y * 0.5 : 0
-      );
-    },
-    { passive: true }
-  );
-  host.addEventListener('pointerleave', () => {
-    isPaused = false;
-    pointer.set(0, 0);
-  });
-  addEventListener('resize', resize);
-  resize();
-
-  const clock = new THREE.Clock();
-  let frameId = null;
-  let onScreen = true;
-  let contextLost = false;
-  const shouldRun = () => onScreen && !document.hidden && !contextLost;
-
-  const stop = () => {
-    if (frameId !== null) {
-      cancelAnimationFrame(frameId);
-      frameId = null;
-    }
-  };
-  const render = () => {
-    frameId = null;
-    if (!shouldRun()) return;
-    const elapsed = clock.getElapsedTime();
-    const delta = elapsed - lastElapsed;
-    lastElapsed = elapsed;
-    if (!isPaused) travelTime += delta;
-    const targetY = -0.35 + pointer.x * 0.85;
-    spiral.rotation.y += (targetY - spiral.rotation.y) * 0.05;
-    spiral.rotation.x += (-0.08 - pointer.y * 0.32 - spiral.rotation.x) * 0.05;
-    meshes.forEach((mesh, index) => {
-      const progress = (mesh.userData.phase + travelTime * 0.012) % 1;
-      const { position } = getHelixState(progress);
-      position.y += Math.sin(travelTime * 1.2 + index) * 0.04;
-      mesh.position.copy(position);
-      mesh.quaternion.copy(camera.quaternion);
-      mesh.rotateZ((index % 2 ? -1 : 1) * (0.04 + index * 0.0025));
-      const depthScale = 0.94 + progress * 0.12;
-      mesh.scale.setScalar(mesh.userData.baseScale * depthScale);
-      const fadeIn = smoothstep(0.04, 0.16, progress);
-      const fadeOut = 1 - smoothstep(0.84, 0.96, progress);
-      mesh.material.opacity = fadeIn * fadeOut;
-    });
-    renderer.render(scene, camera);
-    frameId = requestAnimationFrame(render);
-  };
-  const start = () => {
-    if (frameId === null && shouldRun()) {
-      lastElapsed = clock.getElapsedTime();
-      frameId = requestAnimationFrame(render);
-    }
-  };
-
-  canvas.addEventListener('webglcontextlost', event => {
-    event.preventDefault();
-    contextLost = true;
-    stop();
-  });
-  canvas.addEventListener('webglcontextrestored', () => {
-    contextLost = false;
-    start();
-  });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) stop();
-    else start();
-  });
-  new IntersectionObserver(
-    entries => {
-      onScreen = entries.some(entry => entry.isIntersecting);
-      if (onScreen) start();
-      else stop();
-    },
-    { threshold: 0 }
-  ).observe(grid);
-
-  start();
-}
-
-function wrapCanvasText(context, text, x, y, maxWidth, lineHeight, maxLines) {
-  const characters = [...text];
-  let line = '';
-  const lines = [];
-  for (const character of characters) {
-    const testLine = line + character;
-    if (context.measureText(testLine).width > maxWidth && line) {
-      lines.push(line);
-      line = character;
-      if (lines.length === maxLines) break;
-    } else {
-      line = testLine;
-    }
-  }
-  if (line && lines.length < maxLines) lines.push(line);
-  lines.slice(0, maxLines).forEach((item, index) => {
-    const clipped =
-      index === maxLines - 1 && characters.join('') !== lines.join('');
-    context.fillText(`${item}${clipped ? '…' : ''}`, x, y + index * lineHeight);
-  });
-}
-
-function fitCanvasText(context, text, options) {
-  const {
-    x,
-    y,
-    maxWidth,
-    maxHeight,
-    maxLines,
-    fontFamily,
-    maxFontSize,
-    minFontSize,
-    lineRatio,
-  } = options;
-
-  for (let fontSize = maxFontSize; fontSize >= minFontSize; fontSize -= 2) {
-    context.font = `700 ${fontSize}px ${fontFamily}`;
-    const lineHeight = Math.round(fontSize * lineRatio);
-    const lines = buildCanvasLines(context, text, maxWidth, maxLines);
-    if (lines.length * lineHeight <= maxHeight) {
-      lines.forEach((line, index) => {
-        context.fillText(line, x, y + index * lineHeight);
-      });
-      return;
-    }
-  }
-
-  context.font = `700 ${minFontSize}px ${fontFamily}`;
-  const lineHeight = Math.round(minFontSize * lineRatio);
-  buildCanvasLines(context, text, maxWidth, maxLines).forEach((line, index) => {
-    context.fillText(line, x, y + index * lineHeight);
-  });
-}
-
-function buildCanvasLines(context, text, maxWidth, maxLines) {
-  const characters = [...text];
-  const lines = [];
-  let line = '';
-  for (const character of characters) {
-    const testLine = line + character;
-    if (context.measureText(testLine).width > maxWidth && line) {
-      lines.push(line);
-      line = character;
-      if (lines.length === maxLines) break;
-    } else {
-      line = testLine;
-    }
-  }
-  if (line && lines.length < maxLines) lines.push(line);
-  if (lines.length === maxLines && lines.join('') !== text) {
-    lines[maxLines - 1] = `${lines[maxLines - 1]}…`;
-  }
-  return lines;
-}
-
-function smoothstep(edge0, edge1, value) {
-  const amount = Math.min(Math.max((value - edge0) / (edge1 - edge0), 0), 1);
-  return amount * amount * (3 - 2 * amount);
-}
-
-function initializePathDecorations() {
-  const decorations = [
-    {
-      selector: '#about',
-      variant: 'ribbon-arc',
-      placement: 'right-high',
-      paths: ['M1200 -220 A620 860 0 0 0 1200 1260'],
-    },
-    {
-      selector: '#products',
-      variant: 'ribbon-line',
-      placement: 'line-low',
-      count: 1,
-      paths: ['M-120 430 L1120 38', 'M-120 246 L1120 468'],
-    },
-    {
-      selector: '#interview',
-      variant: 'ribbon-arc',
-      placement: 'left-hero',
-      paths: ['M-320 -300 A920 940 0 0 1 -320 1360'],
-    },
-    {
-      selector: '#keyword',
-      variant: 'ribbon-line',
-      placement: 'line-high',
-      count: 1,
-      paths: ['M-120 222 L1120 148'],
-    },
-    {
-      selector: '#environment',
-      variant: 'ribbon-arc',
-      placement: 'right-hero',
-      paths: ['M1260 -420 A1180 1540 0 0 0 1260 1660'],
-    },
-    {
-      selector: '#welfare',
-      variant: 'ribbon-line',
-      placement: 'line-middle',
-      count: 2,
-      paths: ['M-120 382 L1120 88', 'M-120 136 L1120 390'],
-    },
-    {
-      selector: '#requirements',
-      variant: 'ribbon-arc',
-      placement: 'left-middle',
-      paths: ['M-320 -200 A680 850 0 0 1 -320 1240'],
-    },
-    {
-      selector: '#faq',
-      variant: 'ribbon-arc',
-      placement: 'left-high',
-      paths: ['M-320 -260 A1040 900 0 0 1 -320 1320'],
-    },
-  ];
-
-  decorations.forEach(
-    ({ selector, variant, placement, paths, count }, index) => {
-      const section = document.querySelector(selector);
-      if (!section || section.querySelector('.section-path-decor')) return;
-      section.classList.add('has-section-path');
-      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      svg.classList.add(
-        'section-path-decor',
-        `section-path-decor--${variant}`,
-        `section-path-decor--${placement}`
-      );
-      svg.setAttribute(
-        'viewBox',
-        variant === 'ribbon-arc' ? '-320 -320 1520 1760' : '0 0 1000 520'
-      );
-      svg.setAttribute('preserveAspectRatio', 'none');
-      svg.setAttribute('aria-hidden', 'true');
-      const defs = document.createElementNS(
-        'http://www.w3.org/2000/svg',
-        'defs'
-      );
-      const gradient = document.createElementNS(
-        'http://www.w3.org/2000/svg',
-        'linearGradient'
-      );
-      const gradientId = `section-path-gradient-${section.id || index}`;
-      gradient.setAttribute('id', gradientId);
-      gradient.setAttribute('x1', '0%');
-      gradient.setAttribute('x2', '100%');
-      gradient.setAttribute('y1', '0%');
-      gradient.setAttribute('y2', '100%');
-      [
-        ['0%', '#f5b8b7'],
-        ['28%', '#f7df9a'],
-        ['54%', '#c9dec1'],
-        ['78%', '#cbd8f2'],
-        ['100%', '#fffdef'],
-      ].forEach(([offset, color]) => {
-        const stop = document.createElementNS(
-          'http://www.w3.org/2000/svg',
-          'stop'
-        );
-        stop.setAttribute('offset', offset);
-        stop.setAttribute('stop-color', color);
-        gradient.append(stop);
-      });
-      defs.append(gradient);
-      svg.append(defs);
-      const stickerPaths = paths;
-      stickerPaths
-        .slice(0, count ?? stickerPaths.length)
-        .forEach((pathData, pathIndex) => {
-          const element = document.createElementNS(
-            'http://www.w3.org/2000/svg',
-            'path'
-          );
-          const randomSeed = index * 13 + pathIndex * 7;
-          element.setAttribute('d', pathData);
-          element.setAttribute('pathLength', '1');
-          element.setAttribute('stroke', `url(#${gradientId})`);
-          element.classList.toggle(
-            'is-reverse-draw',
-            variant === 'ribbon-line' && pathIndex % 2 === 1
-          );
-          element.style.stroke = `url(#${gradientId})`;
-          element.style.setProperty(
-            '--path-delay',
-            `${pathIndex * 0.24 + index * 0.04}s`
-          );
-          element.style.setProperty(
-            '--path-duration',
-            `${5.8 + (randomSeed % 5) * 0.55}s`
-          );
-          element.style.setProperty(
-            '--path-drift-x',
-            `${(randomSeed % 2 ? 1 : -1) * (10 + (randomSeed % 4) * 4)}px`
-          );
-          element.style.setProperty(
-            '--path-drift-y',
-            `${((randomSeed % 3) - 1) * 10}px`
-          );
-          element.style.setProperty(
-            '--path-rotate',
-            `${(randomSeed % 7) - 3}deg`
-          );
-          svg.append(element);
-        });
-      section.prepend(svg);
-    }
-  );
-
-  const paths = [...document.querySelectorAll('.section-path-decor path')];
-  paths.forEach(path => {
-    const length = path.getTotalLength();
-    path.style.setProperty('--path-length', length);
-  });
-
-  if (reducedMotion) {
-    document.querySelectorAll('.has-section-path').forEach(section => {
-      section.classList.add('is-path-visible');
-    });
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const section = entry.target.matches('.has-section-path')
-          ? entry.target
-          : entry.target.closest('.has-section-path');
-        section?.classList.add('is-path-visible');
-      });
-    },
-    { rootMargin: '0px 0px -50% 0px', threshold: 0 }
-  );
-  document
-    .querySelectorAll('.has-section-path')
-    .forEach(element => observer.observe(element));
-}
-
 function initializeEnvironmentImagePreload() {
   const section = document.querySelector('#environment');
   if (!section) return;
@@ -2300,39 +1783,49 @@ function initializeKeywordPopovers() {
     active = null;
   };
   const position = item => {
-    const summary = item.querySelector('summary');
     const panel = item.querySelector('.keyword-composition__description');
     const bounds = board.getBoundingClientRect();
-    const anchor = summary.getBoundingClientRect();
+    const anchor = item.querySelector('summary').getBoundingClientRect();
+    const viewport = window.visualViewport;
+    const inset = 12;
+    const gap = 12;
+    const viewportLeft = viewport?.offsetLeft ?? 0;
+    const viewportTop = viewport?.offsetTop ?? 0;
+    const viewportWidth = viewport?.width ?? document.documentElement.clientWidth;
+    const viewportHeight = viewport?.height ?? window.innerHeight;
+    const headerBottom = document.querySelector('.site-header')?.getBoundingClientRect().bottom ?? 0;
+    const leftEdge = viewportLeft + inset;
+    const rightEdge = viewportLeft + viewportWidth - inset;
+    const topEdge = Math.max(viewportTop, headerBottom) + inset;
+    const bottomEdge = viewportTop + viewportHeight - inset;
+    if (anchor.bottom <= topEdge || anchor.top >= bottomEdge) {
+      close();
+      return;
+    }
+
+    // Measure the unconstrained panel at its actual responsive width first.
+    panel.style.setProperty('--panel-max-width', `${rightEdge - leftEdge}px`);
+    panel.style.removeProperty('--panel-max-height');
     const width = panel.offsetWidth;
+    const naturalHeight = panel.offsetHeight;
+    const below = Math.max(0, bottomEdge - anchor.bottom - gap);
+    const above = Math.max(0, anchor.top - topEdge - gap);
+    const useBelow = below >= naturalHeight || (above < naturalHeight && below >= above);
+    const availableHeight = useBelow ? below : above;
+    // On short/zoomed screens the card can scroll without covering its anchor.
+    const maxHeight = Math.max(1, availableHeight);
+    panel.style.setProperty('--panel-max-height', `${maxHeight}px`);
+    panel.classList.toggle('is-scrollable', naturalHeight > maxHeight);
     const height = panel.offsetHeight;
-    const gap = 24 * bounds.width / 1200;
-    const inset = 3; // Account for the decorative outer ring.
-    const x = anchor.left - bounds.left;
-    const y = anchor.top - bounds.top;
-    const vertical = item.classList.contains('keyword-composition__item--vertical');
-    const preferred = vertical
-      ? (x > bounds.width / 2 ? ['left', 'right', 'top', 'bottom'] : ['right', 'left', 'top', 'bottom'])
-      : (y > bounds.height / 2 ? ['top', 'bottom', 'left', 'right'] : ['bottom', 'top', 'right', 'left']);
-    const candidates = {
-      right: [x + anchor.width + gap, y],
-      left: [x - width - gap, y],
-      bottom: [x, y + anchor.height + gap],
-      top: [x, y - height - gap],
-    };
-    const clamp = (value, max) => Math.max(inset, Math.min(value, Math.max(inset, max - inset)));
-    // Prefer a nearby position that fits the board and leaves its own label visible.
-    const positions = preferred.map(side => {
-      const [left, top] = candidates[side];
-      const px = clamp(left, bounds.width - width);
-      const py = clamp(top, bounds.height - height);
-      const overlapWidth = Math.max(0, Math.min(px + width, x + anchor.width) - Math.max(px, x));
-      const overlapHeight = Math.max(0, Math.min(py + height, y + anchor.height) - Math.max(py, y));
-      return { left: px, top: py, overlap: overlapWidth * overlapHeight };
-    });
-    const best = positions.reduce((a, b) => b.overlap < a.overlap ? b : a);
-    panel.style.setProperty('--panel-left', `${best.left}px`);
-    panel.style.setProperty('--panel-top', `${best.top}px`);
+    const left = Math.max(leftEdge, Math.min(
+      anchor.left + (anchor.width - width) / 2,
+      rightEdge - width
+    ));
+    const top = useBelow ? anchor.bottom + gap : anchor.top - gap - height;
+    // Store board-relative coordinates while constraining against the viewport,
+    // so a popup may extend past the board's first/last row when there is room.
+    panel.style.setProperty('--panel-left', `${left - bounds.left}px`);
+    panel.style.setProperty('--panel-top', `${top - bounds.top}px`);
   };
   const open = item => {
     items.forEach(other => { other.open = other === item; });
@@ -2355,8 +1848,11 @@ function initializeKeywordPopovers() {
       if (desktop.matches && active === item) close();
     });
     summary.addEventListener('click', event => {
-      if (!desktop.matches) return; // Native details handles touch/mobile expansion.
       event.preventDefault();
+      if (!desktop.matches && item.open) {
+        close();
+        return;
+      }
       open(item);
     });
   });
@@ -2370,331 +1866,21 @@ function initializeKeywordPopovers() {
     if (active && !board.contains(event.target)) close();
   });
   desktop.addEventListener('change', close);
-  window.addEventListener('resize', () => {
-    if (desktop.matches && active) position(active);
-  });
-  document.fonts?.ready.then(() => {
-    if (desktop.matches && active) position(active);
-  });
+  let positionFrame = 0;
+  const updatePosition = () => {
+    if (!active || positionFrame) return;
+    positionFrame = requestAnimationFrame(() => {
+      positionFrame = 0;
+      if (active) position(active);
+    });
+  };
+  window.addEventListener('resize', updatePosition);
+  window.addEventListener('scroll', updatePosition, { passive: true });
+  window.visualViewport?.addEventListener('resize', updatePosition);
+  window.visualViewport?.addEventListener('scroll', updatePosition);
+  document.fonts?.ready.then(updatePosition);
 }
 
-function initializeKeywordGeometric(section, cards) {
-  const host = section?.querySelector('.keyword-geometric');
-  const board = host?.querySelector('.keyword-geometric__board');
-  const detail = host?.querySelector('.keyword-geometric__detail');
-  if (!host || !board || !detail || !cards.length) return;
-
-  const narrowQuery = window.matchMedia('(max-width: 47.9375rem)');
-  let pinnedIndex = null;
-
-  const getItems = () =>
-    cards.map((card, index) => ({
-      index,
-      number: card.querySelector('.keyword-card__number')?.textContent || '',
-      label: card.querySelector('.keyword-card__label')?.textContent || '',
-      value: card.querySelector('.keyword-card__value')?.innerHTML || '',
-    }));
-
-  const packItems = (items, columns) => {
-    const grid = [];
-    const ensureRow = row => {
-      while (grid.length <= row) grid.push(Array(columns).fill(false));
-    };
-    const shaped = items
-      .map(item => {
-        const chars = Array.from(item.label);
-        let shape = { width: 1, height: chars.length, score: Infinity };
-        for (let width = 1; width <= Math.min(columns, 5, chars.length); width++) {
-          const height = Math.ceil(chars.length / width);
-          const score = (width * height - chars.length) * 1.5 +
-            Math.abs(width - height);
-          if (score < shape.score) shape = { width, height, score };
-        }
-        return { ...item, chars, ...shape };
-      })
-      .sort((a, b) =>
-        b.width * b.height - a.width * a.height || b.height - a.height
-      );
-
-    return shaped.map(piece => {
-      for (let row = 0; ; row++) {
-        ensureRow(row + piece.height - 1);
-        for (let column = 0; column <= columns - piece.width; column++) {
-          let fits = true;
-          for (let y = row; y < row + piece.height && fits; y++) {
-            for (let x = column; x < column + piece.width; x++) {
-              if (grid[y][x]) fits = false;
-            }
-          }
-          if (!fits) continue;
-          for (let y = row; y < row + piece.height; y++) {
-            for (let x = column; x < column + piece.width; x++) {
-              grid[y][x] = true;
-            }
-          }
-          return { ...piece, row, column, rows: grid.length };
-        }
-      }
-    });
-  };
-
-  const showDetail = index => {
-    const item = getItems()[index];
-    if (!item) return;
-    const activePiece = [...board.children].find(
-      piece => Number(piece.dataset.keywordIndex) === index
-    );
-    [...board.children].forEach(piece => {
-      const active = Number(piece.dataset.keywordIndex) === index;
-      piece.classList.toggle('is-active', active);
-      piece.classList.toggle('is-dimmed', !active);
-      piece.setAttribute('aria-pressed', String(active));
-    });
-    detail.innerHTML = `<p class="keyword-geometric__detail-number">${item.number}</p><h3>${item.label}</h3><div>${item.value}</div>`;
-    detail.classList.remove(
-      'is-at-top',
-      'is-at-bottom',
-      'is-at-left',
-      'is-at-right'
-    );
-    if (activePiece) {
-      const centerX = Number(activePiece.dataset.column) +
-        Number(activePiece.dataset.pieceWidth) / 2;
-      const centerY = Number(activePiece.dataset.row) +
-        Number(activePiece.dataset.pieceHeight) / 2;
-      const columns = Number(board.style.getPropertyValue('--geometric-columns'));
-      const rows = Number(board.style.getPropertyValue('--geometric-rows'));
-      detail.classList.add(centerY < rows / 2 ? 'is-at-bottom' : 'is-at-top');
-      detail.classList.add(centerX < columns / 2 ? 'is-at-right' : 'is-at-left');
-    }
-    detail.classList.add('is-visible');
-  };
-
-  const clearDetail = () => {
-    [...board.children].forEach(piece => {
-      piece.classList.remove('is-active', 'is-dimmed');
-      piece.setAttribute('aria-pressed', 'false');
-    });
-    detail.classList.remove('is-visible');
-    detail.innerHTML = '<p>キーワードにカーソルを重ねると詳細が表示されます</p>';
-  };
-
-  const build = () => {
-    const columns = narrowQuery.matches ? 6 : 12;
-    const pieces = packItems(getItems(), columns);
-    const rows = Math.max(...pieces.map(piece => piece.row + piece.height));
-    board.replaceChildren();
-    board.style.setProperty('--geometric-columns', columns);
-    board.style.setProperty('--geometric-rows', rows);
-
-    pieces.forEach(piece => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'keyword-geometric__piece';
-      button.dataset.keywordIndex = String(piece.index);
-      button.dataset.column = String(piece.column);
-      button.dataset.row = String(piece.row);
-      button.dataset.pieceWidth = String(piece.width);
-      button.dataset.pieceHeight = String(piece.height);
-      button.setAttribute('aria-label', `${piece.label}：${piece.value.replace(/<br\s*\/?>/gi, ' ')}`);
-      button.setAttribute('aria-pressed', 'false');
-      button.style.gridColumn = `${piece.column + 1} / span ${piece.width}`;
-      button.style.gridRow = `${piece.row + 1} / span ${piece.height}`;
-      button.style.setProperty('--piece-columns', piece.width);
-      button.style.setProperty('--piece-rows', piece.height);
-
-      piece.chars.forEach((character, characterIndex) => {
-        const cell = document.createElement('span');
-        cell.className = 'keyword-geometric__cell';
-        cell.style.setProperty('--cell-order', characterIndex);
-        cell.textContent = character;
-        button.append(cell);
-      });
-      for (let empty = piece.chars.length;
-        empty < piece.width * piece.height;
-        empty++) {
-        const cell = document.createElement('span');
-        cell.className = 'keyword-geometric__cell is-empty';
-        button.append(cell);
-      }
-
-      button.addEventListener('pointerenter', () => showDetail(piece.index));
-      button.addEventListener('pointerleave', () => {
-        if (pinnedIndex === null) clearDetail();
-        else showDetail(pinnedIndex);
-      });
-      button.addEventListener('focus', () => showDetail(piece.index));
-      button.addEventListener('blur', () => {
-        if (pinnedIndex === null) clearDetail();
-      });
-      button.addEventListener('click', () => {
-        pinnedIndex = pinnedIndex === piece.index ? null : piece.index;
-        if (pinnedIndex === null) clearDetail();
-        else showDetail(pinnedIndex);
-      });
-      board.append(button);
-    });
-    if (pinnedIndex !== null) showDetail(pinnedIndex);
-  };
-
-  build();
-  narrowQuery.addEventListener?.('change', build);
-}
-
-function initializeKeywordDesigns() {
-  const section = document.querySelector('#keyword');
-  const cards = section
-    ? [...section.querySelectorAll('.keyword-grid > .keyword-card')]
-    : [];
-  const tabs = section
-    ? [...section.querySelectorAll('.keyword-designs__tab')]
-    : [];
-  const stage = section?.querySelector('.keyword-stage');
-  const stageNumber = stage?.querySelector('.keyword-stage__number');
-  const stageLabel = stage?.querySelector('.keyword-stage__label');
-  const stageValue = stage?.querySelector('.keyword-stage__value');
-  if (
-    !section ||
-    !cards.length ||
-    !tabs.length ||
-    !stageNumber ||
-    !stageLabel ||
-    !stageValue
-  ) {
-    return;
-  }
-
-  let activeIndex = 0;
-
-  const tapeLibrary = section.querySelector('.keyword-tape-library');
-  const tapeList = tapeLibrary?.querySelector('.keyword-tape-library__list');
-  const tapeDetail = tapeLibrary?.querySelector('.keyword-tape-library__detail');
-
-  const renderTapeDetail = index => {
-    const card = cards[index];
-    if (!card || !tapeDetail || !tapeList) return;
-    const number = card.querySelector('.keyword-card__number')?.textContent || '';
-    const label = card.querySelector('.keyword-card__label')?.textContent || '';
-    const value = [...card.querySelectorAll('.keyword-card__value')]
-      .map(element => element.innerHTML.trim())
-      .join('<br>');
-    tapeDetail.innerHTML = `
-      <p class="keyword-tape-library__eyebrow">KEYWORD ${number}</p>
-      <h3>${label}</h3>
-      <div>${value}</div>
-    `;
-    [...tapeList.children].forEach((button, buttonIndex) => {
-      const active = buttonIndex === index;
-      button.classList.toggle('is-active', active);
-      button.setAttribute('aria-pressed', String(active));
-    });
-  };
-
-  if (tapeList && tapeDetail) {
-    cards.forEach((card, index) => {
-      const number = card.querySelector('.keyword-card__number')?.textContent || '';
-      const label = card.querySelector('.keyword-card__label')?.textContent || '';
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'keyword-tape-library__tape';
-      button.innerHTML = `<span>${number}</span><strong>${label}</strong><i aria-hidden="true">＋</i>`;
-      button.addEventListener('pointerenter', () => renderTapeDetail(index));
-      button.addEventListener('focus', () => renderTapeDetail(index));
-      button.addEventListener('click', () => renderTapeDetail(index));
-      tapeList.append(button);
-    });
-    renderTapeDetail(0);
-  }
-
-  const renderStage = (index, animate = true) => {
-    activeIndex = (index + cards.length) % cards.length;
-    const card = cards[activeIndex];
-    stageNumber.textContent = card.querySelector('.keyword-card__number')?.textContent || '';
-    stageLabel.textContent = card.querySelector('.keyword-card__label')?.textContent || '';
-    stageValue.innerHTML = [...card.querySelectorAll('.keyword-card__value')]
-      .map(element => element.innerHTML.trim())
-      .join('<br>');
-    cards.forEach((item, index) => {
-      item.classList.toggle('is-keyword-active', index === activeIndex);
-      item.setAttribute('aria-pressed', String(index === activeIndex));
-    });
-    if (animate && !reducedMotion) {
-      section.classList.remove('is-keyword-stage-changing');
-      requestAnimationFrame(() =>
-        section.classList.add('is-keyword-stage-changing')
-      );
-    }
-  };
-
-  cards.forEach((card, index) => {
-    const angle = ((index / cards.length) * Math.PI * 2) - Math.PI / 2;
-    card.style.setProperty('--keyword-x', `${50 + Math.cos(angle) * 44}%`);
-    card.style.setProperty('--keyword-y', `${50 + Math.sin(angle) * 43}%`);
-    card.style.setProperty('--keyword-order', index);
-    card.style.setProperty(
-      '--keyword-entry-x',
-      '-5rem'
-    );
-    card.setAttribute('role', 'button');
-    card.tabIndex = 0;
-    card.addEventListener('click', () => {
-      if (section.dataset.keywordView === 'constellation') {
-        renderStage(index);
-      }
-    });
-    card.addEventListener('keydown', event => {
-      if (event.key !== 'Enter' && event.key !== ' ') return;
-      event.preventDefault();
-      if (section.dataset.keywordView === 'constellation') {
-        renderStage(index);
-      }
-    });
-  });
-
-  const activateView = tab => {
-    section.dataset.keywordView = tab.dataset.keywordView;
-    tabs.forEach(item => {
-      const active = item === tab;
-      item.classList.toggle('is-active', active);
-      item.setAttribute('aria-selected', String(active));
-      item.tabIndex = active ? 0 : -1;
-    });
-    const cardsAreInteractive = tab.dataset.keywordView === 'constellation';
-    cards.forEach(card => {
-      const isEditorial = tab.dataset.keywordView === 'runway';
-      card.tabIndex = cardsAreInteractive || isEditorial ? 0 : -1;
-    });
-    if (!reducedMotion) {
-      section.classList.remove('is-keyword-view-entering');
-      requestAnimationFrame(() =>
-        section.classList.add('is-keyword-view-entering')
-      );
-    }
-  };
-
-  tabs.forEach((tab, index) => {
-    tab.addEventListener('click', () => activateView(tab));
-    tab.addEventListener('keydown', event => {
-      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-      event.preventDefault();
-      let nextIndex = index;
-      if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
-      if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
-      if (event.key === 'Home') nextIndex = 0;
-      if (event.key === 'End') nextIndex = tabs.length - 1;
-      activateView(tabs[nextIndex]);
-      tabs[nextIndex].focus();
-    });
-  });
-  renderStage(0, false);
-  const initialTab = tabs.find(
-    tab => tab.dataset.keywordView === section.dataset.keywordView
-  ) || tabs[0];
-  activateView(initialTab);
-  initializeKeywordGeometric(section, cards);
-}
-
-keepReloadAtKvTop();
 const showLoadingScreen = shouldShowLoadingScreen();
 const kvLoaderSequence = showLoadingScreen ? prepareKvLoaderSequence() : null;
 const kvDecorReady = initializeKvRandomDecor();
