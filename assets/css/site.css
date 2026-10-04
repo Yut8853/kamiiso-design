@@ -248,9 +248,13 @@ footer a[href]:hover svg {
 .about-tagline {
   margin-top: 2.5rem;
   font-family: var(--font-noto-serif), ui-serif, serif;
-  font-size: var(--text-xl);
-  line-height: 2;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.7;
   white-space: nowrap;
+}
+.about-tagline__mobile-break {
+  display: none;
 }
 .about-text {
   max-width: var(--container-xl);
@@ -1357,17 +1361,15 @@ html.is-loading .site-body {
   }
   .about-tagline {
     margin-top: 1.75rem;
-    position: relative;
-    left: 50%;
-    width: calc(100vw - 8px);
-    margin-left: -50vw;
-    padding-inline: 4px;
-    font-size: 1.0625rem;
+    font-size: 1.375rem;
     font-weight: 700;
-    line-height: 1.8;
-    letter-spacing: -0.1em;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
+  }
+  .about-tagline__mobile-break {
+    display: inline;
   }
   .about-text,
   .product-text {
@@ -1620,7 +1622,7 @@ html.is-loading .site-body {
     gap: 5rem;
   }
   .about-tagline {
-    font-size: var(--text-2xl);
+    font-size: 1.75rem;
   }
   .product-layout {
     grid-template-columns: 1.15fr 0.85fr;
@@ -2493,7 +2495,12 @@ html.is-loading .site-body {
 }
 
 /* Requirements: clearly defined connected tabs. */
+.requirements-tabs-guide {
+  display: none;
+}
+
 #requirements .requirements-box {
+  --requirements-outline: 1px solid color-mix(in oklab, var(--foreground) 12%, #fffdef);
   overflow: visible;
   border: 0;
   border-radius: 0;
@@ -2504,6 +2511,7 @@ html.is-loading .site-body {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.375rem;
+  border-bottom: 0;
   padding: 0.625rem 0 0;
   background: transparent;
 }
@@ -2513,7 +2521,7 @@ html.is-loading .site-body {
   min-height: 3.25rem;
   padding: 0.875rem 0.5rem;
   font-family: inherit;
-  border: 1px solid color-mix(in oklab, var(--foreground) 14%, transparent);
+  border: var(--requirements-outline);
   border-radius: 0.75rem 0.75rem 0 0;
   background: #fffdef;
   color: color-mix(in oklab, var(--foreground) 60%, transparent);
@@ -2532,7 +2540,6 @@ html.is-loading .site-body {
 
 #requirements .requirements-tab.is-selected,
 #requirements .requirements-tab[aria-selected='true'] {
-  border-color: var(--primary);
   background: var(--primary);
   color: #fff;
   box-shadow: none;
@@ -2546,9 +2553,14 @@ html.is-loading .site-body {
 #requirements .requirements-panel {
   margin-top: -1px;
   padding: 2rem 1.5rem;
-  border: 1px solid color-mix(in oklab, var(--foreground) 12%, transparent);
+  border: var(--requirements-outline);
   border-radius: 0 0 1.25rem 1.25rem;
   background: #fffdef;
+}
+
+#requirements .requirements-panel__title,
+#requirements .requirements-row {
+  border-bottom: var(--requirements-outline);
 }
 
 #requirements .requirements-row:last-child {
@@ -2558,6 +2570,43 @@ html.is-loading .site-body {
 #requirements .requirements-tab:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: -3px;
+}
+
+@media (max-width: 47.9375rem) {
+  #requirements .requirements-tabs-guide {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+
+  #requirements .requirements-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0 0 0.5rem;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+  }
+
+  #requirements .requirements-tab {
+    flex: 0 0 auto;
+    min-width: 8rem;
+    height: 3.25rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+    line-height: 1.5;
+  }
+
+  #requirements .requirements-panel {
+    margin-top: 0.75rem;
+    border-radius: 1rem;
+  }
 }
 
 @media (min-width: 48rem) {
@@ -2604,6 +2653,13 @@ html.is-loading .site-body {
   position: relative;
   padding-top: calc(535 / 1200 * 100cqw);
 }
+.keyword-composition::before {
+  content: '';
+  position: absolute;
+  inset: -1rem 0 auto;
+  border-top: 1px solid var(--primary);
+  pointer-events: none;
+}
 .keyword-composition__outline {
   position: absolute;
   inset: 0 0 auto;
@@ -2612,7 +2668,13 @@ html.is-loading .site-body {
   height: auto;
   pointer-events: none;
 }
-.keyword-composition__item > summary {
+.keyword-composition__item > .keyword-composition__trigger {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  touch-action: manipulation;
   position: absolute;
   left: calc(var(--x) / 1200 * 100cqw);
   top: calc(var(--y) / 1200 * 100cqw);
@@ -2631,59 +2693,51 @@ html.is-loading .site-body {
   transition: color 0.2s ease;
 }
 @media (min-width: 48rem) {
-  /* The XD lettering is rendered from its outlined SVG. The summary remains
-     the accessible hit area, and its mask recolours only the hovered outline. */
-  .keyword-composition__item > summary > span {
+  /* The XD lettering is rendered from its outlined SVG. The button remains
+     the accessible hit area. Render each glyph once so antialiased edges
+     cannot reveal a red copy beneath the beige hover colour. */
+  .keyword-composition__item > .keyword-composition__trigger > span {
     opacity: 0;
   }
-  .keyword-composition__item > summary {
+  .keyword-composition__item > .keyword-composition__trigger {
     overflow: hidden;
   }
-  .keyword-composition__item > summary::before {
+  .keyword-composition__item > .keyword-composition__trigger::before {
     content: '';
     position: absolute;
     left: calc(var(--x) / var(--w) * -100%);
     top: calc(var(--y) / var(--h) * -100%);
     width: calc(1200 / var(--w) * 100%);
     height: calc(535 / var(--h) * 100%);
-    background: #b4ae98;
-    opacity: 0;
+    background: currentColor;
     pointer-events: none;
     -webkit-mask: url('../images/keyword-composition-outline.svg') 0 0 / 100% 100% no-repeat;
     mask: url('../images/keyword-composition-outline.svg') 0 0 / 100% 100% no-repeat;
-    transition: opacity 0.2s ease;
-  }
-  .keyword-composition__item > summary:hover::before,
-  .keyword-composition__item > summary:focus-visible::before,
-  .keyword-composition__item[open] > summary::before {
-    opacity: 1;
   }
 }
-.keyword-composition__item > summary::-webkit-details-marker {
-  display: none;
-}
-.keyword-composition__item > summary > span {
+.keyword-composition__item > .keyword-composition__trigger > span {
   white-space: nowrap;
 }
-.keyword-composition__item--vertical > summary {
+.keyword-composition__item--vertical > .keyword-composition__trigger {
   justify-content: center;
 }
-.keyword-composition__item--vertical > summary > span {
+.keyword-composition__item--vertical > .keyword-composition__trigger > span {
   writing-mode: vertical-rl;
   letter-spacing: -0.045em;
 }
-.keyword-composition__item:last-child > summary {
+.keyword-composition__item:last-child > .keyword-composition__trigger {
   justify-content: flex-end;
   text-align: right;
 }
-.keyword-composition__item > summary:hover {
+.keyword-composition__item > .keyword-composition__trigger:hover,
+.keyword-composition__item > .keyword-composition__trigger:focus-visible {
   color: #b4ae98;
 }
-.keyword-composition__item > summary:focus-visible {
+.keyword-composition__item > .keyword-composition__trigger:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 4px;
 }
-.keyword-composition__item[open] > summary {
+.keyword-composition__item.is-open > .keyword-composition__trigger {
   color: #b4ae98;
 }
 .keyword-composition__description {
@@ -2726,13 +2780,21 @@ html.is-loading .site-body {
     pointer-events: none;
   }
 }
-.keyword-tap-guide,
+.keyword-tap-guide {
+  margin-bottom: 2.25rem;
+  color: #090405;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.8;
+  text-align: center;
+}
+.keyword-tap-guide__mobile,
 .keyword-composition__mobile-outline {
   display: none;
 }
 
 /* Use the XD's SP outlines and independent rules in one 325 × 636 coordinate
-   system. Transparent summaries retain native keyboard and touch access. */
+   system. Transparent buttons retain native keyboard and touch access. */
 @media (max-width: 47.9375rem) {
   .keyword-title__mobile-break {
     display: inline;
@@ -2744,13 +2806,16 @@ html.is-loading .site-body {
     margin-top: 3rem;
   }
   .keyword-tap-guide {
-    display: block;
     margin-bottom: 1.25rem;
-    color: #090405;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    line-height: 1.8;
-    text-align: center;
+  }
+  .keyword-tap-guide__desktop {
+    display: none;
+  }
+  .keyword-tap-guide__mobile {
+    display: inline;
+  }
+  .keyword-composition::before {
+    top: 0;
   }
   .keyword-composition {
     padding-top: 0;
@@ -2771,8 +2836,8 @@ html.is-loading .site-body {
   .keyword-composition__item {
     position: static;
   }
-  .keyword-composition__item > summary,
-  .keyword-composition__item:last-child > summary {
+  .keyword-composition__item > .keyword-composition__trigger,
+  .keyword-composition__item:last-child > .keyword-composition__trigger {
     left: calc(var(--sx) / 325 * 100%);
     top: calc(var(--sy) / 636 * 100%);
     width: calc(var(--sw) / 325 * 100%);
@@ -2781,7 +2846,7 @@ html.is-loading .site-body {
     border: 0;
     overflow: hidden;
   }
-  .keyword-composition__item > summary > span {
+  .keyword-composition__item > .keyword-composition__trigger > span {
     /* Keep the full label available to assistive technology; the SVG supplies
        the exact glyph shapes, weight and line breaks shown in the design. */
     position: absolute;
@@ -2790,35 +2855,30 @@ html.is-loading .site-body {
     overflow: hidden;
     opacity: 0;
   }
-  .keyword-composition__item > summary::before {
+  .keyword-composition__item > .keyword-composition__trigger::before {
     content: '';
     position: absolute;
     left: calc(var(--sx) / var(--sw) * -100%);
     top: calc(var(--sy) / var(--sh) * -100%);
     width: calc(325 / var(--sw) * 100%);
     height: calc(636 / var(--sh) * 100%);
-    background: #b4ae98;
-    opacity: 0;
+    background: currentColor;
     pointer-events: none;
     -webkit-mask: url('../images/keyword-composition-mobile.svg') 0 0 / 100% 100% no-repeat;
     mask: url('../images/keyword-composition-mobile.svg') 0 0 / 100% 100% no-repeat;
   }
-  .keyword-composition__item[open] > summary::before,
-  .keyword-composition__item > summary:focus-visible::before {
-    opacity: 1;
-  }
-  .keyword-composition__item:nth-of-type(1)  { --sx: 0;   --sy: 12;  --sw: 56;  --sh: 159; }
+  .keyword-composition__item:nth-of-type(1)  { --sx: -1; --sy: 7; --sw: 58; --sh: 165; }
   .keyword-composition__item:nth-of-type(2)  { --sx: 85;  --sy: 20;  --sw: 146; --sh: 42; }
   .keyword-composition__item:nth-of-type(3)  { --sx: 86;  --sy: 88;  --sw: 146; --sh: 87; }
   .keyword-composition__item:nth-of-type(4)  { --sx: 254; --sy: 18;  --sw: 71;  --sh: 127; }
-  .keyword-composition__item:nth-of-type(5)  { --sx: 65;  --sy: 377; --sw: 177; --sh: 44; }
-  .keyword-composition__item:nth-of-type(6)  { --sx: 67;  --sy: 441; --sw: 258; --sh: 43; }
-  .keyword-composition__item:nth-of-type(7)  { --sx: 0;   --sy: 381; --sw: 45;  --sh: 162; }
+  .keyword-composition__item:nth-of-type(5)  { --sx: 64; --sy: 374; --sw: 179; --sh: 48; }
+  .keyword-composition__item:nth-of-type(6)  { --sx: 63; --sy: 433; --sw: 263; --sh: 52; }
+  .keyword-composition__item:nth-of-type(7)  { --sx: -5; --sy: 370; --sw: 51; --sh: 174; }
   .keyword-composition__item:nth-of-type(8)  { --sx: 0;   --sy: 195; --sw: 142; --sh: 78; }
   .keyword-composition__item:nth-of-type(9)  { --sx: 157; --sy: 177; --sw: 42;  --sh: 95; }
-  .keyword-composition__item:nth-of-type(10) { --sx: 222; --sy: 178; --sw: 103; --sh: 81; }
+  .keyword-composition__item:nth-of-type(10) { --sx: 221; --sy: 177; --sw: 108; --sh: 83; }
   .keyword-composition__item:nth-of-type(11) { --sx: 67;  --sy: 506; --sw: 258; --sh: 43; }
-  .keyword-composition__item:nth-of-type(12) { --sx: 241; --sy: 578; --sw: 84;  --sh: 42; }
+  .keyword-composition__item:nth-of-type(12) { --sx: 240; --sy: 577; --sw: 87; --sh: 44; }
   .keyword-composition__item:nth-of-type(13) { --sx: 0;   --sy: 297; --sw: 244; --sh: 53; }
   .keyword-composition__item:nth-of-type(14) { --sx: 266; --sy: 297; --sw: 59;  --sh: 111; }
   .keyword-composition__item:nth-of-type(15) { --sx: 0;   --sy: 566; --sw: 217; --sh: 62; }
@@ -2831,7 +2891,7 @@ html.is-loading .site-body {
     padding: 22px 22px 18px;
     font-size: 14px;
     line-height: 24px;
-    pointer-events: none;
+    pointer-events: auto;
   }
   .keyword-composition__description h3 {
     margin-bottom: 12px;
@@ -3109,16 +3169,24 @@ h2.section-title::before,
 }
 @media (min-width: 64rem) {
   #environment .environment-copy {
+    --environment-lead-offset: 2.75rem;
     display: grid;
     max-width: none;
     grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
     gap: 1rem 4rem;
-    /* Start the large heading and the lead copy on the same horizontal line. */
     align-items: start;
   }
   #environment .environment-lead {
-    /* Kicker line box (24px) + title gap (20px): align with the H2 top. */
-    margin-top: 2.75rem;
+    margin-top: var(--environment-lead-offset);
+  }
+  #environment .environment-copy > .section-header {
+    /* Move the entire heading group, preserving the original pink block.
+       Offset its upper edge to the lead: block height minus the kicker,
+       title gap and half the title's line height. */
+    padding-top: calc(
+      var(--environment-lead-offset) + 7.5rem
+      - var(--text-xs) * 1.5 - 1.25rem - var(--text-5xl) * 0.725
+    );
   }
   #environment .env-gallery { margin-top: 3.5rem; }
   #environment .env-feature-card--photo {

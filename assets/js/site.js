@@ -1470,41 +1470,54 @@ function initializeTabsAndKeywords() {
   const requirements = document.querySelector('#requirements');
   const tabs = [...(requirements?.querySelectorAll('[role="tab"]') ?? [])];
   const tabsContainer = requirements?.querySelector('.requirements-tabs');
-  const marker = tabsContainer?.querySelector('.requirements-tabs__marker');
   const panels = [
     ...(requirements?.querySelectorAll('[role="tabpanel"]') ?? []),
   ];
-  const updateMarker = tab => {
-    if (!tabsContainer || !marker || !tab) return;
-    const inset = window.innerWidth >= 768 ? 48 : 16;
-    tabsContainer.style.setProperty(
-      '--marker-x',
-      `${tab.offsetLeft + inset}px`
-    );
-    tabsContainer.style.setProperty(
-      '--marker-width',
-      `${Math.max(0, tab.offsetWidth - inset * 2)}px`
-    );
+  const revealTab = tab => {
+    if (!tabsContainer || !tab || window.innerWidth >= 768) return;
+    const left = tab.offsetLeft;
+    const right = left + tab.offsetWidth;
+    const visibleLeft = tabsContainer.scrollLeft;
+    const visibleRight = visibleLeft + tabsContainer.clientWidth;
+    if (left < visibleLeft || tab.offsetWidth > tabsContainer.clientWidth) {
+      tabsContainer.scrollTo({ left, behavior: 'auto' });
+    } else if (right > visibleRight) {
+      tabsContainer.scrollTo({ left: right - tabsContainer.clientWidth, behavior: 'auto' });
+    }
   };
-  tabs.forEach((tab, index) =>
-    tab.addEventListener('click', () => {
-      tabs.forEach((other, otherIndex) => {
-        const selected = index === otherIndex;
-        other.setAttribute('aria-selected', String(selected));
-        other.classList.toggle('is-selected', selected);
-      });
-      updateMarker(tab);
-      panels.forEach(panel => {
-        const selected = panel.id === tab.getAttribute('aria-controls');
-        panel.hidden = !selected;
-        panel.classList.toggle('is-hidden', !selected);
-      });
-    })
-  );
-  updateMarker(tabs.find(tab => tab.classList.contains('is-selected')));
-  window.addEventListener('resize', () => {
-    updateMarker(tabs.find(tab => tab.classList.contains('is-selected')));
+  const selectTab = tab => {
+    tabs.forEach(other => {
+      const selected = other === tab;
+      other.setAttribute('aria-selected', String(selected));
+      other.tabIndex = selected ? 0 : -1;
+      other.classList.toggle('is-selected', selected);
+    });
+    panels.forEach(panel => {
+      const selected = panel.id === tab.getAttribute('aria-controls');
+      panel.hidden = !selected;
+      panel.classList.toggle('is-hidden', !selected);
+    });
+    revealTab(tab);
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => selectTab(tab));
+    tab.addEventListener('focus', () => revealTab(tab));
+    tab.addEventListener('keydown', event => {
+      let next;
+      if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
+      else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === 'Home') next = 0;
+      else if (event.key === 'End') next = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      selectTab(tabs[next]);
+      tabs[next].focus({ preventScroll: true });
+    });
   });
+  const selectedTab = () => tabs.find(tab => tab.classList.contains('is-selected'));
+  if (tabs.length) selectTab(selectedTab() ?? tabs[0]);
+  window.addEventListener('resize', () => revealTab(selectedTab()));
+  document.fonts?.ready.then(() => revealTab(selectedTab()));
 
 }
 
@@ -1778,14 +1791,19 @@ function initializeKeywordPopovers() {
   const desktop = window.matchMedia('(min-width: 48rem)');
   const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
   let active = null;
+  const setExpanded = (item, expanded) => {
+    item.classList.toggle('is-open', expanded);
+    item.querySelector('.keyword-composition__trigger').setAttribute('aria-expanded', String(expanded));
+    item.querySelector('.keyword-composition__description').hidden = !expanded;
+  };
   const close = () => {
-    items.forEach(item => { item.open = false; });
+    items.forEach(item => setExpanded(item, false));
     active = null;
   };
   const position = item => {
     const panel = item.querySelector('.keyword-composition__description');
     const bounds = board.getBoundingClientRect();
-    const anchor = item.querySelector('summary').getBoundingClientRect();
+    const anchor = item.querySelector('.keyword-composition__trigger').getBoundingClientRect();
     const viewport = window.visualViewport;
     const inset = 12;
     const gap = 12;
@@ -1794,11 +1812,19 @@ function initializeKeywordPopovers() {
     const viewportWidth = viewport?.width ?? document.documentElement.clientWidth;
     const viewportHeight = viewport?.height ?? window.innerHeight;
     const headerBottom = document.querySelector('.site-header')?.getBoundingClientRect().bottom ?? 0;
-    const leftEdge = viewportLeft + inset;
-    const rightEdge = viewportLeft + viewportWidth - inset;
-    const topEdge = Math.max(viewportTop, headerBottom) + inset;
-    const bottomEdge = viewportTop + viewportHeight - inset;
-    if (anchor.bottom <= topEdge || anchor.top >= bottomEdge) {
+    // Keep the card inside both the keyword frame and the visible viewport.
+    const leftEdge = Math.max(bounds.left, viewportLeft) + inset;
+    const rightEdge = Math.min(bounds.right, viewportLeft + viewportWidth) - inset;
+    let topEdge = Math.max(bounds.top, viewportTop, headerBottom) + inset;
+    let bottomEdge = Math.min(bounds.bottom, viewportTop + viewportHeight) - inset;
+    // A tap near a screen edge must not immediately close the disclosure.
+    // When little of the board is visible, use its full height on mobile.
+    if (!desktop.matches && bottomEdge - topEdge < 120) {
+      topEdge = bounds.top + inset;
+      bottomEdge = bounds.bottom - inset;
+    }
+    if (rightEdge - leftEdge < 80 || bottomEdge - topEdge < 80 ||
+        (desktop.matches && (anchor.bottom <= topEdge || anchor.top >= bottomEdge))) {
       close();
       return;
     }
@@ -1812,8 +1838,10 @@ function initializeKeywordPopovers() {
     const above = Math.max(0, anchor.top - topEdge - gap);
     const useBelow = below >= naturalHeight || (above < naturalHeight && below >= above);
     const availableHeight = useBelow ? below : above;
-    // On short/zoomed screens the card can scroll without covering its anchor.
-    const maxHeight = Math.max(1, availableHeight);
+    // If neither side has readable space, use the frame's visible area.
+    // Long descriptions scroll inside the card instead of crossing the frame.
+    const useFrame = availableHeight < Math.min(naturalHeight, 120);
+    const maxHeight = useFrame ? bottomEdge - topEdge : availableHeight;
     panel.style.setProperty('--panel-max-height', `${maxHeight}px`);
     panel.classList.toggle('is-scrollable', naturalHeight > maxHeight);
     const height = panel.offsetHeight;
@@ -1821,20 +1849,20 @@ function initializeKeywordPopovers() {
       anchor.left + (anchor.width - width) / 2,
       rightEdge - width
     ));
-    const top = useBelow ? anchor.bottom + gap : anchor.top - gap - height;
-    // Store board-relative coordinates while constraining against the viewport,
-    // so a popup may extend past the board's first/last row when there is room.
+    const preferredTop = useBelow ? anchor.bottom + gap : anchor.top - gap - height;
+    const top = Math.max(topEdge, Math.min(preferredTop, bottomEdge - height));
+    // Absolute positioning uses the keyword board as its containing block.
     panel.style.setProperty('--panel-left', `${left - bounds.left}px`);
     panel.style.setProperty('--panel-top', `${top - bounds.top}px`);
   };
   const open = item => {
-    items.forEach(other => { other.open = other === item; });
+    items.forEach(other => setExpanded(other, other === item));
     active = item;
     position(item);
   };
 
   items.forEach(item => {
-    const summary = item.querySelector('summary');
+    const summary = item.querySelector('.keyword-composition__trigger');
     summary.addEventListener('pointerenter', event => {
       if (desktop.matches && hover.matches && event.pointerType !== 'touch') open(item);
     });
@@ -1849,7 +1877,7 @@ function initializeKeywordPopovers() {
     });
     summary.addEventListener('click', event => {
       event.preventDefault();
-      if (!desktop.matches && item.open) {
+      if (!desktop.matches && active === item) {
         close();
         return;
       }
