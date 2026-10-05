@@ -51,6 +51,13 @@
 }
 
 :root {
+  /* Shared by page gutters, fixed UI and viewport geometry in JavaScript. */
+  --safe-area-top: env(safe-area-inset-top, 0px);
+  --safe-area-right: env(safe-area-inset-right, 0px);
+  --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-area-left: env(safe-area-inset-left, 0px);
+  --viewport-height: 100vh;
+  --viewport-small-height: 100vh;
   --lightningcss-light: initial;
   --lightningcss-dark: ;
   color-scheme: light;
@@ -77,6 +84,16 @@
   --input: #dedcda;
   --ring: #141414;
   --radius: 0.75rem;
+}
+@supports (height: 100dvh) {
+  :root {
+    --viewport-height: 100dvh;
+  }
+}
+@supports (height: 100svh) {
+  :root {
+    --viewport-small-height: 100svh;
+  }
 }
 @supports (color: lab(0% 0 0)) {
   :root {

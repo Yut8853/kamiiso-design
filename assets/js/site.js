@@ -1,4 +1,5 @@
 import * as THREE from './three.module.min.js';
+import { readSafeViewport, getPopoverArea, placePopover } from './viewport.js';
 
 const reducedMotion = window.matchMedia(
   '(prefers-reduced-motion: reduce)'
@@ -1816,60 +1817,38 @@ function initializeKeywordPopovers() {
     const panel = item.querySelector('.keyword-composition__description');
     const bounds = board.getBoundingClientRect();
     const anchor = item.querySelector('.keyword-composition__trigger').getBoundingClientRect();
-    const viewport = window.visualViewport;
-    const inset = 12;
-    const gap = 12;
-    const viewportLeft = viewport?.offsetLeft ?? 0;
-    const viewportTop = viewport?.offsetTop ?? 0;
-    const viewportWidth = viewport?.width ?? document.documentElement.clientWidth;
-    const viewportHeight = viewport?.height ?? window.innerHeight;
+    const viewport = readSafeViewport();
     const headerBottom = document.querySelector('.site-header')?.getBoundingClientRect().bottom ?? 0;
-    // Keep the card inside both the keyword frame and the visible viewport.
-    const leftEdge = Math.max(bounds.left, viewportLeft) + inset;
-    const rightEdge = Math.min(bounds.right, viewportLeft + viewportWidth) - inset;
-    let topEdge = Math.max(bounds.top, viewportTop, headerBottom) + inset;
-    let bottomEdge = Math.min(bounds.bottom, viewportTop + viewportHeight) - inset;
-    // A tap near a screen edge must not immediately close the disclosure.
-    // When little of the board is visible, use its full height on mobile.
-    if (!desktop.matches && bottomEdge - topEdge < 120) {
-      topEdge = bounds.top + inset;
-      bottomEdge = bounds.bottom - inset;
-    }
-    if (rightEdge - leftEdge < 80 || bottomEdge - topEdge < 80 ||
-        (desktop.matches && (anchor.bottom <= topEdge || anchor.top >= bottomEdge))) {
+    const area = getPopoverArea(bounds, viewport, headerBottom);
+    if (area.width < 80 || area.height < 80 ||
+        (desktop.matches && (anchor.bottom <= area.top || anchor.top >= area.bottom))) {
       close();
       return;
     }
 
-    // Measure the unconstrained panel at its actual responsive width first.
-    panel.style.setProperty('--panel-max-width', `${rightEdge - leftEdge}px`);
+    panel.style.setProperty('--panel-max-width', `${area.width}px`);
     panel.style.removeProperty('--panel-max-height');
-    const width = panel.offsetWidth;
     const naturalHeight = panel.offsetHeight;
-    const below = Math.max(0, bottomEdge - anchor.bottom - gap);
-    const above = Math.max(0, anchor.top - topEdge - gap);
-    const useBelow = below >= naturalHeight || (above < naturalHeight && below >= above);
-    const availableHeight = useBelow ? below : above;
-    // If neither side has readable space, use the frame's visible area.
-    // Long descriptions scroll inside the card instead of crossing the frame.
-    const useFrame = availableHeight < Math.min(naturalHeight, 120);
-    const maxHeight = useFrame ? bottomEdge - topEdge : availableHeight;
-    panel.style.setProperty('--panel-max-height', `${maxHeight}px`);
-    panel.classList.toggle('is-scrollable', naturalHeight > maxHeight);
-    const height = panel.offsetHeight;
-    const left = Math.max(leftEdge, Math.min(
-      anchor.left + (anchor.width - width) / 2,
-      rightEdge - width
-    ));
-    const preferredTop = useBelow ? anchor.bottom + gap : anchor.top - gap - height;
-    const top = Math.max(topEdge, Math.min(preferredTop, bottomEdge - height));
-    // Absolute positioning uses the keyword board as its containing block.
-    panel.style.setProperty('--panel-left', `${left - bounds.left}px`);
-    panel.style.setProperty('--panel-top', `${top - bounds.top}px`);
+    const placement = placePopover(area, anchor, panel.offsetWidth, naturalHeight);
+    panel.style.setProperty('--panel-max-height', `${placement.maxHeight}px`);
+    panel.classList.toggle('is-scrollable', naturalHeight > placement.maxHeight);
+    panel.style.setProperty('--panel-left', `${placement.left - bounds.left}px`);
+    panel.style.setProperty('--panel-top', `${placement.top - bounds.top}px`);
   };
   const open = item => {
     items.forEach(other => setExpanded(other, other === item));
     active = item;
+    // A tap at the viewport edge still opens a readable card, without allowing
+    // it to escape into the gesture bar or outside the keyword frame.
+    if (!desktop.matches) {
+      const headerBottom = document.querySelector('.site-header')?.getBoundingClientRect().bottom ?? 0;
+      const area = getPopoverArea(board.getBoundingClientRect(), readSafeViewport(), headerBottom);
+      if (area.height < 120) {
+        item.querySelector('.keyword-composition__trigger').scrollIntoView({
+          block: 'center', inline: 'nearest', behavior: 'instant',
+        });
+      }
+    }
     position(item);
   };
 
@@ -1918,6 +1897,12 @@ function initializeKeywordPopovers() {
   window.addEventListener('scroll', updatePosition, { passive: true });
   window.visualViewport?.addEventListener('resize', updatePosition);
   window.visualViewport?.addEventListener('scroll', updatePosition);
+  if (typeof ResizeObserver !== 'undefined') {
+    const observer = new ResizeObserver(updatePosition);
+    observer.observe(board);
+    const header = document.querySelector('.site-header');
+    if (header) observer.observe(header);
+  }
   document.fonts?.ready.then(updatePosition);
 }
 

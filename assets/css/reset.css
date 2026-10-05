@@ -265,7 +265,7 @@
     scroll-behavior: smooth;
   }
   [id] {
-    scroll-margin-top: 6rem;
+    scroll-margin-top: calc(6rem + var(--safe-area-top));
   }
   body {
     background-color: var(--background);

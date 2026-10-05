@@ -1,4 +1,11 @@
-
+/* Content gutters preserve the existing spacing when safe insets are zero.
+   Decorations and section backgrounds remain full bleed. */
+:where(.section-container, .entry-container, .site-header__inner,
+       .site-footer__inner, .global-nav__viewport, .kv-content) {
+  --content-gutter: 1.25rem;
+  padding-left: calc(var(--content-gutter) + var(--safe-area-left));
+  padding-right: calc(var(--content-gutter) + var(--safe-area-right));
+}
 
 @keyframes kv-dot-piko {
   0%,
@@ -16,7 +23,7 @@
 }
 .kv-section {
   position: relative;
-  margin-top: 1.5rem;
+  margin-top: calc(1.5rem + var(--safe-area-top));
   overflow: visible;
   background: transparent;
 }
@@ -89,7 +96,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 6rem 1.5rem;
+  --content-gutter: 1.5rem;
+  padding-block: 6rem;
   text-align: center;
 }
 .kv-message {
@@ -165,7 +173,7 @@ footer a[href]:hover svg {
   width: 100%;
   max-width: var(--container-7xl);
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  --content-gutter: 1.25rem;
 }
 .section-header {
   max-width: var(--container-3xl);
@@ -354,6 +362,7 @@ footer a[href]:hover svg {
 }
 
 html {
+  scroll-padding-bottom: var(--safe-area-bottom);
   scrollbar-color: var(--primary) color-mix(in oklab, var(--background) 88%, #fff);
   scrollbar-width: thin;
 }
@@ -443,11 +452,18 @@ html.is-loading .site-body {
 }
 .site-loader__progress {
   position: fixed;
-  top: calc(50% + clamp(7.5rem, 18vh, 10.5rem));
-  right: 50%;
+  /* Keep the progress label visible even in short landscape viewports. */
+  top: max(
+    calc(var(--safe-area-top) + 1rem),
+    min(
+      calc(50% + clamp(7.5rem, var(--viewport-small-height) * 0.18, 10.5rem)),
+      calc(var(--viewport-height) - var(--safe-area-bottom) - 5rem)
+    )
+  );
+  right: calc(50% + (var(--safe-area-right) - var(--safe-area-left)) / 2);
   bottom: auto;
   z-index: 10001;
-  width: min(22rem, calc(100vw - 3rem));
+  width: min(22rem, calc(100% - 3rem - var(--safe-area-left) - var(--safe-area-right)));
   padding: 0.75rem 1rem 0.65rem;
   transform: translateX(50%);
   border: 1px solid rgb(255 255 255 / 0.72);
@@ -481,6 +497,7 @@ html.is-loading .site-body {
 .site-header {
   position: fixed;
   inset: 0 0 auto;
+  padding-top: var(--safe-area-top);
   z-index: 50;
   background: transparent;
   transition: all 0.3s ease;
@@ -498,11 +515,12 @@ html.is-loading .site-body {
   max-width: 120rem;
   height: 5rem;
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  --content-gutter: 1.25rem;
 }
 .site-logo,
 .site-logo__label,
 .menu-button {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
 }
@@ -544,12 +562,13 @@ html.is-loading .site-body {
 }
 .global-nav {
   position: fixed;
-  inset: 0;
+  inset: 0 0 auto;
+  height: var(--viewport-height);
   z-index: 40;
   background: var(--background);
   opacity: 0;
   pointer-events: none;
-  transition: all 0.5s ease;
+  transition: opacity 0.5s ease;
 }
 .global-nav.is-open {
   opacity: 1;
@@ -558,10 +577,13 @@ html.is-loading .site-body {
 .global-nav__viewport {
   display: flex;
   align-items: flex-start;
-  height: calc(100% - 7rem);
-  margin-top: 7rem;
+  height: calc(100% - 7rem - var(--safe-area-top));
+  margin-top: calc(7rem + var(--safe-area-top));
+  min-height: 0;
   overflow-y: auto;
-  padding: 0 1.25rem 3rem;
+  overscroll-behavior-y: contain;
+  --content-gutter: 1.25rem;
+  padding-block: 0 calc(3rem + var(--safe-area-bottom));
 }
 .global-nav__inner {
   width: 100%;
@@ -1097,7 +1119,7 @@ html.is-loading .site-body {
   position: relative;
   max-width: var(--container-5xl);
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  --content-gutter: 1.25rem;
   text-align: center;
 }
 .entry-kicker,
@@ -1204,7 +1226,8 @@ html.is-loading .site-body {
   --footer-ink: #090405;
   position: relative;
   z-index: 20;
-  padding-block: 3.5rem;
+  --footer-space: 3.5rem;
+  padding-block: var(--footer-space) calc(var(--footer-space) + var(--safe-area-bottom));
   border-top: 1px solid #d8d5d0;
   background: #fff;
   color: var(--footer-ink);
@@ -1214,7 +1237,7 @@ html.is-loading .site-body {
   margin-inline: auto;
   flex-direction: column;
   gap: 2.5rem;
-  padding-inline: 1.25rem;
+  --content-gutter: 1.25rem;
 }
 .site-footer__logo-box {
   display: inline-block;
@@ -1325,7 +1348,8 @@ html.is-loading .site-body {
   }
   .kv-content {
     min-height: 40.5rem;
-    padding: 5rem 1rem 4rem;
+    --content-gutter: 1rem;
+    padding-block: 5rem 4rem;
   }
   .kv-message {
     position: relative;
@@ -1348,7 +1372,7 @@ html.is-loading .site-body {
     padding-block: 4.5rem;
   }
   .section-container {
-    padding-inline: 1rem;
+    --content-gutter: 1rem;
   }
   .section-title {
     font-size: 1.875rem;
@@ -1439,7 +1463,7 @@ html.is-loading .site-body {
     padding-block: 5rem;
   }
   .entry-container {
-    padding-inline: 1rem;
+    --content-gutter: 1rem;
   }
   .entry-title {
     font-size: 1.875rem;
@@ -1449,7 +1473,7 @@ html.is-loading .site-body {
     font-size: 1rem;
     /* Fit the 22-character first sentence while retaining 25px side margins.
        Wider phones return to normal tracking; smaller screens may wrap. */
-    letter-spacing: clamp(-0.08em, calc((100vw - 51px) / 22 - 1em), 0em);
+    letter-spacing: clamp(-0.08em, calc((100vw - 51px - var(--safe-area-left) - var(--safe-area-right)) / 22 - 1em), 0em);
     line-height: 1.75rem;
     text-align: left;
     line-break: strict;
@@ -1465,7 +1489,7 @@ html.is-loading .site-body {
     padding-inline: 1.5rem;
   }
   .site-footer {
-    padding-block: 3rem;
+    --footer-space: 3rem;
   }
 }
 
@@ -1475,7 +1499,7 @@ html.is-loading .site-body {
   }
   .site-header__inner {
     height: 6rem;
-    padding-inline: 2rem;
+    --content-gutter: 2rem;
   }
   .site-logo {
     gap: 1.75rem;
@@ -1493,7 +1517,7 @@ html.is-loading .site-body {
     font-size: var(--text-xl);
   }
   .global-nav__viewport {
-    padding-inline: 2.5rem;
+    --content-gutter: 2.5rem;
   }
   .global-nav__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1553,7 +1577,7 @@ html.is-loading .site-body {
   }
   .environment-copy {
     position: sticky;
-    top: 8rem;
+    top: calc(8rem + var(--safe-area-top));
   }
   .environment-title {
     font-size: var(--text-5xl);
@@ -1575,7 +1599,7 @@ html.is-loading .site-body {
     padding-block: 8rem;
   }
   .entry-container {
-    padding-inline: 2.5rem;
+    --content-gutter: 2.5rem;
   }
   .entry-title {
     font-size: var(--text-5xl);
@@ -1587,19 +1611,19 @@ html.is-loading .site-body {
     width: auto;
   }
   .site-footer {
-    padding-block: 4rem;
+    --footer-space: 4rem;
   }
   .site-footer__inner {
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
-    padding-inline: 2.5rem;
+    --content-gutter: 2.5rem;
   }
   .site-footer__links {
     text-align: right;
   }
   .section-container {
-    padding-inline: 2.5rem;
+    --content-gutter: 2.5rem;
   }
   .section-title {
     font-size: var(--text-5xl);
@@ -2803,7 +2827,7 @@ html.is-loading .site-body {
     display: inline;
   }
   #keyword .section-container {
-    padding-inline: 25px;
+    --content-gutter: 25px;
   }
   #keyword .keyword-layout {
     margin-top: 3rem;
@@ -2907,7 +2931,7 @@ html.is-loading .site-body {
 @media (max-width: 47.9375rem) {
   .section-container,
   .entry-container {
-    padding-inline: 25px;
+    --content-gutter: 25px;
   }
 
   #interview .interview-grid {
@@ -3215,8 +3239,9 @@ h2.section-title::before,
   #environment .env-gallery,
   #environment .env-slider-window,
   #environment .env-feature-media {
-    width: calc(100% + 50px);
-    margin-inline: -25px;
+    width: calc(100% + var(--content-gutter) * 2 + var(--safe-area-left) + var(--safe-area-right));
+    margin-left: calc(-1 * (var(--content-gutter) + var(--safe-area-left)));
+    margin-right: calc(-1 * (var(--content-gutter) + var(--safe-area-right)));
   }
 }
 
