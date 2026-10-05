@@ -1657,9 +1657,15 @@ async function initializeParticles() {
   });
   scene.add(new THREE.Points(geometry, material));
 
+  let renderedWidth = 0;
+  let renderedHeight = 0;
   const resize = () => {
     const width = host.clientWidth;
     const height = host.clientHeight;
+    if (width <= 0 || height <= 0 ||
+        (width === renderedWidth && height === renderedHeight)) return;
+    renderedWidth = width;
+    renderedHeight = height;
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
@@ -1670,6 +1676,12 @@ async function initializeParticles() {
     targetSizeMultiplier = 1;
   };
   addEventListener('resize', resize);
+  // Browser toolbar and orientation changes can resize the host independently
+  // of window.resize. Keep the drawing buffer aligned with its CSS dimensions.
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(resize).observe(host);
+  }
+  window.visualViewport?.addEventListener('resize', resize);
   addEventListener('scroll', updateSizeMultiplier, { passive: true });
   addEventListener('resize', updateSizeMultiplier);
   addEventListener(

@@ -43,7 +43,10 @@
     #e7dcca 100%
   );
   width: 100%;
-  height: 100svh;
+  /* Cover the expanded viewport too when mobile browser controls retract. */
+  height: auto;
+  min-height: 100vh;
+  min-height: 100lvh;
   pointer-events: none;
 }
 .kv-decor {
