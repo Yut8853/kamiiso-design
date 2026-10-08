@@ -89,14 +89,15 @@ test('cards remain within frame, safe viewport and header across 189 placements'
   assert.equal(count, 189);
 });
 
-test('edge tap scrolls into safe space and remains open; second tap and outside tap close', () => {
+test('edge tap opens safely; trigger, card and outside taps close; card can reopen', () => {
   const code = readFileSync(new URL('../assets/js/site.js', import.meta.url), 'utf8');
   const start = code.indexOf('function initializeKeywordPopovers()');
   const end = code.indexOf('\nconst showLoadingScreen', start);
-  const handlers = {}, documentHandlers = {}, styles = {};
+  const handlers = {}, panelHandlers = {}, documentHandlers = {}, styles = {};
   let boardTop = 800;
   let scrollCalls = 0;
   const panel = { hidden: true, offsetWidth: 300, offsetHeight: 200,
+    addEventListener: (key, fn) => panelHandlers[key] = fn,
     classList: { toggle() {} }, style: { setProperty: (k, v) => styles[k] = parseFloat(v), removeProperty: k => delete styles[k] } };
   const button = {
     setAttribute() {}, addEventListener: (key, fn) => handlers[key] = fn,
@@ -120,6 +121,8 @@ test('edge tap scrolls into safe space and remains open; second tap and outside 
   assert.equal(panel.hidden, false);
   assert(boardTop + styles['--panel-top'] + Math.min(200, styles['--panel-max-height']) <= 806);
   click(); assert.equal(panel.hidden, true);
+  click(); assert.equal(panel.hidden, false);
+  panelHandlers.click(); assert.equal(panel.hidden, true);
   click(); assert.equal(panel.hidden, false);
   documentHandlers.pointerdown({ target: {} }); assert.equal(panel.hidden, true);
 });

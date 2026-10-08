@@ -2793,7 +2793,7 @@ html.is-loading .site-body {
   color: var(--primary);
   font-size: 14px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.6;
   letter-spacing: 0.2em;
 }
 .keyword-composition__description h3::before { content: '【'; }
@@ -2813,8 +2813,9 @@ html.is-loading .site-body {
   font-size: 0.9375rem;
   font-weight: 500;
   line-height: 1.8;
-  text-align: center;
+  text-align: left;
 }
+.keyword-tap-guide br,
 .keyword-tap-guide__mobile,
 .keyword-composition__mobile-outline {
   display: none;
@@ -2834,6 +2835,9 @@ html.is-loading .site-body {
   }
   .keyword-tap-guide {
     margin-bottom: 1.25rem;
+  }
+  .keyword-tap-guide br {
+    display: inline;
   }
   .keyword-tap-guide__desktop {
     display: none;
@@ -2923,7 +2927,6 @@ html.is-loading .site-body {
   .keyword-composition__description h3 {
     margin-bottom: 12px;
     font-size: 14px;
-    line-height: 1;
   }
 }
 

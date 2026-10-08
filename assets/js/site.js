@@ -1854,6 +1854,10 @@ function initializeKeywordPopovers() {
 
   items.forEach(item => {
     const summary = item.querySelector('.keyword-composition__trigger');
+    const panel = item.querySelector('.keyword-composition__description');
+    panel.addEventListener('click', () => {
+      if (active === item) close();
+    });
     summary.addEventListener('pointerenter', event => {
       if (desktop.matches && hover.matches && event.pointerType !== 'touch') open(item);
     });
