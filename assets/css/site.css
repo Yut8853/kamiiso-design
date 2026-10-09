@@ -2522,6 +2522,11 @@ html.is-loading .site-body {
 }
 
 /* Requirements: clearly defined connected tabs. */
+.requirements-welfare-list > li {
+  padding-left: 1em;
+  text-indent: -1em;
+}
+
 .requirements-tabs-guide {
   display: none;
 }
@@ -2604,8 +2609,8 @@ html.is-loading .site-body {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--muted-foreground);
-    font-size: 0.75rem;
-    line-height: 1.6;
+    font-size: 0.9375rem;
+    line-height: 1.8;
   }
 
   #requirements .requirements-tabs {
