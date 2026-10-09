@@ -2522,12 +2522,12 @@ html.is-loading .site-body {
 }
 
 /* Requirements: clearly defined connected tabs. */
-.requirements-welfare-list > li {
+.requirements-bullet-list > li {
   display: grid;
   grid-template-columns: 1em minmax(0, 1fr);
 }
 
-.requirements-welfare-list > li::before {
+.requirements-bullet-list > li::before {
   content: '・';
 }
 
@@ -2612,9 +2612,6 @@ html.is-loading .site-body {
   #requirements .requirements-tabs-guide {
     display: block;
     margin-bottom: 0.5rem;
-    color: var(--muted-foreground);
-    font-size: 0.9375rem;
-    line-height: 1.8;
   }
 
   #requirements .requirements-tabs {
@@ -2818,6 +2815,9 @@ html.is-loading .site-body {
 }
 .keyword-tap-guide {
   margin-bottom: 2.25rem;
+}
+.keyword-tap-guide,
+.requirements-tabs-guide {
   color: #090405;
   font-size: 0.9375rem;
   font-weight: 500;
