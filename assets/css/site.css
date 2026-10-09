@@ -2523,8 +2523,12 @@ html.is-loading .site-body {
 
 /* Requirements: clearly defined connected tabs. */
 .requirements-welfare-list > li {
-  padding-left: 1em;
-  text-indent: -1em;
+  display: grid;
+  grid-template-columns: 1em minmax(0, 1fr);
+}
+
+.requirements-welfare-list > li::before {
+  content: '・';
 }
 
 .requirements-tabs-guide {
