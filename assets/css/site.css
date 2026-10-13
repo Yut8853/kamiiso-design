@@ -3111,25 +3111,81 @@ h2.section-title::before,
   }
 }
 @media (max-width: 47.9375rem) {
-  /* The mobile hero uses only cutouts, including during the loading stack. */
-  .kv-decor .kv-photo {
-    display: none !important;
+  /* Interleave photos and copy; reserve each photo row in the text flow. */
+  .kv-hero {
+    --mobile-photo-width: clamp(9rem, 43vw, 14rem);
+    --mobile-photo-height: calc(var(--mobile-photo-width) * 2 / 3);
+    --mobile-title-width: min(calc(100vw - 3rem), 22rem);
+    --mobile-title-height: calc(var(--mobile-title-width) * 502 / 982);
+    --mobile-title-top: calc(4.75rem + var(--mobile-photo-height) + 2rem);
+    --mobile-middle-top: calc(var(--mobile-title-top) + var(--mobile-title-height) + 2rem);
+    min-height: 0;
+    padding-top: 0;
+  }
+  .kv-content {
+    min-height: 0;
+    max-width: none;
+    --content-gutter: 1rem;
+    padding-top: var(--mobile-title-top);
+    padding-bottom: calc(var(--mobile-photo-height) + 5rem);
+  }
+  .kv-message {
+    top: 0;
+    max-width: none;
+    padding: 0;
+  }
+  .kv-title {
+    width: var(--mobile-title-width);
+  }
+  .kv-copy {
+    margin-top: calc(var(--mobile-photo-height) + 4rem);
+    font-size: clamp(0.875rem, 4vw, 1rem);
   }
   .kv-decor {
-    clip-path: inset(6rem 0 0);
+    clip-path: none;
+  }
+  .kv-decor .kv-photo {
+    width: var(--mobile-photo-width);
+  }
+  .kv-photo-block {
+    /* Preserve the whole source photo, including faces, through image swaps. */
+    background-size: contain;
+    box-shadow: none;
+  }
+  .kv-decor .kv-photo--01 {
+    left: auto;
+    right: 6%;
+    top: 4.75rem;
+    rotate: -9deg;
+  }
+  .kv-decor .kv-photo--02 {
+    left: 5%;
+    top: var(--mobile-middle-top);
+    rotate: 9deg;
+  }
+  .kv-decor .kv-photo--03 {
+    left: auto;
+    right: 6%;
+    top: auto;
+    bottom: 2rem;
+    rotate: -9deg;
+  }
+  .kv-decor .kv-photo--04,
+  .kv-decor .kv-photo--05 {
+    display: none !important;
   }
   .kv-decor .kv-dot {
-    width: clamp(4.5rem, 22vw, 6.5rem);
+    width: clamp(4rem, 19vw, 6rem);
     aspect-ratio: 1;
     scale: 1;
   }
-  .kv-decor .kv-dot--01 { left: 9%; top: 6.75rem; rotate: -21deg; }
-  .kv-decor .kv-dot--02 { left: -10%; top: 34%; rotate: 19deg; }
-  .kv-decor .kv-dot--03 { left: 73%; top: 6.75rem; rotate: 21deg; }
-  .kv-decor .kv-dot--04 { left: 88%; top: 35%; rotate: -20deg; }
-  .kv-decor .kv-dot--05 { left: -10%; top: 62%; rotate: 4deg; }
-  .kv-decor .kv-dot--06 { left: 88%; top: 63%; rotate: 6deg; }
-  .kv-decor .kv-dot--07 { left: calc(50% - clamp(2.25rem, 11vw, 3.25rem)); top: 85%; rotate: 12deg; }
+  .kv-decor .kv-dot--01 { left: 12%; top: 6rem; rotate: -21deg; }
+  .kv-decor .kv-dot--02 { left: -13%; top: var(--mobile-title-top); rotate: 19deg; }
+  .kv-decor .kv-dot--03 { left: 71%; top: calc(var(--mobile-middle-top) + 1rem); rotate: 21deg; }
+  .kv-decor .kv-dot--04 { left: 94%; top: calc(var(--mobile-title-top) + 3rem); rotate: -20deg; }
+  .kv-decor .kv-dot--05 { left: 7%; top: auto; bottom: calc(var(--mobile-photo-height) - 2rem); rotate: 4deg; }
+  .kv-decor .kv-dot--06 { left: 24%; top: auto; bottom: 1rem; rotate: 6deg; }
+  .kv-decor .kv-dot--07 { display: none !important; }
 }
 
 /* Exhibition and global photo frames; the office gallery keeps its own layout. */
