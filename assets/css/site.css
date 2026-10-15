@@ -3119,6 +3119,7 @@ h2.section-title::before,
     --mobile-title-height: calc(var(--mobile-title-width) * 502 / 982);
     --mobile-title-top: calc(4.75rem + var(--mobile-photo-height) + 2rem);
     --mobile-middle-top: calc(var(--mobile-title-top) + var(--mobile-title-height) + 2rem);
+    --mobile-copy-font-size: clamp(0.875rem, 4vw, 1rem);
     min-height: 0;
     padding-top: 0;
   }
@@ -3139,7 +3140,7 @@ h2.section-title::before,
   }
   .kv-copy {
     margin-top: calc(var(--mobile-photo-height) + 4rem);
-    font-size: clamp(0.875rem, 4vw, 1rem);
+    font-size: var(--mobile-copy-font-size);
   }
   .kv-decor {
     clip-path: none;
@@ -3154,12 +3155,12 @@ h2.section-title::before,
   }
   .kv-decor .kv-photo--01 {
     left: auto;
-    right: 6%;
+    right: 0;
     top: 4.75rem;
     rotate: -9deg;
   }
   .kv-decor .kv-photo--02 {
-    left: 5%;
+    left: 0;
     top: var(--mobile-middle-top);
     rotate: 9deg;
   }
@@ -3182,7 +3183,13 @@ h2.section-title::before,
   .kv-decor .kv-dot--01 { left: 12%; top: 6rem; rotate: -21deg; }
   .kv-decor .kv-dot--02 { left: -13%; top: var(--mobile-title-top); rotate: 19deg; }
   .kv-decor .kv-dot--03 { left: 71%; top: calc(var(--mobile-middle-top) + 1rem); rotate: 21deg; }
-  .kv-decor .kv-dot--04 { left: 94%; top: calc(var(--mobile-title-top) + 3rem); rotate: -20deg; }
+  .kv-decor .kv-dot--04 {
+    left: auto;
+    right: -0.5rem;
+    /* Beside the fourth copy line and the first line of the next paragraph. */
+    top: calc(var(--mobile-middle-top) + var(--mobile-photo-height) + 2rem + var(--mobile-copy-font-size) * 6.6);
+    rotate: -20deg;
+  }
   .kv-decor .kv-dot--05 { left: 7%; top: auto; bottom: calc(var(--mobile-photo-height) - 2rem); rotate: 4deg; }
   .kv-decor .kv-dot--06 { left: 24%; top: auto; bottom: 1rem; rotate: 6deg; }
   .kv-decor .kv-dot--07 { display: none !important; }
