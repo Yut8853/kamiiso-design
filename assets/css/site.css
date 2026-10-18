@@ -3181,7 +3181,7 @@ h2.section-title::before,
     scale: 1;
   }
   .kv-decor .kv-dot--01 { left: 12%; top: 6rem; rotate: -21deg; }
-  .kv-decor .kv-dot--02 { left: -13%; top: var(--mobile-title-top); rotate: 19deg; }
+  .kv-decor .kv-dot--02 { display: none !important; }
   .kv-decor .kv-dot--03 { left: 71%; top: calc(var(--mobile-middle-top) + 1rem); rotate: 21deg; }
   .kv-decor .kv-dot--04 {
     left: auto;
