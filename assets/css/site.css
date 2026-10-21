@@ -3231,6 +3231,9 @@ h2.section-title::before,
   overflow: hidden;
   box-shadow: none;
 }
+#environment .env-feature-photo--group img {
+  transform: translateX(-5%) scale(1.12);
+}
 #environment .env-feature-photo--tour img {
   object-position: 55% 30%;
   transform: scale(1.35);
