@@ -672,6 +672,23 @@ html.is-loading .site-body {
 .global-nav__entry:focus-visible .global-nav__entry-icon {
   transform: translateX(0.25rem);
 }
+@media (max-width: 47.9375rem) {
+  .global-nav__eyebrow {
+    margin-bottom: 1rem;
+  }
+  .global-nav__link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding-block: 0.875rem;
+  }
+  .global-nav__title {
+    font-size: 1rem;
+  }
+  .global-nav__entry {
+    margin-top: 1.5rem;
+  }
+}
 .interview-grid {
   display: grid;
   gap: 2rem;
