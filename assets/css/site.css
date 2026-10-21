@@ -1481,6 +1481,17 @@ html.is-loading .site-body {
   .entry-lead__sentence {
     display: block;
   }
+  .entry-lead--caption {
+    text-align: center;
+  }
+  .entry-lead--description {
+    text-align: justify;
+    text-justify: inter-character;
+    letter-spacing: normal;
+  }
+  .entry-lead__break--desktop {
+    display: none;
+  }
   .entry-actions {
     margin-top: 2rem;
   }
