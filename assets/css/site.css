@@ -1183,6 +1183,7 @@ html.is-loading .site-body {
 }
 .entry-lead--heading {
   margin-top: 2.75rem;
+  font-size: calc(var(--text-lg) + 1pt);
   font-weight: var(--font-weight-bold);
   text-align: center;
 }
@@ -1505,6 +1506,7 @@ html.is-loading .site-body {
   }
   .entry-lead--heading {
     margin-top: 2.25rem;
+    font-size: calc(1rem + 1pt);
     text-align: center;
   }
   .entry-lead--caption {
