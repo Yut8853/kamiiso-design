@@ -1181,6 +1181,11 @@ html.is-loading .site-body {
   font-weight: 400;
   line-height: 2rem;
 }
+.entry-lead--heading {
+  margin-top: 2.75rem;
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}
 .entry-actions {
   flex-direction: column;
   justify-content: center;
@@ -1497,6 +1502,10 @@ html.is-loading .site-body {
   }
   .entry-lead__sentence {
     display: block;
+  }
+  .entry-lead--heading {
+    margin-top: 2.25rem;
+    text-align: center;
   }
   .entry-lead--caption {
     text-align: center;
